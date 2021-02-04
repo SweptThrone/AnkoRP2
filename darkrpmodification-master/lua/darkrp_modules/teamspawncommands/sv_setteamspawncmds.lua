@@ -1,5 +1,3 @@
--- #NoSimplerr#
-
 local function SetTeamSpawnPos(ply, args)
     local pos = ply:GetPos()
     local t
