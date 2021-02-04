@@ -1,0 +1,143 @@
+--[[
+    Initialize the gamemode and define some globals.
+]]--
+
+CSO_WEAPONS_TREE = util.JSONToTable( file.Read( "cso_weapons_with_prices.json" ) )
+CSO_BASIC_WEAPONS = {}
+for k,v in pairs( CSO_WEAPONS_TREE ) do
+    if v.basic then
+        table.insert( CSO_BASIC_WEAPONS, k )
+    end
+end
+
+ROUND_TIME = 60
+CURRENT_ANKORP_EVENT = false
+
+-- starting scores
+FINAL_SCORES = {
+    ["CT"] = 0,
+    ["TR"] = 0,
+    ["CM"] = 0,
+    ["RE"] = 0
+}
+
+hook.Add( "Initialize", "SetupTDMRPDir", function()
+
+    if !sql.TableExists( "AnkoRP_Weapons" ) then
+        sql.Query( "CREATE TABLE AnkoRP_Weapons( SteamID TEXT )" )
+        sql.Query( "CREATE TABLE AnkoRP_Atts( SteamID TEXT )" )
+        sql.Query( "CREATE TABLE AnkoRP_Rep( SteamID TEXT, ContractSuccess INT, ContractFail INT, BountySuccess INT, BountyFail INT )" )
+    end
+    --[[
+    if !file.Exists( "ankorp", "DATA" ) then
+        file.CreateDir( "ankorp/atts" )
+    end
+    ]]
+
+    -- disallow dropping expensive and high-tier weapons
+    GAMEMODE.Config.DisallowDrop = GAMEMODE.Config.DisallowDrop or {}
+
+    for k,v in pairs( CSO_WEAPONS_TREE ) do
+        if v.deep > 1 or v.price > 99999 then
+            GAMEMODE.Config.DisallowDrop[ k ] = true
+        end
+    end
+
+    game.GetWorld():SetNWInt( "AnkoNextRound", CurTime() + ROUND_TIME )
+	
+end )
+
+hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
+
+    --ply.wepInvTable = sql.Query( "SELECT * FROM AnkoRP_Weapons WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
+    --ply.attInvTable = sql.Query( "SELECT * FROM AnkoRP_Atts WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
+    sql.Query( "INSERT INTO AnkoRP_Weapons( SteamID ) VALUES( '" .. ply:SteamID64() .. "' )" )
+    sql.Query( "INSERT INTO AnkoRP_Atts( SteamID ) VALUES( '" .. ply:SteamID64() .. "' )" )
+    sql.Query( "INSERT INTO AnkoRP_Rep( SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail ) VALUES( '" .. ply:SteamID64() .. "', 0, 0, 0, 0 )" )
+    -- i stored weapons n shit in txt files
+    -- oopsie, hehe~
+    --[[
+    if !file.Exists( "ankorp/" .. ply:SteamID64() .. ".txt", "DATA" ) then
+        ply.wepInvTable = {}
+        for k,v in pairs( CSO_WEAPONS_TREE ) do
+            if v.deep == 1 then
+                ply.wepInvTable[ k ] = "nil"
+            end
+        end
+        ply.attInvTable = {}
+        file.Write( "ankorp/" .. ply:SteamID64() .. ".txt", util.TableToJSON( ply.wepInvTable ) )
+        file.Write( "ankorp/atts/" .. ply:SteamID64() .. ".txt", util.TableToJSON( ply.attInvTable ) )
+    end
+    ]]
+
+    ply.ankoRepTable = sql.Query( "SELECT SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail FROM ankorprep WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
+    ply:SetNWInt( "ContractSuccess", tonumber( ply.ankoRepTable[ "ContractSuccess" ] ) )
+    ply:SetNWInt( "ContractFail", tonumber( ply.ankoRepTable[ "ContractFail" ] ) )
+    ply:SetNWInt( "BountySuccess", tonumber( ply.ankoRepTable[ "BountySuccess" ] ) )
+    ply:SetNWInt( "BountyFail", tonumber( ply.ankoRepTable[ "BountyFail" ] ) )
+
+    --ply.wepInvTable = util.JSONToTable( file.Read( "ankorp/" .. ply:SteamID64() .. ".txt" ) )
+    --ply.attInvTable = util.JSONToTable( file.Read( "ankorp/atts/" .. ply:SteamID64() .. ".txt" ) )
+
+    -- make absolutely sure that the player is loaded and has what they need
+    -- i'm sure this is REALLY bad
+    -- but who cares
+    timer.Simple( 10, function()
+        -- see darkrp_customthings/shipments.lua
+        local CSO_WEAPONS_TREE = file.Read( "cso_weapons_with_prices.json" )
+        net.Start( "AllowTreeToBeSeen" )
+            net.WriteData( util.Compress( CSO_WEAPONS_TREE ), #util.Compress( CSO_WEAPONS_TREE ) )
+        net.Send( ply )
+        net.Start( "SendAnkoScores" )
+            net.WriteData( util.Compress( util.TableToJSON( FINAL_SCORES ) ), #util.Compress( util.TableToJSON( FINAL_SCORES ) ) )
+        net.Broadcast()
+        net.Start( "SendPlyTheirAttTable" )
+            net.WriteData( util.Compress( util.TableToJSON( ply:GetAttachmentTable() ) ), #util.Compress( util.TableToJSON( ply:GetAttachmentTable() ) ) )
+        net.Send( ply )
+    end )
+
+
+end )
+
+local plyMeta = FindMetaTable( "Player" )
+
+function plyMeta:GetWeaponTable()
+    local tab = sql.Query( "SELECT * FROM AnkoRP_Weapons WHERE SteamID = '" .. self:SteamID64() .. "'" )[ 1 ]
+    tab[ "SteamID" ] = nil
+    return tab
+end
+
+function plyMeta:AddWeaponToTable( wep )
+    sql.Query( [[ALTER TABLE AnkoRP_Weapons
+    ADD ]] .. GetFinalParent( wep ) .. [[ TEXT
+    ]] )
+    sql.Query( "UPDATE AnkoRP_Weapons SET " .. GetFinalParent( wep ) .. " = '" .. wep .. "' WHERE SteamID = '" .. self:SteamID64() .. "'" )
+end
+
+function plyMeta:RemoveWeaponFromTable( wep )
+    sql.Query( "UPDATE AnkoRP_Weapons SET " .. GetFinalParent( wep ) .. " = NULL WHERE SteamID = '" .. self:SteamID64() .. "'" )
+end
+
+function plyMeta:GetAttachmentTable()
+    local tab = sql.Query( "SELECT * FROM AnkoRP_Atts WHERE SteamID = '" .. self:SteamID64() .. "'" )[ 1 ]
+    tab[ "SteamID" ] = nil
+    return tab
+end
+
+function plyMeta:AddAttachmentToTable( att )
+    sql.Query( [[ALTER TABLE AnkoRP_Atts
+    ADD ]] .. att .. [[ BOOL
+    END
+    ]] )
+    sql.Query( "UPDATE AnkoRP_Atts SET " .. att .. " = 1 WHERE SteamID = '" .. self:SteamID64() .. "'" )
+    net.Start( "SendPlyTheirAttTable" )
+        net.WriteData( util.Compress( util.TableToJSON( self:GetAttachmentTable() ) ), #util.Compress( util.TableToJSON( self:GetAttachmentTable() ) ) )
+    net.Send( self )
+end
+
+function plyMeta:STNPCMessage( ent, msg )
+    net.Start( "ST_NPCMessage" )
+        net.WriteString( ent.PrintName )
+        net.WriteString( msg )
+    net.Send( self )
+end

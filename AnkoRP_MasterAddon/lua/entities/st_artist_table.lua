@@ -1,0 +1,398 @@
+-- i don't want to comment these right now
+-- i have a headache
+
+AddCSLuaFile()
+
+ENT.Type = "anim"
+ENT.Base = "base_gmodentity"
+ 
+ENT.PrintName= "Artist's Workbench"
+ENT.Author= "Throneco"
+ENT.Contact= "http://discord.gg/Tg8SUDv"
+ENT.Purpose= ""
+ENT.Instructions= ""
+ENT.Spawnable = true
+ENT.AdminSpawnable = false
+ENT.Category = "AnkoRP Entities"
+
+local function FormatTime( num )
+    return string.FormattedTime( math.ceil( num ) ).m .. ":" .. 
+        ( string.FormattedTime( math.ceil( num ) ).s < 10 and "0" or "" ) .. string.FormattedTime( math.ceil( num ) ).s
+end
+
+if CLIENT then
+    function ENT:Draw()
+        self:DrawModel()
+
+        local Pos = self:GetPos()
+        local Ang = self:GetAngles()
+        
+        Ang:RotateAroundAxis(Ang:Forward(), 90)
+        Ang:RotateAroundAxis(Ang:Right(),-90)
+        
+        local txt = ( self:CPPIGetOwner() and self:CPPIGetOwner():Name() .. "'s " or "" ) .. "Artist's Workbench"
+        local txt2
+        --print(  self:GetNWString( "WorkWeapon" ) )
+        if weapons.Get( self:GetNWString( "WorkWeapon" ) ) != nil then
+            txt2 = weapons.Get( self:GetNWString( "WorkWeapon" ) ).PrintName
+        else
+            txt2 = "No Weapon"
+        end
+        local txt3
+        if self:GetNWString( "WorkSkin" ) == "" then
+            txt3 = "No Skin"
+        else
+            txt3 = TFA.Attachments.Atts[ self:GetNWString( "WorkSkin" ) ].Name
+        end
+        local txt4
+        if self:GetNWInt( "WorkTime", math.huge ) == math.huge then
+            if self:GetNWString( "WorkSkin" ) != "" then
+                txt4 = "READY"
+            else
+                txt4 = FormatTime( 0 )
+            end
+        else
+            txt4 = FormatTime( self:GetNWInt( "WorkTime", math.huge ) - CurTime() )
+        end
+        
+        surface.SetFont("UPGMed")
+        local TextWidth = surface.GetTextSize(txt)
+        local TextWidth2 = surface.GetTextSize(txt2)
+        local TextWidth3 = surface.GetTextSize(txt3)
+        local TextWidth4 = surface.GetTextSize(txt4)
+        
+        cam.Start3D2D(Pos + Ang:Up() * -20 - Ang:Right() * -15, Ang, 0.16)
+            draw.WordBox(4, -TextWidth*0.5, -380, txt, "UPGMed", Color(50, 22, 49, 255), Color(255,255,255,255))
+            draw.WordBox(4, -TextWidth2*0.5, -340, txt2, "UPGMed", Color(50, 22, 49, 255), Color(255,255,255,255))
+            draw.WordBox(4, -TextWidth3*0.5, -300, txt3, "UPGMed", Color(50, 22, 49, 255), Color(255,255,255,255))
+            draw.WordBox(4, -TextWidth4*0.5, -260, txt4, "UPGMed", Color(50, 22, 49, 255), Color(255,255,255,255))
+        cam.End3D2D()
+    end
+
+    net.Receive( "ST_OpenArtistMenu", function()
+    
+        local this = net.ReadEntity()
+
+        local UpgradeWindow = vgui.Create( "DFrame" )
+        UpgradeWindow:SetPos( 5, 5 )
+        UpgradeWindow:SetSize( 800, 500 )
+        UpgradeWindow:SetTitle( "" )
+        UpgradeWindow:SetVisible( true )
+        UpgradeWindow:SetDraggable( false )
+        UpgradeWindow:ShowCloseButton( false )
+        UpgradeWindow:MakePopup()
+        UpgradeWindow:Center()
+        UpgradeWindow.Paint = function( self, w, h )
+            draw.RoundedBox( 0, 0, 0, w, h, Color( 50, 22, 49, 255 ) )
+            draw.SimpleText( "ARTIST'S WORKBENCH", "UPGMed", 5, 2 )
+        end
+
+        local CloseButton = vgui.Create( "DButton", UpgradeWindow )
+        CloseButton:SetPos( 760, 0 )
+        CloseButton:SetSize( 40, 20 )
+        CloseButton:SetText( "X" )
+        CloseButton:SetTextColor(Color(255,255,255))
+        CloseButton.DoClick = function( self )
+            UpgradeWindow:Close()
+            surface.PlaySound("ui/buttonclick.wav")
+        end
+        CloseButton.Paint = function( self, w, h )
+            if CloseButton:IsHovered() then
+                draw.RoundedBox( 0, 0, 0, w, h, Color( 128, 0, 0, 255 ) )
+            else
+                draw.RoundedBox( 0, 0, 0, w, h, Color( 255, 0, 0, 255 ) )
+            end
+            surface.SetDrawColor( color_black )
+        end
+
+        local WeaponLabel = vgui.Create( "DLabel", UpgradeWindow )
+        WeaponLabel:SetPos( 0, 80 )
+        WeaponLabel:SetFont( "UPGSmall" )
+        local wepUpgrades = LocalPlayer():GetActiveWeapon().Attachments
+        
+        if wepUpgrades == {} or wepUpgrades == nil or table.IsEmpty( wepUpgrades ) then
+            WeaponLabel:SetText( "You cannot apply any skins to your " .. ( LocalPlayer():GetActiveWeapon():GetPrintName()[1] == "#" and language.GetPhrase( LocalPlayer():GetActiveWeapon():GetPrintName() ) or LocalPlayer():GetActiveWeapon():GetPrintName() ) .. "." )
+            WeaponLabel:SizeToContents()
+            WeaponLabel:CenterHorizontal()
+        else
+            WeaponLabel:SetText( "Select a skin for your " .. LocalPlayer():GetActiveWeapon():GetPrintName() .. ":" )
+            WeaponLabel:SizeToContents()
+            WeaponLabel:CenterHorizontal()
+
+            local HintLabel = vgui.Create( "DLabel", UpgradeWindow )
+            HintLabel:SetPos( 0, 480 )
+            HintLabel:SetFont( "UPGMini" )
+            HintLabel:SetText( "Hit C while holding your weapon to view skins and their effects." )
+            HintLabel:SizeToContents()
+            HintLabel:CenterHorizontal()
+            -- fuckin tfa attachment structure
+            -- attachment slot (v)
+            --      attachments in that slot (w)
+            --          number of the attachment (m)
+            --              class name of the attachment (x)
+            for k,v in pairs( wepUpgrades ) do
+                for l,w in pairs( v ) do
+                    if l != "sel" then
+                        for m,x in pairs( w ) do
+
+                            local skinPrice, paintTime = 0, 0
+                            if TFA.Attachments.Atts[ x ].WeaponTable.MaterialTable != {} or TFA.Attachments.Atts[ x ].WeaponTable.MaterialTable_W != {} then
+                                skinPrice = skinPrice + 500
+                                paintTime = paintTime + 30
+                            end
+                            if TFA.Attachments.Atts[ x ].WeaponTable.Primary then
+                                if TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage then
+                                    skinPrice = skinPrice + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Damage ) / LocalPlayer():GetActiveWeapon().Primary.Damage ) ) * CSO_WEAPONS_TREE[ GetFinalParent( LocalPlayer():GetActiveWeapon():GetClass() ) ].price * 5 )
+                                    paintTime = paintTime + 30 + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Damage ) / LocalPlayer():GetActiveWeapon().Primary.Damage ) - 1 ) * 90 )
+                                end
+                                if TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize then
+                                    skinPrice = skinPrice + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.ClipSize ) - LocalPlayer():GetActiveWeapon().Primary.ClipSize ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 1 ) )
+                                    paintTime = paintTime + 30 + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.ClipSize ) - LocalPlayer():GetActiveWeapon().Primary.ClipSize ) * 9 )
+                                end
+                                if TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread then
+                                    skinPrice = skinPrice + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Spread ) / LocalPlayer():GetActiveWeapon().Primary.Spread ) ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 2.5 ) )
+                                    paintTime = paintTime + 30 + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Spread ) / LocalPlayer():GetActiveWeapon().Primary.Spread ) - 1 ) * 45 )
+                                end
+                                if TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM then
+                                    skinPrice = skinPrice + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.RPM ) - LocalPlayer():GetActiveWeapon().Primary.RPM ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 0.1 ) )
+                                    paintTime = paintTime + 30 + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.RPM ) - LocalPlayer():GetActiveWeapon().Primary.RPM ) * 6 )
+                                end
+                            end
+
+                            paintTime = paintTime / SKIN_SPEED_MULTIPLIER
+
+                            local SkinnedWeapon = vgui.Create( "DButton", UpgradeWindow )
+                            SkinnedWeapon:SetPos( 100, 50 + (m+k)*35 )
+                            SkinnedWeapon:SetSize( 600, 30 )
+                            --SkinnedWeapon:SetText( LocalPlayer():GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ x ].Name .. " - " .. "$97" )
+                            SkinnedWeapon:SetText( LocalPlayer():GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ x ].Name .. " - " .. "$" .. string.Comma( math.floor( skinPrice ) ) .. " | " .. FormatTime( paintTime ) )
+                            SkinnedWeapon:SetFont( "UPGSmall" )
+                            SkinnedWeapon:SetTextColor( LocalPlayer().attInvTable[ x ] and Color( 128, 128, 128 ) or Color( 255, 255, 255 ) )
+                            SkinnedWeapon:SetEnabled( !LocalPlayer().attInvTable[ x ] )
+                            SkinnedWeapon.class = x
+                            function SkinnedWeapon:Paint( w, h )
+                                if self:IsHovered() or LocalPlayer().attInvTable[ x ] then
+                                    surface.SetDrawColor( Color( 128, 128, 128 ) )
+                                else
+                                    surface.SetDrawColor( Color( 255, 255, 255 ) )
+                                end
+                                surface.DrawOutlinedRect( 0, 0, w, h)
+                            end
+                            function SkinnedWeapon:DoClick()
+                                net.Start( "ST_SkinWeapon" )
+                                    net.WriteString( self.class )
+                                    net.WriteEntity( this )
+                                    net.WriteInt( math.floor( skinPrice ), 32 )
+                                    net.WriteInt( paintTime, 32 )
+                                    net.WriteString( LocalPlayer():GetActiveWeapon():GetClass() )
+                                net.SendToServer()
+                                UpgradeWindow:Close()
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+    end )
+
+end
+
+if SERVER then
+    function ENT:Initialize()
+    
+        self:SetModel( "models/props_wasteland/controlroom_desk001b.mdl" )
+        self:PhysicsInit( SOLID_VPHYSICS )
+        self:SetMoveType( MOVETYPE_VPHYSICS )
+        self:SetSolid( SOLID_VPHYSICS )
+    
+        self.Ready = false
+
+        local phys = self:GetPhysicsObject()
+        if (phys:IsValid()) then phys:Wake() end
+        self:SetUseType(SIMPLE_USE)
+
+        self.spraycan = ents.Create( "prop_dynamic" )
+        self.spraycan:SetModel( "models/props_junk/propane_tank001a.mdl" )
+        self.spraycan:SetPos( self:GetPos() + self:GetUp() * 22 - self:GetForward() * 10 + self:GetRight() * 45 )
+        self.spraycan:SetAngles( self:GetAngles() - Angle( 0, 225, 0 ) )
+        self.spraycan:SetParent(self)
+        self:DeleteOnRemove( self.spraycan )
+        self.spraycan:SetModelScale( 0.3333 )
+        self.spraycan:Spawn()
+
+        self.wrench = ents.Create( "prop_dynamic" )
+        self.wrench:SetModel( "models/props_c17/tools_wrench01a.mdl" )
+        self.wrench:SetPos( self:GetPos() + self:GetUp() * 17 + self:GetForward() * 15 - self:GetRight() * 45 )
+        self.wrench:SetAngles( self:GetAngles() - Angle( 0, 225, 0 ) )
+        self.wrench:SetParent(self)
+        self:DeleteOnRemove( self.wrench )
+        self.wrench:Spawn()
+
+        -- ############## up is not up for all weapons ##################
+        -- use the OBB's second smallest edge and orient it based on that
+        -- but how
+        self.weapon = ents.Create( "prop_dynamic" )
+        self.weapon:SetModel( "models/weapons/w_rif_m4a1.mdl" )
+        self.weapon:SetPos( self:GetPos() + self:GetUp() * 20 + self:GetForward() * 4 + self:GetRight() * 7 )
+        self.weapon:SetAngles( self:GetAngles() - Angle( 0, 115, 270 ) )
+        self.weapon:SetParent(self)
+        self.weapon:SetMaterial( "models/wireframe" )
+        self:DeleteOnRemove( self.weapon )
+        self.weapon:Spawn()
+
+    end
+
+    function ENT:Think()
+        if CurTime() >= self:GetNWInt( "WorkTime", math.huge ) and self:GetNWString( "WorkSkin" ) != "" then
+            self.Ready = true
+            self:SetNWInt( "WorkTime", math.huge )
+            if TFA.Attachments.Atts[ self:GetNWString( "WorkSkin" ) ].WeaponTable.MaterialTable then
+                self.weapon:SetMaterial( TFA.Attachments.Atts[ self:GetNWString( "WorkSkin" ) ].WeaponTable.MaterialTable[ 1 ] )
+            elseif TFA.Attachments.Atts[ self:GetNWString( "WorkSkin" ) ].WeaponTable.MaterialTable_W then
+                self.weapon:SetMaterial( TFA.Attachments.Atts[ self:GetNWString( "WorkSkin" ) ].WeaponTable.MaterialTable_W[ 1 ] )
+            end
+            self:EmitSound( "player/sprayer.wav" )
+        end
+    end
+    
+    function table.GetLosingKey( tab )
+        local lowest = math.huge
+        local loser = nil
+
+        for k,v in pairs( tab ) do
+            if ( v < lowest ) then
+                loser = k
+                lowest = v
+            end
+        end
+
+        return loser
+    end
+
+    function ENT:Use( act, ply )
+        if self:GetNWInt( "WorkTime", math.huge ) == math.huge then
+            if self.Ready then
+                ply:Give( self:GetNWString( "WorkWeapon" ) )
+                DarkRP.notify( ply, 0, 4, "You got the " .. weapons.Get( self:GetNWString( "WorkWeapon" ) ).PrintName .. " | " .. TFA.Attachments.Atts[ self:GetNWString( "WorkSkin" ) ].Name .. ".  Hit C to equip it!" )
+                ply:AddAttachmentToTable( self:GetNWString( "WorkSkin" ) )
+                self.weapon:SetModel( "models/weapons/w_rif_m4a1.mdl" )
+                self.weapon:SetAngles( self:GetAngles() - Angle( 0, 115, 270 ) )
+                self.weapon:SetMaterial( "models/wireframe" )
+                self:SetNWInt( "WorkTime", math.huge )
+                self:SetNWString( "WorkSkin", "" )
+                self:SetNWString( "WorkWeapon", "" )
+                self.Ready = false
+            else
+                net.Start( "ST_OpenArtistMenu" )
+                    net.WriteEntity( self )
+                net.Send( ply )
+            end
+        else
+            DarkRP.notify( ply, 1, 4, "This workbench is busy." )
+        end
+            
+            --[[local mdl = ply:GetActiveWeapon().WorldModel
+            self.weapon:SetModel( mdl )
+
+            print( self.weapon:OBBMins() )
+            print( self.weapon:OBBMaxs() )
+            local diffs = {
+                ["x"] = Vector( Vector( self.weapon:OBBMaxs().x, self.weapon:OBBMins().y, self.weapon:OBBMins().z ) - self.weapon:OBBMins() ).x,
+                ["y"] = Vector( Vector( self.weapon:OBBMins().x, self.weapon:OBBMaxs().y, self.weapon:OBBMins().z ) - self.weapon:OBBMins() ).y,
+                ["z"] = Vector( Vector( self.weapon:OBBMins().x, self.weapon:OBBMins().y, self.weapon:OBBMaxs().z ) - self.weapon:OBBMins() ).z,
+            }
+            local func = {
+                ["x"] = self.weapon:GetForward() * 64,
+                ["y"] = self.weapon:GetRight() * 64,
+                ["z"] = self.weapon:GetUp() * 64,
+            }
+            local angs = {
+                ["x"] = Angle( 90, 0, 0 ),
+                ["y"] = Angle( 0, 0, 0 ),
+                ["z"] = Angle( 0, 225, 90 )
+            }
+            PrintTable( diffs )
+            print( table.GetLosingKey( diffs ) )
+            self.weapon:SetAngles( self:GetAngles() - Angle( 0, 115, 270 ) - angs[ table.GetLosingKey( diffs ) ] )
+            self.weapon:SetMaterial( "" )
+            ]]
+        
+       -- debugoverlay.Line( self.weapon:GetPos(), self.weapon:GetPos() + func[ table.GetLosingKey( diffs ) ], 5, Color( 255, 0, 0 ) )
+       -- debugoverlay.BoxAngles( self.weapon:GetPos(), self.weapon:OBBMins(), self.weapon:OBBMaxs(), self.weapon:GetAngles(), 5, Color( 0, 255, 0 ) )
+        --[[
+        print( "y diff:" )
+        print( Vector( Vector( self.weapon:OBBMins().x, self.weapon:OBBMaxs().y, self.weapon:OBBMins().z ) - self.weapon:OBBMins() ).y )
+        print( "z diff:" )
+        print( Vector( Vector( self.weapon:OBBMins().x, self.weapon:OBBMins().y, self.weapon:OBBMaxs().z ) - self.weapon:OBBMins() ).z )
+        print( "x diff:" )
+        print( Vector( Vector( self.weapon:OBBMaxs().x, self.weapon:OBBMins().y, self.weapon:OBBMins().z ) - self.weapon:OBBMins() ).x )
+        ]]
+    end
+
+    net.Receive( "ST_SkinWeapon", function( _, ply )
+        local wep = net.ReadString()
+        local this = net.ReadEntity()
+        local price = net.ReadInt( 32 )
+        local time = net.ReadInt( 32 )
+        local actWep = net.ReadString()
+
+        if !table.HasValue( ply:GetActiveWeapon().Attachments[ 1 ].atts, wep ) and !table.HasValue( ply:GetActiveWeapon().Attachments[ 2 ].atts, wep ) then
+            DarkRP.notify( ply, 1, 4, "Paint failed, you are not holding the right weapon." )
+        return end
+        if !ply:canAfford( price ) then
+            DarkRP.notify( ply, 1, 4, "Paint failed, you don't have enough money." )
+        return end
+        this:EmitSound( "npc/dog/dog_servo12.wav" )
+        DarkRP.notify( ply, 0, 4, "Paint started! Come back in " .. FormatTime( time ) .. " to get your " .. ply:GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ wep ].Name .. "." )
+        ply:addMoney( -price )
+        this:SetNWString( "WorkWeapon", actWep )
+        this:SetNWString( "WorkSkin", wep )
+        this:SetNWInt( "WorkTime", CurTime() + time )
+        this.weapon:SetModel( ply:GetActiveWeapon().WorldModel )
+        local diffs = {
+            ["x"] = Vector( Vector( this.weapon:OBBMaxs().x, this.weapon:OBBMins().y, this.weapon:OBBMins().z ) - this.weapon:OBBMins() ).x,
+            ["y"] = Vector( Vector( this.weapon:OBBMins().x, this.weapon:OBBMaxs().y, this.weapon:OBBMins().z ) - this.weapon:OBBMins() ).y,
+            ["z"] = Vector( Vector( this.weapon:OBBMins().x, this.weapon:OBBMins().y, this.weapon:OBBMaxs().z ) - this.weapon:OBBMins() ).z,
+        }
+        local func = {
+            ["x"] = this.weapon:GetForward() * 64,
+            ["y"] = this.weapon:GetRight() * 64,
+            ["z"] = this.weapon:GetUp() * 64,
+        }
+        local angs = {
+            ["x"] = Angle( 90, 0, 0 ),
+            ["y"] = Angle( 0, 0, 0 ),
+            ["z"] = Angle( 0, 225, 90 )
+        }
+        this.weapon:SetAngles( this:GetAngles() - Angle( 0, 115, 270 ) - angs[ table.GetLosingKey( diffs ) ] )
+        this.weapon:SetMaterial( "" )
+
+        --[[
+        if ply:GetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" ) == ply:GetActiveWeapon():GetClass() then
+            if ply:GetActiveWeapon().Slot == weapons.Get( wep ).Slot then
+                ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, wep )
+            else
+                ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" )
+                timer.Simple( 4, function()
+                    DarkRP.notify( ply, 0, 8, "Your new weapon has a different slot than your previous weapon. Your new weapon has not been added to your loadout." )
+                end )
+            end
+        end
+        ]]
+        ply:StripWeapon( ply:GetActiveWeapon():GetClass() )
+        --[[
+        ply:Give( wep )
+        ply:SelectWeapon( wep )
+        local finalParent = wep
+        for _ = CSO_WEAPONS_TREE[ wep ].deep, 2, -1 do
+            finalParent = CSO_WEAPONS_TREE[ finalParent ].parent
+        end
+        ply.wepInvTable[ finalParent ] = wep
+        file.Write( "ankorp/" .. ply:SteamID64() .. ".txt", util.TableToJSON( ply.wepInvTable ) )
+        ply:addMoney( -CSO_WEAPONS_TREE[wep].price )
+        ]]
+
+    end )
+
+end
