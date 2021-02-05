@@ -355,7 +355,7 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 		multOffsets = multOffsets + 20
 	end
 	
-	if LocalPlayer():GetActiveWeapon().IsTFAWeapon then
+	if LocalPlayer():GetActiveWeapon().IsTFAWeapon and LocalPlayer():GetActiveWeapon():GetIronSights() and LocalPlayer():GetActiveWeapon().Scoped then
 		surface.SetDrawColor( color_white )
 		surface.DrawRect( ScrW() / 2 - 1, ScrH() / 2 - 1, 2, 2 )
 	end
@@ -364,49 +364,17 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 
 end )
 
---[[
-net.Receive( "KDGMockWanted", function()
-
-	local ply = net.ReadEntity()
-	local cop = net.ReadEntity()
-	local reason = net.ReadString()
-
-	local title = ply:Name() .. " is wanted for " .. reason .. "!"
-	local subtitle = "Issued by " .. cop:Name()
-
-	hook.Add( "HUDPaint", "DrawKDGWanted", function()
-
-		draw.NoTexture()
-		surface.SetFont( "KDGWantedFont" )
-		draw.RoundedBox( 8, ScrW()/2 - ( surface.GetTextSize( title ) + 50 ) / 2, 25, surface.GetTextSize( title ) + 50, 100, Color( 255, 0, 0, 64 ) )
-		draw.SimpleText( title, "KDGWantedFont", ScrW()/2 - surface.GetTextSize( title )/2, 40, color_white )
-		surface.SetFont( "AmmoKDGDisplayFont" )
-		draw.SimpleText( subtitle, "AmmoKDGDisplayFont", ScrW()/2 - surface.GetTextSize( subtitle )/2, 80, color_white )
-
-	end )
-
-	timer.Create( "KDGWantedCLock", 3, 1, function()
-		hook.Remove( "HUDPaint", "DrawKDGWanted" )
-	end )
-
-end )
-]]
-
 local hide = {
 	CHudBattery = true,
 	CHudHealth = true,
 	CHudAmmo = true,
 	CHudSecondaryAmmo = true,
-	DarkRP_LocalPlayerHUD = true
+	DarkRP_LocalPlayerHUD = true,
+	DarkRP_Agenda = true,
+	DarkRP_ArrestedHUD = true
 }
 
-local hideHUDElements = {
-	["DarkRP_LocalPlayerHUD"] = true,
-	["DarkRP_Agenda"] = true,
-	["DarkRP_ArrestedHUD"] = true,
-}
 
 hook.Add( "HUDShouldDraw", "HideDefaults_KDGHUD", function(n)
 	if hide[n] then return false end
-	if hideHUDElements[name] then return false end
 end )
