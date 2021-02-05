@@ -51,9 +51,11 @@ hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
 
     --ply.wepInvTable = sql.Query( "SELECT * FROM AnkoRP_Weapons WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
     --ply.attInvTable = sql.Query( "SELECT * FROM AnkoRP_Atts WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
-    sql.Query( "INSERT INTO AnkoRP_Weapons( SteamID ) VALUES( '" .. ply:SteamID64() .. "' )" )
-    sql.Query( "INSERT INTO AnkoRP_Atts( SteamID ) VALUES( '" .. ply:SteamID64() .. "' )" )
-    sql.Query( "INSERT INTO AnkoRP_Rep( SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail ) VALUES( '" .. ply:SteamID64() .. "', 0, 0, 0, 0 )" )
+    if sql.Query( "SELECT * FROM AnkoRP_Weapons WHERE SteamID = '" .. ply:SteamID64() .. "'" ) == nil then
+        sql.Query( "INSERT INTO AnkoRP_Weapons( SteamID ) VALUES( '" .. ply:SteamID64() .. "' )" )
+        sql.Query( "INSERT INTO AnkoRP_Atts( SteamID ) VALUES( '" .. ply:SteamID64() .. "' )" )
+        sql.Query( "INSERT INTO AnkoRP_Rep( SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail ) VALUES( '" .. ply:SteamID64() .. "', 0, 0, 0, 0 )" )
+    end
     -- i stored weapons n shit in txt files
     -- oopsie, hehe~
     --[[
@@ -70,7 +72,7 @@ hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
     end
     ]]
 
-    ply.ankoRepTable = sql.Query( "SELECT SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail FROM ankorprep WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
+    ply.ankoRepTable = sql.Query( "SELECT SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail FROM AnkoRP_Rep WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
     ply:SetNWInt( "ContractSuccess", tonumber( ply.ankoRepTable[ "ContractSuccess" ] ) )
     ply:SetNWInt( "ContractFail", tonumber( ply.ankoRepTable[ "ContractFail" ] ) )
     ply:SetNWInt( "BountySuccess", tonumber( ply.ankoRepTable[ "BountySuccess" ] ) )
