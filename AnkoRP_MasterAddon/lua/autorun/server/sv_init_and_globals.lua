@@ -28,11 +28,6 @@ hook.Add( "Initialize", "SetupTDMRPDir", function()
         sql.Query( "CREATE TABLE AnkoRP_Atts( SteamID TEXT )" )
         sql.Query( "CREATE TABLE AnkoRP_Rep( SteamID TEXT, ContractSuccess INT, ContractFail INT, BountySuccess INT, BountyFail INT )" )
     end
-    --[[
-    if !file.Exists( "ankorp", "DATA" ) then
-        file.CreateDir( "ankorp/atts" )
-    end
-    ]]
 
     -- disallow dropping expensive and high-tier weapons
     GAMEMODE.Config.DisallowDrop = GAMEMODE.Config.DisallowDrop or {}
@@ -49,37 +44,27 @@ end )
 
 hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
 
-    --ply.wepInvTable = sql.Query( "SELECT * FROM AnkoRP_Weapons WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
-    --ply.attInvTable = sql.Query( "SELECT * FROM AnkoRP_Atts WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
     if sql.Query( "SELECT * FROM AnkoRP_Weapons WHERE SteamID = '" .. ply:SteamID64() .. "'" ) == nil then
         sql.Query( "INSERT INTO AnkoRP_Weapons( SteamID ) VALUES( '" .. ply:SteamID64() .. "' )" )
         sql.Query( "INSERT INTO AnkoRP_Atts( SteamID ) VALUES( '" .. ply:SteamID64() .. "' )" )
         sql.Query( "INSERT INTO AnkoRP_Rep( SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail ) VALUES( '" .. ply:SteamID64() .. "', 0, 0, 0, 0 )" )
     end
-    -- i stored weapons n shit in txt files
-    -- oopsie, hehe~
-    --[[
-    if !file.Exists( "ankorp/" .. ply:SteamID64() .. ".txt", "DATA" ) then
-        ply.wepInvTable = {}
-        for k,v in pairs( CSO_WEAPONS_TREE ) do
-            if v.deep == 1 then
-                ply.wepInvTable[ k ] = "nil"
+
+    if file.Exists( "ankorp/" .. ply:SteamID64() .. ".txt", "DATA" ) then
+        ankoWepTable = util.JSONToTable( file.Read( "ankorp/" .. ply:SteamID64() .. ".txt" ) )
+        for k,v in pairs( ankoWepTable ) do
+            if v != "nil" then
+                ply:AddWeaponToTable( v )
             end
         end
-        ply.attInvTable = {}
-        file.Write( "ankorp/" .. ply:SteamID64() .. ".txt", util.TableToJSON( ply.wepInvTable ) )
-        file.Write( "ankorp/atts/" .. ply:SteamID64() .. ".txt", util.TableToJSON( ply.attInvTable ) )
+        file.Delete( "ankorp/" .. ply:SteamID64() .. ".txt" )
     end
-    ]]
 
-    ply.ankoRepTable = sql.Query( "SELECT SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail FROM AnkoRP_Rep WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
-    ply:SetNWInt( "ContractSuccess", tonumber( ply.ankoRepTable[ "ContractSuccess" ] ) )
-    ply:SetNWInt( "ContractFail", tonumber( ply.ankoRepTable[ "ContractFail" ] ) )
-    ply:SetNWInt( "BountySuccess", tonumber( ply.ankoRepTable[ "BountySuccess" ] ) )
-    ply:SetNWInt( "BountyFail", tonumber( ply.ankoRepTable[ "BountyFail" ] ) )
-
-    --ply.wepInvTable = util.JSONToTable( file.Read( "ankorp/" .. ply:SteamID64() .. ".txt" ) )
-    --ply.attInvTable = util.JSONToTable( file.Read( "ankorp/atts/" .. ply:SteamID64() .. ".txt" ) )
+    local ankoRepTable = sql.Query( "SELECT SteamID, ContractSuccess, ContractFail, BountySuccess, BountyFail FROM AnkoRP_Rep WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ]
+    ply:SetNWInt( "ContractSuccess", tonumber( ankoRepTable[ "ContractSuccess" ] ) )
+    ply:SetNWInt( "ContractFail", tonumber( ankoRepTable[ "ContractFail" ] ) )
+    ply:SetNWInt( "BountySuccess", tonumber( ankoRepTable[ "BountySuccess" ] ) )
+    ply:SetNWInt( "BountyFail", tonumber( ankoRepTable[ "BountyFail" ] ) )
 
     -- make absolutely sure that the player is loaded and has what they need
     -- i'm sure this is REALLY bad
