@@ -113,13 +113,15 @@ hook.Add( "PlayerLoadout", "OfferPlayerContract", function( ply )
     local fail = ply:GetNWInt( "ContractFail" )
     local chance, rate
     if succ + fail == 0 then
-        fail = 1
+        rate = 50
+    else
+        rate = succ / ( succ + fail ) * 100
     end
-
-    rate = succ / ( succ + fail ) * 100
+    
     chance = math.Clamp( rate, 20, 80 )
 
     local randChance = math.random( 1, 100 )
+    print( "Rolled a " .. randChance .. " (needed to be lower than " .. chance .. ")" )
     if randChance < chance and ply:GetNWInt( "Contract_IsActive", 0 ) == 0 and #GetCombatants() > 1 and #GetActiveTeams() >= 2 then
         ply:OfferContract()
     end
