@@ -12,7 +12,6 @@ hook.Add("PlayerChangedTeam", "SaveKillsInSameTeam", function( ply, old, new )
     local newTeam = -1
     
     for k,v in pairs( RPExtraTeams ) do
-        print( "old: " .. old .. " new: " .. new )
         if v.team == old then
             oldTeam = v
         end
