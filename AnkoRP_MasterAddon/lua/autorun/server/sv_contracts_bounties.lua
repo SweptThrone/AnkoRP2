@@ -121,7 +121,6 @@ hook.Add( "PlayerLoadout", "OfferPlayerContract", function( ply )
     chance = math.Clamp( rate, 20, 80 )
 
     local randChance = math.random( 1, 100 )
-    print( "Rolled a " .. randChance .. " (needed to be lower than " .. chance .. ")" )
     if randChance < chance and ply:GetNWInt( "Contract_IsActive", 0 ) == 0 and #GetCombatants() > 1 and #GetActiveTeams() >= 2 then
         ply:OfferContract()
     end
