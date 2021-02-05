@@ -449,27 +449,7 @@ ANKORP_PROPERTIES = {
         2743,
         2751,
         2750
-    }
-    -- unownable:
-    -- fridge doors in 7-12 and diner   never owned
-    -- sewers                           never owned
-    -- impound lot                      never owned
-    -- jewerly store                    never owned
-    -- bank                             never owned
-    -- world corp                       never owned
-    -- remote                           never owned
-    -- barge                            never owned
-    -- hospital                         never owned
-    -- pd                               team owned CT
-    -- west hideout                     team owned RE
-    -- club                             never owned
-    -- gun shop                         team owned GUN
-    -- pawn shop                        never owned
-    -- city hall                        never owned
-    -- houseboat                        team owned TR
-    -- self storage                     team owned CM
-    -- dumpsters                        never owned
-    
+    }    
 }
 
 hook.Add( "playerKeysSold", "UnownWholeProperty", function( ply, door, cash )
