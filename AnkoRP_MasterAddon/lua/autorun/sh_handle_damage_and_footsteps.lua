@@ -9,6 +9,28 @@ hook.Add( "ScalePlayerDamage", "FriendlyFire/CitizenFie", function( vic, _, dmg 
 	-- friendly fire and civilian shots deal zero damage
     if vic:getJobTable() and dmg:GetAttacker():IsPlayer() then
 
+		if vic:Team() == TEAM_SKELETON then
+			dmg:ScaleDamage( 0.75 )
+			vic:EmitSound( "weapons/fx/rics/ric" .. math.random( 1, 5 ) .. ".wav" )
+		end
+
+		if dmg:GetAttacker():Team() == TEAM_CHARPLE and vic:getJobTable().category != "Monsters" and vic:getJobTable().category != "Citizens" and dmg:GetInflictor():IsWeapon() and dmg:GetInflictor().Slot == 0 then
+			vic:Ignite( 5 )
+		end
+
+		if dmg:GetAttacker():Team() == TEAM_ZOMBIE and vic:getJobTable().category != "Monsters" and vic:getJobTable().category != "Citizens" and dmg:GetInflictor():IsWeapon() and dmg:GetInflictor().Slot == 0 then
+			if SERVER then
+				timer.Create( "Bleeding" .. vic:EntIndex(), 0.5, math.random( 12, 18 ), function()
+					local cdmg = DamageInfo()
+					cdmg:SetDamage( math.random( 2, 4 ) )
+					cdmg:SetAttacker( dmg:GetAttacker() )
+					cdmg:SetDamageType( DMG_SLASH )
+					cdmg:SetInflictor( dmg:GetInflictor() )
+					vic:TakeDamageInfo( cdmg )
+				end )
+			end
+		end
+
         if dmg:GetAttacker():getJobTable() and vic:getJobTable().category == dmg:GetAttacker():getJobTable().category then
             dmg:ScaleDamage( 0 )
             dmg:GetAttacker():PrintMessage( HUD_PRINTCENTER, "Watch your fire!  You hit a teammate!" )
@@ -64,6 +86,28 @@ hook.Add( "KeyPress", "KillBabygodWhenFire", function( ply, key )
 			ply.Babygod = nil
 			ply:SetRenderMode( RENDERMODE_NORMAL )
 			ply:GodDisable()
+		end
+	end
+
+	if key == IN_ALT1 and ply:Team() == TEAM_FZOMBIE and CurTime() > ply:GetNWInt( "SuperJumpRecharge", 0 ) and ply:Alive() then
+		if SERVER then ply:EmitSound( "npc/fast_zombie/leap1.wav" ) end
+		ply:SetVelocity( ply:GetAimVector() * 750 )
+		ply:SetNWInt( "SuperJumpRecharge", CurTime() + 3 )
+	end
+
+	if key == IN_ALT1 and ply:Team() == TEAM_ZOMBINE and !timer.Exists( "ZombineDet" .. ply:EntIndex() ) and !ply:HasGodMode() then
+		if SERVER then
+			ply:EmitSound( "npc/fast_zombie/fz_scream1.wav" )
+			timer.Create( "ZombineDet" .. ply:EntIndex(), 1.5, 1, function()
+				if ply:Alive() and !ply:HasGodMode() then
+					local explode = ents.Create( "env_explosion" ) //creates the explosion
+					explode:SetPos( ply:GetPos() + Vector( 0, 0, 32 ) )
+					explode:Spawn()
+					explode:SetKeyValue( "iMagnitude", 200 )
+					explode:SetOwner( ply )
+					explode:Fire( "Explode", 0, 0 )
+				end
+			end )
 		end
 	end
 
