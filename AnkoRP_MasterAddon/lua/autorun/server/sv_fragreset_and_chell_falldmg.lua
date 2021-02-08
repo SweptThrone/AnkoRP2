@@ -25,5 +25,5 @@ hook.Add("PlayerChangedTeam", "SaveKillsInSameTeam", function( ply, old, new )
 end )
 
 hook.Add( "GetFallDamage", "NoChellFDamage", function( ply, _ )
-    if ply:Team() == TEAM_CHELL then return 0 end
+    if ply:Team() == TEAM_CHELL or ply:Team() == TEAM_FZOMBIE then return 0 end
 end )
