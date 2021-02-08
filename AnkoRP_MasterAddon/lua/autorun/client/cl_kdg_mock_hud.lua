@@ -41,7 +41,12 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 	local color_text = color_bg
 	local color_black = color_black
 
-	local money_this_frame = LocalPlayer():getDarkRPVar( "money" ) or 0
+	local money_this_frame
+	if LocalPlayer().getDarkRPVar then
+		money_this_frame = LocalPlayer():getDarkRPVar( "money" )
+	else
+		money_this_frame = 0
+	end
 
 	if money_last_frame > money_this_frame then
 		timesincelastdrop = CurTime()
@@ -166,17 +171,33 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 	end
 
 	-- ap foreground
-	surface.SetDrawColor( color_ap )
-	draw.NoTexture()
-	local apXOne = smoothAP * ( 282 / 150 )
-	if ap != 0 then
-		surface.DrawPoly( { // - 91
-			{ x = 15, y = ScrH() - 111 },
-			{ x = apXOne, y = ScrH() - 111 }, -- 282 max width
-			{ x = apXOne + 17, y = ScrH() - 97 }, -- 299 max width
-			{ x = apXOne + 17, y = ScrH() - 96 },
-			{ x = 15, y = ScrH() - 96 }
-		} )
+	if LocalPlayer():Team() == TEAM_FZOMBIE then
+		surface.SetDrawColor( Color( 255, 255, 0 ) )
+		draw.NoTexture()
+		--local apXOne = smoothAP * ( 282 / 150 )
+		local apXOne = math.Clamp( ( 150 * ( 282 / 150 ) ) - ( ( LocalPlayer():GetNWInt( "SuperJumpRecharge", 0 ) - CurTime() ) / 3 ) * 150 * ( 282 / 150 ), 0, ( 150 * ( 282 / 150 ) ) )
+		--if ap != 0 then
+			surface.DrawPoly( { // - 91
+				{ x = 15, y = ScrH() - 111 },
+				{ x = apXOne, y = ScrH() - 111 }, -- 282 max width
+				{ x = apXOne + 17, y = ScrH() - 97 }, -- 299 max width
+				{ x = apXOne + 17, y = ScrH() - 96 },
+				{ x = 15, y = ScrH() - 96 }
+			} )
+		--end
+	else
+		surface.SetDrawColor( color_ap )
+		draw.NoTexture()
+		local apXOne = smoothAP * ( 282 / 150 )
+		if ap != 0 then
+			surface.DrawPoly( { // - 91
+				{ x = 15, y = ScrH() - 111 },
+				{ x = apXOne, y = ScrH() - 111 }, -- 282 max width
+				{ x = apXOne + 17, y = ScrH() - 97 }, -- 299 max width
+				{ x = apXOne + 17, y = ScrH() - 96 },
+				{ x = 15, y = ScrH() - 96 }
+			} )
+		end
 	end
 
 	-- name icon
@@ -228,7 +249,7 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 			{ x = ScrW() - 266, y = ScrH() - 54 }
 		} )
 
-		-- ammo background foreground (grey)
+		-- ammo background foreground (weapon col)
 		surface.SetDrawColor( color_wep )
 		draw.NoTexture()
 		surface.DrawPoly( {
@@ -249,6 +270,38 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 		surface.DrawRect( ScrW() - 101, ScrH() - 48, 24, 24 )
 		surface.DrawRect( ScrW() - 72, ScrH() - 48, 24, 24 )
 		surface.DrawRect( ScrW() - 43, ScrH() - 48, 24, 24 )
+
+		if LocalPlayer():GetActiveWeapon().Secondary and ( LocalPlayer():GetActiveWeapon().Secondary.Ammo != "none" and LocalPlayer():GetActiveWeapon().Secondary.Ammo != nil and LocalPlayer():GetActiveWeapon().Secondary.Ammo != "" ) then
+			-- alt background
+			surface.SetDrawColor( color_black )
+			draw.NoTexture()
+			surface.DrawPoly( {
+				{ x = ScrW() - 128, y = ScrH() - 106 },
+				{ x = ScrW(), y = ScrH() - 106 },
+				{ x = ScrW(), y = ScrH() - 64 },
+				{ x = ScrW() - 138, y = ScrH() - 64 },
+				{ x = ScrW() - 138, y = ScrH() - 96 }
+			} )
+
+			-- alt foreground
+			surface.SetDrawColor( color_wep )
+			draw.NoTexture()
+			surface.DrawPoly( {
+				{ x = ScrW() - 123, y = ScrH() - 101 },
+				{ x = ScrW() - 5, y = ScrH() - 101 },
+				{ x = ScrW() - 5, y = ScrH() - 64 },
+				{ x = ScrW() - 133, y = ScrH() - 64 },
+				{ x = ScrW() - 133, y = ScrH() - 91 }
+			} )
+
+			-- ammo number panels
+			surface.SetDrawColor( color_black )
+			draw.NoTexture()
+			surface.DrawRect( ScrW() - 124, ScrH() - 94, 24, 24 )
+			surface.DrawRect( ScrW() - 95, ScrH() - 94, 24, 24 )
+			surface.DrawRect( ScrW() - 66, ScrH() - 94, 24, 24 )
+			surface.DrawRect( ScrW() - 37, ScrH() - 94, 24, 24 )
+		end
 	end
 
 	--[[ ========= TEXTS START HERE ========= ]]--
@@ -271,7 +324,7 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 	}
 
 	draw.SimpleText( hp .. " HP", "KDGDisplayFont", 105, ScrH() - 144, color_black )
-	draw.SimpleText( ap .. " AP", "KDGDisplayFont", 105, ScrH() - 112, color_black )
+	draw.SimpleText( LocalPlayer():Team() == TEAM_FZOMBIE and "+ALT1" or ap .. " AP", "KDGDisplayFont", 105, ScrH() - 112, color_black )
 	draw.SimpleText( LocalPlayer():Name(), "KDGDisplayFont", 35, ScrH() - 83, color_white )
 	draw.SimpleText( LocalPlayer():getDarkRPVar( "job" ), "KDGDisplayFont", 35, ScrH() - 57, color_white )
 	draw.SimpleText( DarkRP.formatMoney( math.Round( smoothCash ) ), "KDGDisplayFont", 35, ScrH() - 31, color_white )
@@ -279,8 +332,8 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 	draw.SimpleText( LocalPlayer():getJobTable() and TEAM_CAT_LUT[ LocalPlayer():getJobTable().category ] or "ERR", "KDGDisplayFont", 220, ScrH() - 57, LocalPlayer():getJobTable() and TEAM_CAT_COLOR_LUT[ LocalPlayer():getJobTable().category ] or color_white )
 
 	if IsValid( LocalPlayer():GetActiveWeapon() ) then
-		local amo1 = LocalPlayer():GetAmmoCount( LocalPlayer():GetActiveWeapon():GetPrimaryAmmoType() )
 		local amoType = LocalPlayer():GetActiveWeapon():GetPrimaryAmmoType()
+		local amo1 = LocalPlayer():GetAmmoCount( amoType )
 		draw.SimpleText( amoType == -1 and "-" or amo1 % 10, "AmmoKDGDisplayFont", ScrW() - 37, ScrH() - 49, color_white )
 		draw.SimpleText( amoType == -1 and "-" or math.floor( amo1 / 10 % 10 ), "AmmoKDGDisplayFont", ScrW() - 66, ScrH() - 49, color_white )
 		draw.SimpleText( amoType == -1 and "-" or math.floor( amo1 / 100 % 10 ), "AmmoKDGDisplayFont", ScrW() - 95, ScrH() - 49, color_white )
@@ -291,6 +344,16 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 		draw.SimpleText( clipp == -1 and "-" or math.floor( clipp / 100 % 10 ), "BigKDGDisplayFont", ScrW() - 242, ScrH() - 49, color_white )
 
 		draw.SimpleText( "/", "BigKDGDisplayFont", ScrW() - 152, ScrH() - 54, color_black )
+
+		if LocalPlayer():GetActiveWeapon().Secondary and ( LocalPlayer():GetActiveWeapon().Secondary.Ammo != "none" and LocalPlayer():GetActiveWeapon().Secondary.Ammo != nil and LocalPlayer():GetActiveWeapon().Secondary.Ammo != "" ) then
+			local amoType2 = LocalPlayer():GetActiveWeapon():GetSecondaryAmmoType()
+			local amo2 = LocalPlayer():GetAmmoCount( amoType2 )
+
+			draw.SimpleText( amoType2 == -1 and "-" or amo2 % 10, "AmmoKDGDisplayFont", ScrW() - 32, ScrH() - 95, color_white )
+			draw.SimpleText( amoType2 == -1 and "-" or math.floor( amo2 / 10 % 10 ), "AmmoKDGDisplayFont", ScrW() - 61, ScrH() - 95, color_white )
+			draw.SimpleText( amoType2 == -1 and "-" or math.floor( amo2 / 100 % 10 ), "AmmoKDGDisplayFont", ScrW() - 90, ScrH() - 95, color_white )
+			draw.SimpleText( amoType2 == -1 and "-" or math.floor( amo2 / 1000 % 10 ), "AmmoKDGDisplayFont", ScrW() - 119, ScrH() - 95, color_white )
+		end
 	end
 
 	if LocalPlayer():getAgendaTable() then
