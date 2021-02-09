@@ -27,7 +27,7 @@ if SERVER then
 		self:SetBloodColor(BLOOD_COLOR_RED)
 
 		timer.Create( "GenerateBountyJob", 30, 0, function()
-			if math.random( 1, 4 ) == 4 and #GetCombatants() > 2 and #GetActiveTeams() >= 2 then
+			if math.random( 1, 10 ) == 10 and #GetCombatants() > 2 and #GetActiveTeams() >= 2 then
 				for k,v in pairs( GetCombatants() ) do
 					self.HasJob[ v ] = true
 				end
@@ -80,7 +80,7 @@ if SERVER then
 				},
 			}
 
-			if self.HasJob[ caller ] and #GetCombatants() > 2 and #GetActiveTeams() >= 2 and caller:IsCombatant() then
+			if self.HasJob[ caller ] and #GetCombatants() > 2 and #GetActiveTeams() >= 2 and caller:IsCombatant() and !caller:GetNWBool( "Bounty_IsActive", false ) then
 				caller:STNPCMessage( self, speechLUT[ caller:getJobTable().category ][ true ] )
 				if IsValid( self.Jobs[ caller ] ) then
 					caller:OfferBounty( self.Jobs[ caller ] )
