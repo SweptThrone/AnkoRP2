@@ -44,6 +44,38 @@ hook.Add("PlayerChangedTeam", "SaveKillsInSameTeam", function( ply, old, new )
         end
     end
 
+    if CURRENT_ANKORP_EVENT and #GetCombatants() <= 2 and #GetActiveTeams() <= 1 then
+        DarkRP.notify( player.GetAll(), 1, 4, "There are no longer enough combatants for the current Money Event.  It has been cancelled." )
+        for k,v in pairs( player.GetAll() ) do
+            v:SetNWBool( "HasGold", false )
+            v:SetNWBool( "HasSmallGems", false )
+            v:SetNWBool( "HasLargeGems", false )
+        end
+        for k,v in pairs( ents.FindByClass( "st_ankorp_gold" ) ) do
+            v:Remove()
+        end
+        for k,v in pairs( ents.FindByClass( "st_ankorp_lggems" ) ) do
+            v:Remove()
+        end
+        for k,v in pairs( ents.FindByClass( "st_ankorp_money" ) ) do
+            v:Remove()
+        end
+        for k,v in pairs( ents.FindByClass( "st_ankorp_smgems" ) ) do
+            v:Remove()
+        end
+        for k,v in pairs( ents.FindByClass( "st_weapon_box" ) ) do
+            v:Remove()
+        end
+        for k,v in pairs( ents.GetAll() ) do
+            if v.REMOVEONEVENT then
+                v:Remove()
+            end
+        end
+        CURRENT_ANKORP_EVENT = false
+        game.GetWorld():SetNWString( "EventLoc", "" )
+        game.GetWorld():SetNWString( "EventEnt", "" )
+    end
+
 end )
 
 hook.Add( "GetFallDamage", "NoChellFDamage", function( ply, _ )
