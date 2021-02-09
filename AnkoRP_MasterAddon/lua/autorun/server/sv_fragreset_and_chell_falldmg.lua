@@ -22,6 +22,28 @@ hook.Add("PlayerChangedTeam", "SaveKillsInSameTeam", function( ply, old, new )
     if newTeam.category != oldTeam.category then
         ply:SetFrags( 0 )
     end
+
+    if ply:getJobTable().category == "Citizens" then
+        for k,v in pairs( player.GetAll() ) do
+            if v:GetNWEntity( "Bounty_Target", NULL ) == ply then
+                v:SetNWEntity( "Bounty_Target", NULL )
+                v:SetNWBool( "Bounty_IsActive", true )
+                v:SetNWInt( "Bounty_Payout", 0 )
+                DarkRP.notify( v, 1, 4, "Your bounty is no longer a combatant and therefore was cancelled." )
+                DarkRP.notify( v, 1, 4, "You suffered no penalty." )
+            end
+        end
+
+        for k,v in pairs( ents.FindByClass( "st_crime_boss" ) ) do
+            for a,b in pairs( v.Jobs ) do
+                if b == ply then
+                    v.Jobs[ a ] = NULL
+                    v.HasJob[ a ] = false
+                end
+            end
+        end
+    end
+
 end )
 
 hook.Add( "GetFallDamage", "NoChellFDamage", function( ply, _ )
