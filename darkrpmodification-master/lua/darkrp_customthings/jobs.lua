@@ -7,8 +7,15 @@ TEAM_SAS = DarkRP.createJob("British SAS", {
     color = Color(84, 109, 126, 255),
     model = "models/player/gasmask.mdl",
     description = [[The British SAS.
-    Fight for the safety of the Citizens.]],
-    weapons = {"tfa_cso_sealknife", "tfa_cso_p228", "tfa_cso_famas" },
+Founded in World War 2 by David Stirling.
+Focused on gathering intel behind enemy lines.
+Also specialized in key assassinations.
+Fight for the safety of the Citizens.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_sealknife", "tfa_cso_p228", "tfa_cso_scout", "door_ram" },
     command = "sas",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -43,8 +50,15 @@ TEAM_GSG = DarkRP.createJob("German GSG-9", {
     color = Color(84, 109, 126, 255),
     model = "models/player/riot.mdl",
     description = [[The German GSG-9.
-    Fight for the safety of the Citizens.]],
-    weapons = {"tfa_cso_sealknife", "tfa_cso_automagv", "tfa_cso_xm1014" },
+Formed in response to the Munich Massacre.
+One of the top-performing counter-terrorism units.
+Historically rather peaceful yet effective.
+Fight for the safety of the Citizens.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_sealknife", "tfa_cso_automagv", "tfa_cso_xm1014", "door_ram" },
     command = "gsg",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -79,8 +93,15 @@ TEAM_GIGN = DarkRP.createJob("French GIGN", {
     color = Color(84, 109, 126, 255),
     model = "models/player/swat.mdl",
     description = [[The French GIGN.
-    Fight for the safety of the Citizens.]],
-    weapons = {"tfa_cso_sealknife", "tfa_cso_infinite_silver", "tfa_cso_scout" },
+Designed to be a fast response team.
+Limited in size, but excelling in power.
+A force to be reckoned with.
+Fight for the safety of the Citizens.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_sealknife", "tfa_cso_infinite_silver", "tfa_cso_famas", "door_ram" },
     command = "gign",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -115,8 +136,15 @@ TEAM_ST6 = DarkRP.createJob("American ST6", {
     color = Color(84, 109, 126, 255),
     model = "models/player/urban.mdl",
     description = [[The American SEAL Team 6.
-    Fight for the safety of the Citizens.]],
-    weapons = {"tfa_cso_sealknife", "tfa_cso_fiveseven", "tfa_cso_m4a1" },
+Founded in 1980 under Richard Marchinko.
+American counter-terrorism unit with worldwide influence.
+One of the most intimidating forces on the planet.
+Fight for the safety of the Citizens.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_sealknife", "tfa_cso_fiveseven", "tfa_cso_m4a1", "door_ram" },
     command = "seal",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -151,8 +179,15 @@ TEAM_WW2AMER = DarkRP.createJob("American Soldier", {
     color = Color(84, 109, 126, 255),
     model = "models/player/dod_american.mdl",
     description = [[An American WW2 Soldier.
-    Fight for the safety of the Citizens.]],
-    weapons = {"tfa_cso_sealknife", "tfa_cso_m1911a1", "tfa_cso_m1918bar" },
+For some, the war never ended.
+A force of dedicated American citizens who have taken up arms.
+Join forces with the Counter-Terrorists.
+Fight for the safety of the Citizens.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_sealknife", "tfa_cso_m1911a1", "tfa_cso_m1918bar", "door_ram" },
     command = "america",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -187,8 +222,15 @@ TEAM_ARC = DarkRP.createJob("Arctic Avenger", {
     color = Color(125, 61, 64, 255),
     model = "models/player/arctic.mdl",
     description = [[An Arctic Avenger.
-    Fight for whatever you believe is right.]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_glock", "tfa_cso_awp" },
+Swedish force founded in 1977.
+Branched off from the Brotherhood.
+Masters of destruction and hand-to-hand combat.
+Fight for whatever you believe is right.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_glock", "tfa_cso_awp", "lockpick" },
     command = "arc",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -223,8 +265,15 @@ TEAM_WAR = DarkRP.createJob("Guerilla Warrior", {
     color = Color(125, 61, 64, 255),
     model = "models/player/guerilla.mdl",
     description = [[A Guerilla Warrior.
-    Fight for whatever you believe is right.]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_fnp45", "tfa_cso_negev" },
+Established in 1968 as a wing of the Reza Regime.
+Ruthless Middle Eastern terrorist faction.
+The single largest and best-equipped Terrorist group in the world.
+Fight for whatever you believe is right.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_fnp45", "tfa_cso_negev", "lockpick" },
     command = "war",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -259,8 +308,15 @@ TEAM_LEET = DarkRP.createJob("Elite Crewman", {
     color = Color(125, 61, 64, 255),
     model = "models/player/leet.mdl",
     description = [[An Elite Crewman.
-    Fight for whatever you believe is right.]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_tacticalknife", "tfa_cso_elite" },
+Highly ambitious Middle Eastern organization.
+The most show-offish Terrorist faction known.
+Their main goal is total world domination.
+Fight for whatever you believe is right.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_tacticalknife", "tfa_cso_elite", "lockpick" },
     command = "leet",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -295,8 +351,15 @@ TEAM_PHOE = DarkRP.createJob("Phoenix Connexion", {
     color = Color(125, 61, 64, 255),
     model = "models/player/phoenix.mdl",
     description = [[A Phoenix Connexion member.
-    Fight for whatever you believe is right.]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_deagle", "tfa_cso_ak47" },
+Formed somewhere in Europe nearing the breakup of the USSR.
+Notoriously ruthless and vicious in their methods.
+Their influence reaches across the globe.
+Fight for whatever you believe is right.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_deagle", "tfa_cso_ak47", "lockpick" },
     command = "phoe",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -331,8 +394,15 @@ TEAM_NAZI = DarkRP.createJob("Nazi Soldier", {
     color = Color(125, 61, 64, 255),
     model = "models/player/dod_german.mdl",
     description = [[A German WW2 soldier.
-    Fight for whatever you believe is right.]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_luger", "tfa_cso_mp40" },
+For some, the war never ended.
+A force of dedicated German soldiers who have taken up arms.
+Join forces with the Terrorists.
+Fight for whatever you believe is right.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_luger", "tfa_cso_mp40", "lockpick" },
     command = "nazi",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -367,8 +437,15 @@ TEAM_ALYX = DarkRP.createJob("Alyx Vance", {
     color = Color(243, 207, 47, 255),
     model = "models/player/alyx.mdl",
     description = [[Alyx Vance.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_f2000" },
+Raised during an era of Combine occupation.
+Talented mechanic of the Resistance force.
+Often accompanied Gordon Freeman in his travels.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+25 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_f2000", "lockpick" },
     command = "alyx",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -403,8 +480,15 @@ TEAM_BARNEY = DarkRP.createJob("Barney Calhoun", {
     color = Color(243, 207, 47, 255),
     model = "models/player/barney.mdl",
     description = [[Barney Calhoun.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_mp5" },
+Former security guard at Black Mesa.
+Key leader of the Resistance against the Combine.
+Also happens to be a Civil Protection officer.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_mp5", "lockpick" },
     command = "barney",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -439,8 +523,15 @@ TEAM_ELI = DarkRP.createJob("Eli Vance", {
     color = Color(243, 207, 47, 255),
     model = "models/player/eli.mdl",
     description = [[Eli Vance.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python" },
+Physicist and researcher of the Resistance force.
+Father of Alyx Vance and just as good of a mechanic.
+Prefers not to fight unless he absolutely has to.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+0 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "lockpick" },
     command = "eli",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -474,8 +565,15 @@ TEAM_KLEINER = DarkRP.createJob("Isaac Kleiner", {
     color = Color(243, 207, 47, 255),
     model = "models/player/kleiner.mdl",
     description = [[Isaac Kleiner.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_spas12" },
+Resistance scientist focused on researching teleportation.
+Worked alongside Eli Vance back in Black Mesa.
+Assisted the Resistance force over in City 17.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+0 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_spas12", "lockpick" },
     command = "kleiner",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -510,8 +608,15 @@ TEAM_KLEINER = DarkRP.createJob("Arne Magnusson", {
     color = Color(243, 207, 47, 255),
     model = "models/player/magnusson.mdl",
     description = [[Arne Magnusson.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_spas12" },
+Leader of the White Forest Resistance base.
+Harsh, stern, and to-the-point in his presentation.
+Still sides with the Resistance regardless.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+0 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_spas12", "lockpick" },
     command = "magnusson",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -546,8 +651,15 @@ TEAM_GRIGORI = DarkRP.createJob("Father Grigori", {
     color = Color(243, 207, 47, 255),
     model = "models/player/monk.mdl",
     description = [[Father Grigori.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_dbarrel" },
+Insane hermit from the depths of Ravenholm.
+Fights with the Resistance for what the Combine has done.
+Specializes in taking out zombies and monsters.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+25 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_dbarrel", "lockpick" },
     command = "grigori",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -582,8 +694,15 @@ TEAM_ODESSA = DarkRP.createJob("Odessa Cubbage", {
     color = Color(243, 207, 47, 255),
     model = "models/player/odessa.mdl",
     description = [[Odessa Cubbage.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_at4" },
+Resistance colonel specializing in high explosives.
+Former security operator who knows how to fight.
+Has a Resistance outpost named after him.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+25 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_at4", "lockpick" },
     command = "odessa",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -620,8 +739,15 @@ TEAM_MOSSMAN = DarkRP.createJob("Judith Mossman", {
         "models/player/mossman_arctic.mdl"
     },
     description = [[Judith Mossman.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python" },
+Former double agent for the Combine.
+Turned back to the Resistance full-time.
+Has some intel on some ship having to do with teleportation.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+0 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "lockpick" },
     command = "mossman",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -670,8 +796,15 @@ TEAM_RESIST = DarkRP.createJob("Resistance Fighter", {
         "models/player/group03/male_09.mdl"
     },
     description = [[A fighter in the resistance.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_mp7a1" },
+Formed when the Combine started taking over.
+Essentially just Citizens with a little extra firepower.
+They decided to not stand idly by and let the Combine rule them.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+50 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_mp7a1", "lockpick" },
     command = "resist",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -680,7 +813,7 @@ TEAM_RESIST = DarkRP.createJob("Resistance Fighter", {
     hasLicense = false,
     category = "Resistance", -- The name of the category it is in. Note: the category must be created!
     sortOrder = 9, -- The position of this thing in its category. Lower number means higher up.
-    PlayerLoadout = function(ply) ply:SetHealth( 150 ) ply:SetArmor( 75 ) ply:SetMaxHealth( 150 )
+    PlayerLoadout = function(ply) ply:SetHealth( 150 ) ply:SetArmor( 50 ) ply:SetMaxHealth( 150 )
     if ply:GetNWString( "WepLoadoutSlot1", "nil" ) != "nil" then
         ply:StripWeapon( "tfa_cso_crowbar" )
         ply:Give( ply:GetNWString( "WepLoadoutSlot1" ) )
@@ -721,8 +854,15 @@ TEAM_MEDIC = DarkRP.createJob("Resistance Medic", {
         "models/player/group03m/male_09.mdl"
     },
     description = [[A medic for the resistance.
-    Fight for the freedom of your oppressed citizens.]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "weapon_medkit" },
+Basic Resistance soldiers with some medical know-how.
+If it wasn't for these soldiers, the Resistance would've died long ago.
+Every good squad has at least one on standby.
+Fight for the freedom of your oppressed citizens.
+    
+STATS:
+150 HP
+50 AP]],
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "weapon_medkit", "lockpick" },
     command = "medic",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -731,7 +871,7 @@ TEAM_MEDIC = DarkRP.createJob("Resistance Medic", {
     hasLicense = false,
     category = "Resistance", -- The name of the category it is in. Note: the category must be created!
     sortOrder = 10, -- The position of this thing in its category. Lower number means higher up.
-    PlayerLoadout = function(ply) ply:SetHealth( 150 ) ply:SetArmor( 75 ) ply:SetMaxHealth( 150 )
+    PlayerLoadout = function(ply) ply:SetHealth( 150 ) ply:SetArmor( 50 ) ply:SetMaxHealth( 150 )
     if ply:GetNWString( "WepLoadoutSlot1", "nil" ) != "nil" then
         ply:StripWeapon( "tfa_cso_crowbar" )
         ply:Give( ply:GetNWString( "WepLoadoutSlot1" ) )
@@ -756,8 +896,15 @@ TEAM_BREEN = DarkRP.createJob("Wallace Breen", {
     color = Color(63, 92, 205, 255),
     model = "models/player/breen.mdl",
     description = [[Wallace Breen.
-    Fight to keep a tight grip on your control.]],
-    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp" },
+Former head of the Black Mesa research facility.
+Represented all of humanity to the Combine.
+Regarded as a traitor to humanity.
+Fight to keep a tight grip on your control.
+    
+STATS:
+150 HP
+0 AP]],
+    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "door_ram" },
     command = "breen",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -791,8 +938,15 @@ TEAM_SOLDIER = DarkRP.createJob("Soldier", {
     color = Color(63, 92, 205, 255),
     model = "models/player/combine_soldier.mdl",
     description = [[A basic foot soldier.
-    Fight to keep a tight grip on your control.]],
-    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "tfa_cso_oicw" },
+The lowest ranking augmented soldiers for the Combine.
+Expendable and disposable, yet oddly effective.
+Deployed to areas of known Resistance presence.
+Fight to keep a tight grip on your control.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "tfa_cso_oicw", "door_ram" },
     command = "cmb",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -827,9 +981,16 @@ TEAM_ELITE = DarkRP.createJob("Elite", {
     color = Color(63, 92, 205, 255),
     model = "models/player/combine_super_soldier.mdl",
     description = [[A heavy foot soldier.
-    Fight to keep a tight grip on your control.
-YOU GET NO LOADOUT WEAPONS AS THIS JOB!]],
-    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "tfa_cso_mg36" },
+A Combine soldier with plenty of armor.
+Underwent substantial augmentation to become even more durable.
+Deployed to key areas where the Resistance lurks.
+Fight to keep a tight grip on your control.
+    
+STATS:
+250 HP
+150 AP
+NO LOADOUT]],
+    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "tfa_cso_mg36", "door_ram" },
     command = "elite",
     max = 2, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -845,9 +1006,16 @@ YOU GET NO LOADOUT WEAPONS AS THIS JOB!]],
 TEAM_GUARD = DarkRP.createJob("Prison Guard", {
     color = Color(63, 92, 205, 255),
     model = "models/player/combine_soldier_prisonguard.mdl",
-    description = [[A combine prison guard.
-    Fight to keep a tight grip on your control.]],
-    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "tfa_cso_uts15" },
+    description = [[A Combine prison guard.
+Used to guard the Nova Prospekt prison facility.
+Their skill with crowd control comes in handy.
+Counter-Terrorists own the jails, so they're essentially Soldiers with shotguns.
+Fight to keep a tight grip on your control.
+    
+STATS:
+150 HP
+75 AP]],
+    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "tfa_cso_uts15", "door_ram" },
     command = "guard",
     max = 4, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -882,9 +1050,16 @@ TEAM_POLICE = DarkRP.createJob("Civil Protection", {
     color = Color(63, 92, 205, 255),
     model = { "models/player/police.mdl",
         "models/player/police_fem.mdl" },
-    description = [[A civil protection agent.
-    Fight to keep a tight grip on your control.]],
-    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "tfa_cso_mp7a1" },
+    description = [[A Civil Protection agent.
+Lowest ranking members of the Combine.
+Citizens who have submitted to the Combine rule.
+Receive free rations and special treatment.
+Fight to keep a tight grip on your control.
+    
+STATS:
+150 HP
+50 AP]],
+    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "tfa_cso_mp7a1", "door_ram" },
     command = "police",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -919,8 +1094,15 @@ TEAM_STRIPPED = DarkRP.createJob("Stripped Soldier", {
     color = Color(63, 92, 205, 255),
     model = "models/player/soldier_stripped.mdl",
     description = [[A stripped soldier.
-    Fight to keep a tight grip on your control.]],
-    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "weapon_medkit" },
+Hastily deployed before their augmentation has finished.
+Not enough armor to fight, so they're used as medics.
+Aren't cared for too much by the Combine.
+Fight to keep a tight grip on your control.
+    
+STATS:
+150 HP
+0 AP]],
+    weapons = {"tfa_cso_coldsteelblade", "tfa_cso_usp", "weapon_medkit", "door_ram" },
     command = "stripped",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -954,8 +1136,14 @@ TEAM_CHARPLE = DarkRP.createJob("Charple", {
     color = Color(112, 173, 71, 255),
     model = "models/player/charple.mdl",
     description = [[A burnt corpse.
-    Fight against those who left you to die.
-ONLY YOUR LOADOUT MELEE WEAPON WILL BE GIVEN!]],
+Some of their fiery fate remains with them after death.
+Fight against those who left you to die.
+    
+STATS:
+100 HP
+0 AP
+MELEE ONLY
+FLAMING TOUCH]],
     weapons = {"tfa_cso_combatknife" },
     command = "charple",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -977,8 +1165,13 @@ TEAM_CORPSE = DarkRP.createJob("Corpse", {
     color = Color(112, 173, 71, 255),
     model = "models/player/corpse1.mdl",
     description = [[A corpse that hasn't quite decomposed yet.
-    Fight against those who left you to die.
-ONLY YOUR LOADOUT MELEE WEAPON WILL BE GIVEN!]],
+Got up just a little too early to be effective.
+Fight against those who left you to die.
+    
+STATS:
+100 HP
+0 AP
+MELEE ONLY]],
     weapons = {"tfa_cso_combatknife" },
     command = "corpse",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1000,8 +1193,14 @@ TEAM_SKELETON = DarkRP.createJob("Skeleton", {
     color = Color(112, 173, 71, 255),
     model = "models/player/skeleton.mdl",
     description = [[A completely clean corpse.
-    Fight against those who left you to die.
-ONLY YOUR LOADOUT MELEE WEAPON WILL BE GIVEN!]],
+Way overdone, their bone marrow has condensed.
+Fight against those who left you to die.
+    
+STATS:
+100 HP
+0 AP
+MELEE ONLY
+DENSE MARROW]],
     weapons = {"tfa_cso_combatknife" },
     command = "skel",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1023,8 +1222,14 @@ TEAM_ZOMBIE = DarkRP.createJob("Zombie", {
     color = Color(112, 173, 71, 255),
     model = "models/player/zombie_classic.mdl",
     description = [[The dead resurrected.
-    Fight against those who left you to die.
-ONLY YOUR LOADOUT MELEE WEAPON WILL BE GIVEN!]],
+Typical zombies with scarily sharp claws.
+Fight against those who left you to die.
+    
+STATS:
+100 HP
+0 AP
+MELEE ONLY
+SERRATED CLAWS]],
     weapons = {"tfa_cso_combatknife" },
     command = "zombie",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1046,8 +1251,15 @@ TEAM_FZOMBIE = DarkRP.createJob("Fast Zombie", {
     color = Color(112, 173, 71, 255),
     model = "models/player/zombie_fast.mdl",
     description = [[The dead resurrected, but fast.
-    Fight against those who left you to die.
-ONLY YOUR LOADOUT MELEE WEAPON WILL BE GIVEN!]],
+Zombies stripped of extra meat, yielding higher agility.
+Fight against those who left you to die.
+    
+STATS:
+100 HP
+0 AP
+MELEE ONLY
+NO FALL DAMAGE
++alt1: FERAL LUNGE]],
     weapons = {"tfa_cso_combatknife" },
     command = "fzombie",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1062,6 +1274,7 @@ ONLY YOUR LOADOUT MELEE WEAPON WILL BE GIVEN!]],
         ply:StripWeapon( "tfa_cso_combatknife" )
         ply:Give( ply:GetNWString( "WepLoadoutSlot1" ) )
     end
+    DarkRP.notify( ply, 0, 4, "Bind a key to +alt1 to super-jump forward!" )
     return false end
 })
 
@@ -1069,8 +1282,14 @@ TEAM_ZOMBINE = DarkRP.createJob("Zombine", {
     color = Color(112, 173, 71, 255),
     model = "models/player/zombie_soldier.mdl",
     description = [[A dead combine soldier resurrected.
-    Fight against those who left you to die.
-ONLY YOUR LOADOUT MELEE WEAPON WILL BE GIVEN!]],
+They always have a grenade handy from their previous lives.
+Fight against those who left you to die.
+    
+STATS:
+100 HP
+50 AP
+MELEE ONLY
++alt1 SELF-DETONATION]],
     weapons = {"tfa_cso_combatknife" },
     command = "zombine",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1085,6 +1304,7 @@ ONLY YOUR LOADOUT MELEE WEAPON WILL BE GIVEN!]],
         ply:StripWeapon( "tfa_cso_combatknife" )
         ply:Give( ply:GetNWString( "WepLoadoutSlot1" ) )
     end
+    DarkRP.notify( ply, 0, 4, "Bind a key to +alt1 to explode!" )
     return false end
 })
 
@@ -1106,7 +1326,14 @@ TEAM_CIVIE = DarkRP.createJob("Civilian", {
             "models/player/group01/male_09.mdl"
     },
     description = [[An average citizen lost in the city.
-    You have no real role.]],
+Dodge bullets or do what you can to survive.
+You have no real role, therefore you are free to do whatever you want.
+Get creative and roleplay.
+    
+STATS:
+150 HP
+0 AP
+NO COMBAT]],
     weapons = {},
     command = "civilian",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1125,7 +1352,14 @@ TEAM_GUN = DarkRP.createJob("Gun Dealer", {
             "models/player/hostage/hostage_04.mdl"
     },
     description = [[You sell affordable guns at modest prices.
-    Set up at your gun shop or somewhere on the streets.]],
+While the guns you sell are quite cheap, they can be upgraded.
+Upgrading weapons makes them better than you could ever imagine.
+Set up at your gun shop or somewhere on the streets.
+    
+STATS:
+150 HP
+0 AP
+NO COMBAT]],
     weapons = {},
     command = "gundealer",
     max = 4, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1144,7 +1378,14 @@ TEAM_SPECGUN = DarkRP.createJob("Special Gun Dealer", {
             "models/player/hostage/hostage_03.mdl"
     },
     description = [[You sell special guns at ridiculous prices.
-    Set up at your gun shop or somewhere on the streets.]],
+You can rake in some serious money selling the guns you have.
+These guns can be upgraded too, often also becoming much better
+Set up at your gun shop or somewhere on the streets.
+    
+STATS:
+150 HP
+0 AP
+NO COMBAT]],
     weapons = {},
     command = "specgundealer",
     max = 2, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1165,7 +1406,14 @@ TEAM_MINER = DarkRP.createJob("Bitcoin Miner", {
             "models/player/group02/male_08.mdl"
     },
     description = [[You mine Bitcoin to make money.
-    It pays the bills.]],
+Your Bitcoin Miners are fragile, so make sure they're kept safe.
+Check up on them every so often to reap your rewards.
+It pays the bills.
+    
+STATS:
+150 HP
+0 AP
+NO COMBAT]],
     weapons = { "urp_pickaxe" },
     command = "miner",
     max = 8, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
@@ -1182,9 +1430,15 @@ TEAM_CHELL = DarkRP.createJob( "Chell", {
 	color = Color( 0, 176, 80, 255 ),
 	model = "models/player/p2_chell.mdl",
 	description = [[You are Chell.
-	You jump around and figure out how to maneuver around the map,
-	but you look like an Aperture test subject.
-	You also take no fall damage.]],
+You don't do much other than freerun around.
+Your special boots prevent you from getting hurt by falling.
+You jump around and figure out how to maneuver around the map.
+    
+STATS:
+150 HP
+0 AP
+NO COMBAT
+NO FALL DAMAGE]],
 	weapons = {},
 	command = "chell",
 	max = 1,
@@ -1197,13 +1451,14 @@ TEAM_CHELL = DarkRP.createJob( "Chell", {
     PlayerLoadout = function(ply) ply:SetHealth( 150 ) ply:SetArmor( 0 ) ply:SetMaxHealth( 150 ) return false end
 })
 
-TEAM_GMAN = DarkRP.createJob("The G-Man", {
-    color = Color(0, 0, 0, 255),
+TEAM_GMAN = DarkRP.createJob("Crime Boss", {
+    color = Color(255, 0, 0, 255),
     model = "models/player/gman_high.mdl",
-    description = [[You are the G-Man.
-    You know what to do.]],
+    description = [[You are the Crime Boss.
+You offer bounties to combatants who are interested.
+You also run the Union City Club.]],
     weapons = {},
-    command = "gman",
+    command = "crimeboss",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
     admin = 0,
@@ -1213,7 +1468,7 @@ TEAM_GMAN = DarkRP.createJob("The G-Man", {
     sortOrder = 1, -- The position of this thing in its category. Lower number means higher up.
     PlayerLoadout = function(ply) ply:SetHealth( 150 ) ply:SetArmor( 0 ) ply:SetMaxHealth( 150 ) return false end,
     customCheck = function(ply) return ply:SteamID() == "STEAM_0:1:29801505" end,
-    CustomCheckFailMsg = "You are not worthy..."
+    CustomCheckFailMsg = "Only SweptThrone can play as the Crime Boss."
 })
 
 --[[---------------------------------------------------------------------------
