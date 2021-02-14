@@ -10,7 +10,7 @@ for k,v in pairs( CSO_WEAPONS_TREE ) do
     end
 end
 
-ROUND_TIME = 60
+ROUND_TIME = 600
 CURRENT_ANKORP_EVENT = false
 
 -- starting scores
@@ -42,6 +42,12 @@ hook.Add( "Initialize", "SetupTDMRPDir", function()
 	
 end )
 
+hook.Add( "InitPostEntity", "FreezeMultiplayerProps", function()
+	for k,v in pairs( ents.FindByClass( "prop_physics_multiplayer" ) ) do
+		v:GetPhysicsObject():EnableMotion( false )
+	end
+end )
+
 hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
 
     if sql.Query( "SELECT * FROM AnkoRP_Weapons WHERE SteamID = '" .. ply:SteamID64() .. "'" ) == nil then
@@ -66,6 +72,11 @@ hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
     ply:SetNWInt( "BountySuccess", tonumber( ankoRepTable[ "BountySuccess" ] ) )
     ply:SetNWInt( "BountyFail", tonumber( ankoRepTable[ "BountyFail" ] ) )
 
+	if sql.Query( "SELECT Credits FROM AnkoRP_Credits WHERE SteamID = '" .. ply:SteamID64() .. "'" ) == nil then
+		sql.Query( "INSERT INTO AnkoRP_Credits( SteamID, Credits ) VALUES( '" .. ply:SteamID64() .. "', 0 )" )
+	end
+	local creds = sql.Query( "SELECT Credits FROM AnkoRP_Credits WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ].Credits
+	ply:SetNWInt( "STCredits", creds )
     -- make absolutely sure that the player is loaded and has what they need
     -- i'm sure this is REALLY bad
     -- but who cares
@@ -122,9 +133,42 @@ function plyMeta:AddAttachmentToTable( att )
     net.Send( self )
 end
 
+function plyMeta:SetCredits( cr )
+	sql.Query( "UPDATE AnkoRP_Credits SET Credits = " .. cr .. " WHERE SteamID = '" .. self:SteamID64() .. "'" )
+	self:SetNWInt( "STCredits", cr )
+end
+
+function plyMeta:AddCredits( cr )
+	local creds = sql.Query( "SELECT Credits FROM AnkoRP_Credits WHERE SteamID = '" .. self:SteamID64() .. "'" )[ 1 ].Credits
+	creds = creds + cr
+
+	sql.Query( "UPDATE AnkoRP_Credits SET Credits = " .. creds .. " WHERE SteamID = '" .. self:SteamID64() .. "'" )
+	self:SetNWInt( "STCredits", creds )
+end
+
 function plyMeta:STNPCMessage( ent, msg )
     net.Start( "ST_NPCMessage" )
         net.WriteString( ent.PrintName )
         net.WriteString( msg )
     net.Send( self )
+end
+
+function plyMeta:GetInventoryValue( str )
+	local val = 0
+
+	for k,v in pairs( self:GetWeaponTable() ) do
+		--val = val + CSO_WEAPONS_TREE[ v ].price
+		local curr = v
+		for i = CSO_WEAPONS_TREE[ v ].deep, 1, -1 do
+			--print( "Added " .. curr )
+			val = val + CSO_WEAPONS_TREE[ curr ].price
+			curr = CSO_WEAPONS_TREE[ curr ].parent
+		end
+	end
+	
+	return str and "$" .. string.Comma( val ) or val
+end
+
+function plyMeta:GetWorth( str )
+	return str and "$" .. string.Comma( self:GetInventoryValue() + self:getDarkRPVar( "money" ) ) or self:GetInventoryValue() + self:getDarkRPVar( "money" )
 end

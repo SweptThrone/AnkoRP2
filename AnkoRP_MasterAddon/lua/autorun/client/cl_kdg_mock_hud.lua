@@ -18,7 +18,7 @@ local timesincelastmoney = 0
 local playerIcon = Material( "icon16/user.png" )
 local jobIcon = Material( "icon16/group.png" )
 local moneyIcon = Material( "icon16/money.png" )
-local salaryIcon = Material( "icon16/money_add.png" )
+local salaryIcon = Material( "icon16/rosette.png" )
 local propIcon = Material( "icon16/group_link.png" )
 local killstreakIcon = Material( "icon16/fire.png" )
 local ksStar = Material( "icon16/star.png" )
@@ -26,6 +26,10 @@ local moreHealth = Material( "icon16/pill_add.png" )
 local goldIcon = Material( "icon16/coins.png" )
 local smGemsIcon = Material( "icon16/ruby.png" )
 local lgGemsIcon = Material( "icon16/ruby_add.png" )
+
+local ammoTypeLUT = {
+	"u", "z", "p", "q", "p357", "w", "s", "x", "t", "v", "o", "12", "13", "r"
+}
 
 hook.Add( "HUDPaint", "DrawKDGHUD", function()
 
@@ -328,7 +332,7 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 	draw.SimpleText( LocalPlayer():Name(), "KDGDisplayFont", 35, ScrH() - 83, color_white )
 	draw.SimpleText( LocalPlayer():getDarkRPVar( "job" ), "KDGDisplayFont", 35, ScrH() - 57, color_white )
 	draw.SimpleText( DarkRP.formatMoney( math.Round( smoothCash ) ), "KDGDisplayFont", 35, ScrH() - 31, color_white )
-	draw.SimpleText( "+" .. DarkRP.formatMoney( LocalPlayer():getDarkRPVar( "salary" ) ), "KDGDisplayFont", 220, ScrH() - 31, color_white )
+	draw.SimpleText( string.Comma( LocalPlayer():GetNWInt( "STCredits", 0 ) ) .. "cR", "KDGDisplayFont", 220, ScrH() - 31, color_white )
 	draw.SimpleText( LocalPlayer():getJobTable() and TEAM_CAT_LUT[ LocalPlayer():getJobTable().category ] or "ERR", "KDGDisplayFont", 220, ScrH() - 57, LocalPlayer():getJobTable() and TEAM_CAT_COLOR_LUT[ LocalPlayer():getJobTable().category ] or color_white )
 
 	if IsValid( LocalPlayer():GetActiveWeapon() ) then
@@ -342,7 +346,15 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 		draw.SimpleText( clipp == -1 and "-" or clipp % 10, "BigKDGDisplayFont", ScrW() - 185, ScrH() - 49, color_white )
 		draw.SimpleText( clipp == -1 and "-" or math.floor( clipp / 10 % 10 ), "BigKDGDisplayFont", ScrW() - 214, ScrH() - 49, color_white )
 		draw.SimpleText( clipp == -1 and "-" or math.floor( clipp / 100 % 10 ), "BigKDGDisplayFont", ScrW() - 242, ScrH() - 49, color_white )
-
+		
+		if amoType == 5 then
+			surface.SetFont( "Ammo2TypeDisplay" )
+			draw.SimpleText( ammoTypeLUT[ amoType ] or "", "Ammo2TypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 60, color_white )
+		else
+			surface.SetFont( "AmmoTypeDisplay" )
+			draw.SimpleText( ammoTypeLUT[ amoType ] or "", "AmmoTypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 80, color_white )
+		end
+		
 		draw.SimpleText( "/", "BigKDGDisplayFont", ScrW() - 152, ScrH() - 54, color_black )
 
 		if LocalPlayer():GetActiveWeapon().Secondary and ( LocalPlayer():GetActiveWeapon().Secondary.Ammo != "none" and LocalPlayer():GetActiveWeapon().Secondary.Ammo != nil and LocalPlayer():GetActiveWeapon().Secondary.Ammo != "" ) then
@@ -353,6 +365,7 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 			draw.SimpleText( amoType2 == -1 and "-" or math.floor( amo2 / 10 % 10 ), "AmmoKDGDisplayFont", ScrW() - 61, ScrH() - 95, color_white )
 			draw.SimpleText( amoType2 == -1 and "-" or math.floor( amo2 / 100 % 10 ), "AmmoKDGDisplayFont", ScrW() - 90, ScrH() - 95, color_white )
 			draw.SimpleText( amoType2 == -1 and "-" or math.floor( amo2 / 1000 % 10 ), "AmmoKDGDisplayFont", ScrW() - 119, ScrH() - 95, color_white )
+			draw.SimpleText( ammoTypeLUT[ amoType2 ] or "", "Ammo2TypeDisplay", ScrW() - 180, ScrH() - 110, color_white )
 		end
 	end
 

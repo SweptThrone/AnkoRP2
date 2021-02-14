@@ -34,6 +34,16 @@ surface.CreateFont( "AmmoKDGDisplayFont", {
 	size = 26,
 	weight = 5000
 } )
+surface.CreateFont( "AmmoTypeDisplay", {
+	font = "HalfLife2",
+	size = 100,
+	weight = 500
+} )
+surface.CreateFont( "Ammo2TypeDisplay", {
+	font = "HalfLife2",
+	size = 50,
+	weight = 500
+} )
 surface.CreateFont( "KDGWantedFont", {
 	font = "Arial",
 	size = 32,

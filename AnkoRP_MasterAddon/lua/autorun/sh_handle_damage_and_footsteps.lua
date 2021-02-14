@@ -116,7 +116,8 @@ end )
 hook.Add( "PlayerFootstep", "NoStepWhenWalkAndCrouch", function( ply, pos, foot, sound, vol, rf )
 
 	-- stealth
-
+	if !ply:getJobTable() then return end
+	
 	if IsValid( ply ) and ( ply:Crouching() or ply:GetMaxSpeed() < 150 ) and ply:getJobTable() then
 		return true
 	else

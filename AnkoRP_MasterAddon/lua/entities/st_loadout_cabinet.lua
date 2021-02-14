@@ -85,7 +85,7 @@ if CLIENT then
         Slot1Box:AddChoice( "[Job default]", "nil" )
         Slot1Box:SetValue( LocalPlayer():GetNWString( "WepLoadoutSlot1", "nil" ) == "nil" and "[Job default]" or weapons.Get( LocalPlayer():GetNWString( "WepLoadoutSlot1" ) ).PrintName )
         for k,v in pairs( inv ) do
-            if v != "nil" then
+            if v != "nil" and v != "NULL" then
             if weapons.Get( v ).Slot + 1 == 1 then
                 Slot1Box:AddChoice( weapons.Get( v ).PrintName, v )
             end
@@ -111,7 +111,7 @@ if CLIENT then
         Slot2Box:AddChoice( "[Job default]", "nil" )
         Slot2Box:SetValue( LocalPlayer():GetNWString( "WepLoadoutSlot2", "nil" ) == "nil" and "[Job default]" or weapons.Get( LocalPlayer():GetNWString( "WepLoadoutSlot2" ) ).PrintName )
         for k,v in pairs( inv ) do
-            if v != "nil" then
+            if v != "nil" and v != "NULL" then
             if weapons.Get( v ).Slot + 1 == 2 then
                 Slot2Box:AddChoice( weapons.Get( v ).PrintName, v )
             end
@@ -137,7 +137,7 @@ if CLIENT then
         Slot3Box:AddChoice( "[Job default]", "nil" )
         Slot3Box:SetValue( LocalPlayer():GetNWString( "WepLoadoutSlot3", "nil" ) == "nil" and "[Job default]" or weapons.Get( LocalPlayer():GetNWString( "WepLoadoutSlot3" ) ).PrintName )
         for k,v in pairs( inv ) do
-            if v != "nil" then
+            if v != "nil" and v != "NULL" then
             if weapons.Get( v ).Slot + 1 == 3 then
                 Slot3Box:AddChoice( weapons.Get( v ).PrintName, v )
             end
@@ -163,7 +163,7 @@ if CLIENT then
         Slot4Box:AddChoice( "[Job default]", "nil" )
         Slot4Box:SetValue( LocalPlayer():GetNWString( "WepLoadoutSlot4", "nil" ) == "nil" and "[Job default]" or weapons.Get( LocalPlayer():GetNWString( "WepLoadoutSlot4" ) ).PrintName )
         for k,v in pairs( inv ) do
-            if v != "nil" then
+            if v != "nil" and v != "NULL" then
             if weapons.Get( v ).Slot + 1 == 4 then
                 Slot4Box:AddChoice( weapons.Get( v ).PrintName, v )
             end
@@ -189,7 +189,7 @@ if CLIENT then
         Slot5Box:AddChoice( "[Job default]", "nil" )
         Slot5Box:SetValue( LocalPlayer():GetNWString( "WepLoadoutSlot5", "nil" ) == "nil" and "[Job default]" or weapons.Get( LocalPlayer():GetNWString( "WepLoadoutSlot5" ) ).PrintName )
         for k,v in pairs( inv ) do
-            if v != "nil" then
+            if v != "nil" and v != "NULL" then
             if weapons.Get( v ).Slot + 1 == 5 then
                 Slot5Box:AddChoice( weapons.Get( v ).PrintName, v )
             end

@@ -32,3 +32,5 @@ util.AddNetworkString( "ST_OfferAnkoBounty" ) -- sv->cl offer the player a bount
 util.AddNetworkString( "ST_TakeBounty" ) -- cl->sv accept or deny the bounty
 
 util.AddNetworkString( "STCustomKillfeed" ) -- sv->cl send info for killfeed
+
+util.AddNetworkString( "ST_SendCredits" )

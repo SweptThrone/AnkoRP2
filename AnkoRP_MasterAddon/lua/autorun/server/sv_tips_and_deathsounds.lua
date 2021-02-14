@@ -12,7 +12,9 @@ local ANKORP_TIPS = {
     "Monsters gain full health when they kill someone!",
     "Use console command st_ping_loc to call out locations to your team!",
     "The Vs over players' heads are your teammates!",
-    "These tips only show up 25% of the time!"
+    "These tips only show up 25% of the time!",
+	"Visit the Crime Boss at the Club to pick up a Bounty!",
+	"Hold shift to run up stairs without flying off!"
 }
 
 hook.Add( "PlayerDeath", "DifferentKillSounds", function( vic, inf, atk )

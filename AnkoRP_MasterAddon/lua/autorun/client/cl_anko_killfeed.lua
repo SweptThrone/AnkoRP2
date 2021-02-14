@@ -5,6 +5,7 @@
 
 local stckfdeaths = {}
 
+--[[
 local DEEP_COLORS = {
     Color( 255, 255, 255 ),
     Color( 146, 95, 72 ), --copper
@@ -13,6 +14,16 @@ local DEEP_COLORS = {
     Color( 219, 170, 16 ), --gold
     Color( 177, 1, 215 ), --mystic
     Color( 255, 215, 0 ) --transcendent
+}
+]]
+local DEEP_COLORS = {
+    Color( 255, 255, 255 ),
+    Color( 141, 141, 141 ), --grey
+    Color( 197, 121, 101 ), --pale
+    Color( 228, 144, 255 ), --pink
+    Color( 46, 246, 255 ), --aqua
+    Color( 255, 183, 0 ), --gold
+    Color( 255, 0, 0 ) --red
 }
 
 net.Receive( "STCustomKillfeed", function()
