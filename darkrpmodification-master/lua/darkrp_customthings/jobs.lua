@@ -15,7 +15,7 @@ Fight for the safety of the Citizens.
 STATS:
 150 HP
 75 AP]],
-    weapons = {"tfa_cso_sealknife", "tfa_cso_p228", "tfa_cso_scout", "door_ram" },
+    weapons = {"tfa_cso_sealknife", "tfa_cso_p228_v2", "tfa_cso_scout", "door_ram" },
     command = "sas",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -30,7 +30,7 @@ STATS:
         ply:Give( ply:GetNWString( "WepLoadoutSlot1" ) )
     end
     if ply:GetNWString( "WepLoadoutSlot2", "nil" ) != "nil" then
-        ply:StripWeapon( "tfa_cso_p228" )
+        ply:StripWeapon( "tfa_cso_p228_v2" )
         ply:Give( ply:GetNWString( "WepLoadoutSlot2" ) )
     end
     if ply:GetNWString( "WepLoadoutSlot3", "nil" ) != "nil" then
@@ -230,7 +230,7 @@ Fight for whatever you believe is right.
 STATS:
 150 HP
 75 AP]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_glock", "tfa_cso_awp", "lockpick" },
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_glock", "tfa_cso_awp", "lockquick" },
     command = "arc",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -273,7 +273,7 @@ Fight for whatever you believe is right.
 STATS:
 150 HP
 75 AP]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_fnp45", "tfa_cso_negev", "lockpick" },
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_fnp45", "tfa_cso_negev", "lockquick" },
     command = "war",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -316,7 +316,7 @@ Fight for whatever you believe is right.
 STATS:
 150 HP
 75 AP]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_tacticalknife", "tfa_cso_elite", "lockpick" },
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_tacticalknife", "tfa_cso_elite", "lockquick" },
     command = "leet",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -359,7 +359,7 @@ Fight for whatever you believe is right.
 STATS:
 150 HP
 75 AP]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_deagle", "tfa_cso_ak47", "lockpick" },
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_deagle", "tfa_cso_ak47", "lockquick" },
     command = "phoe",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -402,7 +402,7 @@ Fight for whatever you believe is right.
 STATS:
 150 HP
 75 AP]],
-    weapons = {"tfa_cso_butterflyknife", "tfa_cso_luger", "tfa_cso_mp40", "lockpick" },
+    weapons = {"tfa_cso_butterflyknife", "tfa_cso_luger", "tfa_cso_mp40", "lockquick" },
     command = "nazi",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -445,7 +445,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 25 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_f2000", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_f2000", "lockquick" },
     command = "alyx",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -488,7 +488,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 75 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_mp5", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_mp5", "lockquick" },
     command = "barney",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -531,7 +531,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 0 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "lockquick" },
     command = "eli",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -573,7 +573,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 0 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_spas12", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_spas12", "lockquick" },
     command = "kleiner",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -604,7 +604,7 @@ STATS:
     return false end
 })
 
-TEAM_KLEINER = DarkRP.createJob("Arne Magnusson", {
+TEAM_MAGNUSSON = DarkRP.createJob("Arne Magnusson", {
     color = Color(243, 207, 47, 255),
     model = "models/player/magnusson.mdl",
     description = [[Arne Magnusson.
@@ -616,7 +616,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 0 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_spas12", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_spas12", "lockquick" },
     command = "magnusson",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -659,7 +659,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 25 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_dbarrel", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_dbarrel", "lockquick" },
     command = "grigori",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -702,7 +702,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 25 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_at4", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_at4", "lockquick" },
     command = "odessa",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -747,7 +747,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 0 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "lockquick" },
     command = "mossman",
     max = 1, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -804,7 +804,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 50 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_mp7a1", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "tfa_cso_mp7a1", "lockquick" },
     command = "resist",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
@@ -862,7 +862,7 @@ Fight for the freedom of your oppressed citizens.
 STATS:
 150 HP
 50 AP]],
-    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "weapon_medkit", "lockpick" },
+    weapons = {"tfa_cso_crowbar", "tfa_cso_python", "weapon_medkit", "lockquick" },
     command = "medic",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 200,
