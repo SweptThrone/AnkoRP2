@@ -1,4 +1,4 @@
-{
+﻿{
   "tfa_cso_m82_v8": {
     "price": 395000,
     "slot": 4,
@@ -152,7 +152,7 @@
     "basic": true,
     "name": "FAMAS F1"
   },
-  "tfa_cso_mac10": {
+  "tfa_cso_mac10_v2": {
     "price": 1100,
     "slot": 4,
     "parent": "nil",
@@ -233,7 +233,7 @@
     "basic": false,
     "name": "USAS-12 Camouflage"
   },
-  "tfa_cso_p228": {
+  "tfa_cso_p228_v2": {
     "price": 300,
     "slot": 2,
     "parent": "nil",
