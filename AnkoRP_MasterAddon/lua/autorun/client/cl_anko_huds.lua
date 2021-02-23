@@ -1,9 +1,7 @@
 --[[
-	I was asked to recreate a HUD from "KDGaming" I think.
-	I didn't think it was terrible, so I used it for AnkoRP.
-
-	This version actually also contains an optimization for the money flash,
-	making this whole HUD client-bound (as it should be).
+	AnkoRP HUD hook.
+	Using a ConVar, you can use the new AnkoHUD,
+	or the old KDGaming Mock HUD.
 ]]--
 
 local smoothHP = 100
