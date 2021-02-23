@@ -686,7 +686,7 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 
 			draw.SimpleText( "/", "BigKDGDisplayFont", ScrW() - 145, ScrH() - 56, color_white )
 			local clipp = LocalPlayer():GetActiveWeapon():Clip1()
-			draw.SimpleText( amoType == -1 and "• • •" or math.floor( clipp / 100 % 10 ) .. " " .. math.floor( clipp / 10 % 10 ) .. " " .. clipp % 10, "BigKDGDisplayFont", ScrW() - 242, ScrH() - 56, color_white )
+			draw.SimpleText( clipp == -1 and "• • •" or math.floor( clipp / 100 % 10 ) .. " " .. math.floor( clipp / 10 % 10 ) .. " " .. clipp % 10, "BigKDGDisplayFont", ScrW() - 242, ScrH() - 56, color_white )
 			
 			if amoType == 5 then
 				surface.SetFont( "Ammo2TypeDisplay" )
