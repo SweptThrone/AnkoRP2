@@ -1171,7 +1171,8 @@ Fight against those who left you to die.
 STATS:
 100 HP
 0 AP
-MELEE ONLY]],
+MELEE ONLY
+UNDYING]],
     weapons = {"tfa_cso_combatknife" },
     command = "corpse",
     max = 0, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.

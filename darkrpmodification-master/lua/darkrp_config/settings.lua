@@ -296,13 +296,13 @@ GM.Config.lockdownsound = "music/ravenholm_1.mp3"
 GM.Config.DarkRPSkin = "DarkRP"
 GM.Config.currency = "$"
 GM.Config.chatCommandPrefix = "/"
-GM.Config.F1MenuHelpPage = "sweptthr.one"
-GM.Config.F1MenuHelpPageTitle = "Information"
+GM.Config.F1MenuHelpPage = "http://sweptthrone.weebly.com/ankomap.html"
+GM.Config.F1MenuHelpPageTitle = "World Map"
 
 -- Put Steam ID's and ranks in this list, and the players will have that rank when they join.
 GM.Config.DefaultPlayerGroups = {
-    ["STEAM_0:0:00000000"] = "superadmin",
-    ["STEAM_0:0:11111111"] = "admin"
+    --["STEAM_0:0:00000000"] = "superadmin",
+    --["STEAM_0:0:11111111"] = "admin"
 }
 
 -- Custom modules in this addon that are disabled.
