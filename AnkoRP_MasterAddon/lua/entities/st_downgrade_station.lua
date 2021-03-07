@@ -23,7 +23,7 @@ if CLIENT then
         local Ang = self:GetAngles()
         
         Ang:RotateAroundAxis(Ang:Forward(), 90)
-        Ang:RotateAroundAxis(Ang:Right(), -15)
+        Ang:RotateAroundAxis(Ang:Right(), 90)
         
         local txt = "Downgrade Station"
         
@@ -111,7 +111,7 @@ end
 if SERVER then
     function ENT:Initialize()
     
-        self:SetModel( "models/props_wasteland/laundry_washer001a.mdl" )
+        self:SetModel( "models/props_canal/winch02.mdl" )
         self:PhysicsInit( SOLID_VPHYSICS )
         self:SetMoveType( MOVETYPE_VPHYSICS )
         self:SetSolid( SOLID_VPHYSICS )

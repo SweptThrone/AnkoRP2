@@ -1,7 +1,9 @@
 --[[
-	AnkoRP HUD hook.
-	Using a ConVar, you can use the new AnkoHUD,
-	or the old KDGaming Mock HUD.
+	I was asked to recreate a HUD from "KDGaming" I think.
+	I didn't think it was terrible, so I used it for AnkoRP.
+
+	This version actually also contains an optimization for the money flash,
+	making this whole HUD client-bound (as it should be).
 ]]--
 
 local smoothHP = 100
@@ -26,25 +28,44 @@ local smGemsIcon = Material( "icon16/ruby.png" )
 local lgGemsIcon = Material( "icon16/ruby_add.png" )
 
 local ammoTypeLUT = {
-	"u", "z", "p", "q", "p357", "w", "s", "x", "t", "v", "o", "12", "13", "r"
+	"u", "z", "p", "q", "p357", "w", "s", "x", "t", "v", "*", "12", "13", "r"
 }
 
 hook.Add( "HUDPaint", "DrawKDGHUD", function()
 
-	if GetConVar( "cl_anko_classichud" ):GetBool() then
-		local ply = LocalPlayer()
-		local hp = LocalPlayer():Health()
-		local ap = LocalPlayer():Armor()
-		
-		local color_hp = Color( 255, 0, 0 )
-		local color_ap = Color( 0, 128, 255 )
-		local color_bg = LocalPlayer():GetPlayerColor():ToColor()
-		local color_wep = LocalPlayer():GetWeaponColor():ToColor()
-		local color_barbg = Color( 86, 85, 86 )
-		local color_text = color_bg
-		local color_black = color_black
+	local ply = LocalPlayer()
+	local hp = LocalPlayer():Health()
+	local ap = LocalPlayer():Armor()
+	
+	local color_hp = Color( 255, 0, 0 )
+	local color_ap = Color( 0, 128, 255 )
+	local color_bg = LocalPlayer():GetPlayerColor():ToColor()
+	local color_wep = LocalPlayer():GetWeaponColor():ToColor()
+	local color_barbg = Color( 86, 85, 86 )
+	local color_text = color_bg
+	local color_black = color_black
 
-		local money_this_frame
+	local money_this_frame
+
+	local TEAM_CAT_LUT = {
+		[ "Counter-Terrorists" ] = "CT",
+		[ "Terrorists" ] = "TR",
+		[ "Resistance" ] = "RE",
+		[ "Combine" ] = "CM",
+		[ "Monsters" ] = "MN",
+		[ "Citizens" ] = "CZ"
+	}
+	
+	local TEAM_CAT_COLOR_LUT = {
+		[ "Counter-Terrorists" ] = Color( 84, 109, 126 ),
+		[ "Terrorists" ] = Color( 125, 61, 64 ),
+		[ "Resistance" ] = Color( 243, 207, 47 ),
+		[ "Combine" ] = Color( 63, 92, 205 ),
+		[ "Monsters" ] = Color( 112, 173, 71 ),
+		[ "Citizens" ] = Color( 0, 176, 80 )
+	}
+	
+	if GetConVar( "cl_anko_classichud" ):GetBool() then
 		if LocalPlayer().getDarkRPVar then
 			money_this_frame = LocalPlayer():getDarkRPVar( "money" )
 		else
@@ -308,24 +329,6 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 		end
 
 		--[[ ========= TEXTS START HERE ========= ]]--
-		local TEAM_CAT_LUT = {
-			[ "Counter-Terrorists" ] = "CT",
-			[ "Terrorists" ] = "TR",
-			[ "Resistance" ] = "RE",
-			[ "Combine" ] = "CM",
-			[ "Monsters" ] = "MN",
-			[ "Citizens" ] = "CZ"
-		}
-		
-		local TEAM_CAT_COLOR_LUT = {
-			[ "Counter-Terrorists" ] = Color( 84, 109, 126 ),
-			[ "Terrorists" ] = Color( 125, 61, 64 ),
-			[ "Resistance" ] = Color( 243, 207, 47 ),
-			[ "Combine" ] = Color( 63, 92, 205 ),
-			[ "Monsters" ] = Color( 112, 173, 71 ),
-			[ "Citizens" ] = Color( 0, 176, 80 )
-		}
-
 		draw.SimpleText( hp .. " HP", "KDGDisplayFont", 105, ScrH() - 144, color_black )
 		draw.SimpleText( LocalPlayer():Team() == TEAM_FZOMBIE and "+ALT1" or ap .. " AP", "KDGDisplayFont", 105, ScrH() - 112, color_black )
 		draw.SimpleText( LocalPlayer():Name(), "KDGDisplayFont", 35, ScrH() - 83, color_white )
@@ -349,9 +352,12 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 			if amoType == 5 then
 				surface.SetFont( "Ammo2TypeDisplay" )
 				draw.SimpleText( ammoTypeLUT[ amoType ] or "", "Ammo2TypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 60, color_white )
+			elseif amoType == 11 then
+				surface.SetFont( "SLAMAmmoTypeDisplay" )
+				draw.SimpleText( ammoTypeLUT[ amoType ] or "", "SLAMAmmoTypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 60, color_white )
 			else
 				surface.SetFont( "AmmoTypeDisplay" )
-				draw.SimpleText( ammoTypeLUT[ amoType ] or "", "AmmoTypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 80, color_white )
+				draw.SimpleText( ammoTypeLUT[ amoType ] or "", amoType2 == 11 and "SLAMAmmo2TypeDisplay" or "Ammo2TypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - ( amoType2 == 11 and 70 or 80 ), color_white )
 			end
 			
 			draw.SimpleText( "/", "BigKDGDisplayFont", ScrW() - 152, ScrH() - 54, color_black )
@@ -366,41 +372,6 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 				draw.SimpleText( amoType2 == -1 and "-" or math.floor( amo2 / 1000 % 10 ), "AmmoKDGDisplayFont", ScrW() - 119, ScrH() - 95, color_white )
 				draw.SimpleText( ammoTypeLUT[ amoType2 ] or "", "Ammo2TypeDisplay", ScrW() - 180, ScrH() - 110, color_white )
 			end
-		end
-
-		if LocalPlayer():getAgendaTable() then
-			-- background
-			surface.SetDrawColor( Color( 0, 0, 0, 128 ) )
-			draw.NoTexture()
-			surface.DrawPoly( {
-				{ x = 0, y = 0 },
-				{ x = 480, y = 0 },
-				{ x = 480, y = 160 },
-				{ x = 460, y = 180 },
-				{ x = 0, y = 180 }
-			} )
-
-			-- foreground
-			surface.SetDrawColor( Color( 255, 255, 255, 32 ) )
-			draw.NoTexture()
-			surface.DrawPoly( {
-				{ x = 10, y = 10 },
-				{ x = 470, y = 10 },
-				{ x = 470, y = 150 },
-				{ x = 450, y = 170 },
-				{ x = 10, y = 170 }
-			} )
-
-			-- title
-			surface.SetDrawColor( color_black )
-			draw.NoTexture()
-			surface.DrawRect( 15, 15, 450, 30 )
-
-			-- texts
-			draw.SimpleText( LocalPlayer():getAgendaTable().Title, "KDGDisplayFont", 20, 20, color_white )
-			agendaText = agendaText or DarkRP.textWrap((LocalPlayer():getDarkRPVar("agenda") or ""):gsub("//", "\n"):gsub("\\n", "\n"), "KDGDisplayFont", 440)
-			draw.DrawNonParsedText(agendaText, "KDGDisplayFont", 20, 47, color_white, 0)
-
 		end
 
 		local multOffsets = 0
@@ -437,18 +408,6 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 
 		money_last_frame = LocalPlayer():getDarkRPVar( "money" )
 	else
-		local ply = LocalPlayer()
-		local hp = LocalPlayer():Health()
-		local ap = LocalPlayer():Armor()
-		
-		local color_hp = Color( 255, 0, 0 )
-		local color_ap = Color( 0, 128, 255 )
-		local color_bg = LocalPlayer():GetPlayerColor():ToColor()
-		local color_wep = LocalPlayer():GetWeaponColor():ToColor()
-		local color_barbg = Color( 86, 85, 86 )
-		local color_black = color_black
-
-		local money_this_frame
 		if LocalPlayer().getDarkRPVar then
 			money_this_frame = LocalPlayer():getDarkRPVar( "money" )
 		else
@@ -473,7 +432,7 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 		surface.DrawPoly( {
 			{ x = 0, y = ScrH() - 175 },
 			{ x = 250, y = ScrH() - 175 },
-			{ x = 390	, y = ScrH() - 10 },
+			{ x = 393	, y = ScrH() - 10 },
 			{ x = 0, y = ScrH() - 10 }
 		} )
 
@@ -523,25 +482,25 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 		if LocalPlayer():GetNWBool( "MedkitRegen", false ) then
 			surface.SetDrawColor( Color( 255, 255, 255, TimedSin( 1, 127, 255, 0 ) ) )
 			surface.SetMaterial( moreHealth )
-			surface.DrawTexturedRect( 393, ScrH() - 36, 24, 24 )
+			surface.DrawTexturedRect( 396, ScrH() - 36, 24, 24 )
 		end
 
 		if LocalPlayer():GetNWBool( "HasGold", false ) then
 			surface.SetDrawColor( Color( 255, 255, 255, TimedCos( 1, 127, 255, 0 ) ) )
 			surface.SetMaterial( goldIcon )
-			surface.DrawTexturedRect( LocalPlayer():GetNWBool( "MedkitRegen", false ) and 419 or 393, ScrH() - 36, 24, 24 )
+			surface.DrawTexturedRect( LocalPlayer():GetNWBool( "MedkitRegen", false ) and 422 or 396, ScrH() - 36, 24, 24 )
 		end
 
 		if LocalPlayer():GetNWBool( "HasSmallGems", false ) then
 			surface.SetDrawColor( Color( 255, 255, 255, TimedCos( 1, 127, 255, 0 ) ) )
 			surface.SetMaterial( smGemsIcon )
-			surface.DrawTexturedRect( LocalPlayer():GetNWBool( "MedkitRegen", false ) and 419 or 393, ScrH() - 36, 24, 24 )
+			surface.DrawTexturedRect( LocalPlayer():GetNWBool( "MedkitRegen", false ) and 422 or 396, ScrH() - 36, 24, 24 )
 		end
 
 		if LocalPlayer():GetNWBool( "HasLargeGems", false ) then
 			surface.SetDrawColor( Color( 255, 255, 255, TimedCos( 1, 127, 255, 0 ) ) )
 			surface.SetMaterial( lgGemsIcon )
-			surface.DrawTexturedRect( LocalPlayer():GetNWBool( "MedkitRegen", false ) and 419 or 393, ScrH() - 36, 24, 24 )
+			surface.DrawTexturedRect( LocalPlayer():GetNWBool( "MedkitRegen", false ) and 422 or 396, ScrH() - 36, 24, 24 )
 		end
 
 		-- ap foreground
@@ -651,23 +610,6 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 		end
 
 		--[[ ========= TEXTS START HERE ========= ]]--
-		local TEAM_CAT_LUT = {
-			[ "Counter-Terrorists" ] = "CT",
-			[ "Terrorists" ] = "TR",
-			[ "Resistance" ] = "RE",
-			[ "Combine" ] = "CM",
-			[ "Monsters" ] = "MN",
-			[ "Citizens" ] = "CZ"
-		}
-		
-		local TEAM_CAT_COLOR_LUT = {
-			[ "Counter-Terrorists" ] = Color( 84, 109, 126 ),
-			[ "Terrorists" ] = Color( 125, 61, 64 ),
-			[ "Resistance" ] = Color( 243, 207, 47 ),
-			[ "Combine" ] = Color( 63, 92, 205 ),
-			[ "Monsters" ] = Color( 112, 173, 71 ),
-			[ "Citizens" ] = Color( 0, 176, 80 )
-		}
 
 		draw.SimpleText( hp .. " HP", "KDGWantedFont", 105, ScrH() - 100, color_black )
 		draw.SimpleText( LocalPlayer():Team() == TEAM_FZOMBIE and "+ALT1" or ap .. " AP", "KDGWantedFont", 105, ScrH() - 55, color_black )
@@ -690,10 +632,13 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 			
 			if amoType == 5 then
 				surface.SetFont( "Ammo2TypeDisplay" )
-				draw.SimpleText( ammoTypeLUT[ amoType ] or "", "Ammo2TypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 65, color_white )
+				draw.SimpleText( ammoTypeLUT[ amoType ] or "", "Ammo2TypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 60, color_white )
+			elseif amoType == 11 then
+				surface.SetFont( "SLAMAmmoTypeDisplay" )
+				draw.SimpleText( ammoTypeLUT[ amoType ] or "", "SLAMAmmoTypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 60, color_white )
 			else
 				surface.SetFont( "AmmoTypeDisplay" )
-				draw.SimpleText( ammoTypeLUT[ amoType ] or "", "AmmoTypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 90, color_white )
+				draw.SimpleText( ammoTypeLUT[ amoType ] or "", "AmmoTypeDisplay", ScrW() - 275 - surface.GetTextSize( ammoTypeLUT[ amoType ] or "" ), ScrH() - 80, color_white )
 			end
 
 			if LocalPlayer():GetActiveWeapon().Secondary and ( LocalPlayer():GetActiveWeapon().Secondary.Ammo != "none" and LocalPlayer():GetActiveWeapon().Secondary.Ammo != nil and LocalPlayer():GetActiveWeapon().Secondary.Ammo != "" ) then
@@ -701,7 +646,7 @@ hook.Add( "HUDPaint", "DrawKDGHUD", function()
 				local amo2 = LocalPlayer():GetAmmoCount( amoType2 )
 
 				draw.SimpleText( amoType2 == -1 and "•" or math.floor( amo2 / 1000 % 10 ) .. " " .. math.floor( amo2 / 100 % 10 ) .. " " .. math.floor( amo2 / 10 % 10 ) .. " " .. amo2 % 10, "AmmoKDGDisplayFont", ScrW() - 90, ScrH() - 92, color_white )
-				draw.SimpleText( ammoTypeLUT[ amoType2 ] or "", "Ammo2TypeDisplay", ScrW() - 180, ScrH() - 110, color_white )
+				draw.SimpleText( ammoTypeLUT[ amoType2 ] or "", amoType2 == 11 and "SLAMAmmo2TypeDisplay" or "Ammo2TypeDisplay", ScrW() - 180, ScrH() - ( amoType2 == 11 and 100 or 110 ), color_white )
 			end
 		end
 

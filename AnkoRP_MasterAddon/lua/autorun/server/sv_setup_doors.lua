@@ -13,5 +13,8 @@ hook.Add( "DarkRPFinishedLoading", "SetUpDoorOwnerships", function()
 				v:setKeysNonOwnable( true )
 			end
 		end
+		
+		ents.GetMapCreatedEntity( 3684 ):setKeysTitle( "East VIP Room - $10,000" )
+		ents.GetMapCreatedEntity( 3689 ):setKeysTitle( "West VIP Room - $10,000" )
 	end )
 end )

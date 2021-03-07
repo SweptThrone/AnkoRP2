@@ -23,15 +23,32 @@ hook.Add( "Tick", "CheckFoRoundOver", function()
                 v:SetNWInt( "Contract_IsActive", 2 )
                 DarkRP.notify( v, 0, 4, "Your contract is now active!" )
             end
+			v:SetNWInt( "NumEggs", 0 )
         end
 
         if CURRENT_ANKORP_EVENT then
             DarkRP.notify( player.GetAll(), 1, 4, "The previous Money Event has ended and all related items have been removed." )
+			local mostEggs, eggWinner = 0, NULL
             for k,v in pairs( player.GetAll() ) do
                 v:SetNWBool( "HasGold", false )
                 v:SetNWBool( "HasSmallGems", false )
                 v:SetNWBool( "HasLargeGems", false )
+				
+				if v:GetNWInt( "NumEggs", 0 ) > mostEggs then
+					eggWinner = v
+					mostEggs = tonumber( v:GetNWInt( "NumEggs", 0 ) )
+				end
+				
+				v:SetNWInt( "NumEggs", 0 )
             end
+			-- egg cleanup
+			if IsValid( eggWinner ) then
+				DarkRP.notify( eggWinner, 0, 4, "You won the Golden Egg hunt and earned " .. DarkRP.formatMoney( 500 * mostEggs ) .. "!" )
+				eggWinner:addMoney( DarkRP.formatMoney( 500 * mostEggs ) )
+			end
+			for k,v in pairs( ents.FindByClass( "st_golden_egg" ) ) do
+				v:Remove()
+			end
             -- gold cleanup
             if #ents.FindByClass( "st_ankorp_gold" ) > 0 then
                 for _,ply in pairs( player.GetAll() ) do
@@ -97,41 +114,46 @@ hook.Add( "Tick", "CheckFoRoundOver", function()
 
         if #GetCombatants() > 2 and #GetActiveTeams() > 1 then
             local eventChance = math.random( 1, 4 )
-            local locChance = math.random( 1, 100 )
+            --local locChance = math.random( 1, 100 )
             local lootChance = math.random( 1, 20 )
             local location, loot
+			
+			function GetWeightedRandomKey( tab )
+				local sum = 0
+				
+				for _, chance in pairs( tab ) do
+					sum = sum + chance
+				end
+				
+				local sel = math.random() * sum
+				
+				for k, chance in pairs( tab ) do
+					sel = sel - chance
+					if sel < 0 then return k end
+				end
+			end
+			
+			local events = {
+				remote = 20,
+				barge = 20,
+				worldcorp = 20,
+				eggs = 25,
+				bank = 10,
+				richman = 5
+			}
+			
             if eventChance == 4 then
-                if locChance < 27 then
-                    location = "remote"
-                    loot = "weapons"
-                elseif locChance < 54 then
-                    location = "barge"
-                    if lootChance < 14 then
-                        loot = "money"
-                    else
-                        loot = "gold"
-                    end
-                elseif locChance < 81 then
-                    location = "worldcorp"
-                    if lootChance < 14 then
-                        loot = "money"
-                    else
-                        loot = "gold"
-                    end
-                elseif locChance < 93 then
-                    location = "bank"
-                    if lootChance < 14 then
-                        loot = "money"
-                    else
-                        loot = "gold"
-                    end
-                else
-                    location = "richman"
-                    loot = "gems"
-                end
+                location = GetWeightedRandomKey( events )
+				if location == "barge" or location == "worldcorp" or location == "bank" then
+					loot = lootChance > 15 and "gold" or "money"
+				elseif location == "richman" then loot = "gems"
+				elseif location == "remote" then loot = "weapons"
+				elseif location == "eggs" then loot = "eggs" end
                 StartEvent( location, loot )
             end
-        end
+        else
+			PrintMessage( HUD_PRINTCONSOLE, "Need 3 combatants and 2 teams for an event, have " .. #GetCombatants() .. " combatants and " .. #GetActiveTeams() .. " teams." )
+		end
 
         local SCORE_CT, SCORE_TR, SCORE_CM, SCORE_RE = 0, 0, 0, 0
 

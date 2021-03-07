@@ -14,7 +14,8 @@ local ANKORP_TIPS = {
     "The Vs over players' heads are your teammates!",
     "These tips only show up 25% of the time!",
 	"Visit the Crime Boss at the Club to pick up a Bounty!",
-	"Hold shift to run up stairs without flying off!"
+	"Hold shift to run up stairs without flying off!",
+	"Check the Utilities menu in the spawnmenu for extra options!"
 }
 
 hook.Add( "PlayerDeath", "DifferentKillSounds", function( vic, inf, atk )

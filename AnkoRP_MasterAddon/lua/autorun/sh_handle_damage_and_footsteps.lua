@@ -11,7 +11,14 @@ hook.Add( "ScalePlayerDamage", "FriendlyFire/CitizenFie", function( vic, _, dmg 
 
 		if vic:Team() == TEAM_SKELETON then
 			dmg:ScaleDamage( 0.75 )
-			vic:EmitSound( "weapons/fx/rics/ric" .. math.random( 1, 5 ) .. ".wav" )
+			if SERVER then vic:EmitSound( "weapons/fx/rics/ric" .. math.random( 1, 5 ) .. ".wav" ) end
+		end
+		
+		if vic:Team() == TEAM_CORPSE and dmg:GetDamage() >= vic:Health() then
+			vic:SetHealth( 75 )
+			if SERVER then
+				DarkRP.notify( vic, 0, 4, "Your UNDYING trait saved you from death...this time..." )
+			end
 		end
 
 		if dmg:GetAttacker():Team() == TEAM_CHARPLE and vic:getJobTable().category != "Monsters" and vic:getJobTable().category != "Citizens" and dmg:GetInflictor():IsWeapon() and dmg:GetInflictor().Slot == 0 then

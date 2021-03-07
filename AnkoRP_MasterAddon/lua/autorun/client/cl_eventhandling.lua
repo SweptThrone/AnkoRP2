@@ -34,6 +34,9 @@ net.Receive( "ST_EventStarted", function( len )
         elseif game.GetWorld():GetNWString( "EventEnt" ) == "weapons" then
             surface.SetTextPos( ScrW() / 2 - ( surface.GetTextSize( "You have one round to break open the crates and take the weapons." ) / 2 ), ScrH() / 8 + 72 )
             surface.DrawText( "You have one round to break open the crates and take the weapons." )
+		elseif game.GetWorld():GetNWString( "EventEnt" ) == "eggs" then
+			surface.SetTextPos( ScrW() / 2 - ( surface.GetTextSize( "You have one round to kill and collect as many golden eggs as you can." ) / 2 ), ScrH() / 8 + 72 )
+            surface.DrawText( "You have one round to kill and collect as many golden eggs as you can." )
         end
         --draw.SimpleText( "A new Money Event has started!", "UPGLarge", ScrW() - 185, ScrH() - 49, color_white )
     end )

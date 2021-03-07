@@ -25,7 +25,7 @@ net.Receive( "ST_OfferAnkoContract", function( len )
     ContractPanel:ShowCloseButton( false )
     ContractPanel:MoveTo( ScrW() - 300, ScrH() / 2 - 100, 1, 0, 0.25, function( anim, panel )
         currentWindow = ContractPanel
-        timer.Create( "CloseCurrentContract", 5, 1, function()
+        timer.Create( "CloseCurrentContract", 30, 1, function()
             if IsValid( currentWindow ) then
                 currentWindow:MoveTo( ScrW(), ScrH() / 2 - 100, 1, 0, 0.25, function( anim2, panel2 )
                     currentWindow:Close()
@@ -186,7 +186,7 @@ net.Receive( "ST_OfferAnkoBounty", function( len )
     BountyPanel:ShowCloseButton( false )
     BountyPanel:MoveTo( 0, ScrH() / 2 - 75, 1, 0, 0.25, function( anim, panel )
         currentWindow2 = BountyPanel
-        timer.Create( "CloseCurrentBounty", 5, 1, function()
+        timer.Create( "CloseCurrentBounty", 30, 1, function()
             if IsValid( currentWindow2 ) then
                 currentWindow2:MoveTo( -300, ScrH() / 2 - 75, 1, 0, 0.25, function( anim2, panel2 )
                     currentWindow2:Close()

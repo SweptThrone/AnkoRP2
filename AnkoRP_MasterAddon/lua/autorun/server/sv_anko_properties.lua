@@ -449,11 +449,18 @@ ANKORP_PROPERTIES = {
         2743,
         2751,
         2750
-    }    
+    },
+	["East VIP Room"] = {
+		3684
+	},
+	["West VIP Room"] = {
+		3689
+	}
 }
 
 hook.Add( "playerKeysSold", "UnownWholeProperty", function( ply, door, cash )
     local i = door:MapCreationID()
+	
     for k,v in pairs( ANKORP_PROPERTIES ) do
         if table.HasValue( v, i ) then
             DarkRP.notify( ply, 0, 5, "You sold your " .. k .. " property for $" .. cash * #v .. "." )
@@ -468,6 +475,16 @@ end )
 hook.Add( "playerBuyDoor", "OwnWholeProperty", function( ply, door )
     if !IsValid( door:getDoorOwner() ) then
         local i = door:MapCreationID()
+		if i == 3684 or i == 3689 and !IsValid( door:getDoorOwner() ) then
+			if ply:canAfford( 10000 ) then
+				ply:addMoney( -9975 )
+				DarkRP.notify( ply, 2, 5, "You rented a VIP Room in the club for $10,000" )
+				return true, "", true
+			else
+				return false, "VIP Rooms cost $10,000 each.", false
+			end
+		end
+		
         for k,v in pairs( ANKORP_PROPERTIES ) do
             if table.HasValue( v, i ) then
 				if !ply:canAfford( GAMEMODE.Config.doorcost * #v ) then

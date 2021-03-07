@@ -78,6 +78,10 @@ if SERVER then
 					[ true ] = "I’m not trusting no frail monster to take out my targets. Scram!",
 					[ false ] = "I’m not trusting no frail monster to take out my targets. Scram!"
 				},
+				[ "???" ] = {
+					[ true ] = "What the hell???",
+					[ false ] = "What the hell???"
+				}
 			}
 
 			if self.HasJob[ caller ] and #GetCombatants() > 2 and #GetActiveTeams() >= 2 and caller:IsCombatant() and !caller:GetNWBool( "Bounty_IsActive", false ) then

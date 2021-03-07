@@ -17,7 +17,8 @@ net.Receive( "ST_NPCMessage", function( len )
 	local npcCols = {
 		[ "Nurse" ] = Color( 0, 128, 255 ),
 		[ "Pawn Broker" ] = Color( 128, 128, 0 ),
-		[ "Crime Boss" ] = Color( 255, 0, 0 )
+		[ "Crime Boss" ] = Color( 255, 0, 0 ),
+		[ "Bouncer Bot" ] = Color( 0, 0, 255 )
 	}
 
 	chat.PlaySound()

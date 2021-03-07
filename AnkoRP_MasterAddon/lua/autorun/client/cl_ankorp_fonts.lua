@@ -39,8 +39,18 @@ surface.CreateFont( "AmmoTypeDisplay", {
 	size = 100,
 	weight = 500
 } )
+surface.CreateFont( "SLAMAmmoTypeDisplay", {
+	font = "HL2MP",
+	size = 100,
+	weight = 500
+} )
 surface.CreateFont( "Ammo2TypeDisplay", {
 	font = "HalfLife2",
+	size = 50,
+	weight = 500
+} )
+surface.CreateFont( "SLAMAmmo2TypeDisplay", {
+	font = "HL2MP",
 	size = 50,
 	weight = 500
 } )

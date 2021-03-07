@@ -25,16 +25,20 @@ net.Receive( "SendAnkoScores", function( len )
 
 end )
 
-local color_diamond = Color( 166, 222, 255 )
-local color_money = Color( 158, 217, 173 )
-local color_gold = Color( 255, 240, 160 )
-local color_guns = Color( 217, 160, 160 )
+local lootColLUT = {
+	gems = Color( 166, 222, 255 ),
+	money = Color( 158, 217, 173 ),
+	gold = Color( 255, 240, 160 ),
+	weapons = Color( 217, 160, 160 ),
+	eggs = Color( 255, 200, 110 )
+}
 local locLUT = {
 	[ "worldcorp" ] = "World Corp",
 	[ "bank" ] = "Union Bank",
 	[ "barge" ] = "The Barge",
 	[ "remote" ] = "Remote",
-	[ "richman" ] = "Richman"
+	[ "richman" ] = "Richman",
+	[ "eggs" ] = LocalPlayer():GetNWInt( "NumEggs", 0 ) .. " Eggs"
 }
 local locPos = {
 	[ "worldcorp" ] = Vector( "-1216.555664 4793.572266 32.209515" ),
@@ -82,21 +86,8 @@ hook.Add( "HUDPaint", "STShowTimer", function()
 			{ x = ScrW() / 2 - 65, y = 85 }
 		} )
 
-		if game.GetWorld():GetNWString( "EventLoc" ) == "worldcorp" or game.GetWorld():GetNWString( "EventLoc" ) == "bank" or game.GetWorld():GetNWString( "EventLoc" ) == "barge" then
-			if game.GetWorld():GetNWString( "EventEnt" ) == "money" then
-				surface.SetDrawColor( color_money )
-				draw.NoTexture()
-			else
-				surface.SetDrawColor( color_gold )
-				draw.NoTexture()
-			end
-		elseif game.GetWorld():GetNWString( "EventLoc" ) == "richman" then
-			surface.SetDrawColor( color_diamond )
-			draw.NoTexture()
-		else
-			surface.SetDrawColor( color_guns )
-			draw.NoTexture()
-		end
+		surface.SetDrawColor( lootColLUT[ game.GetWorld():GetNWString( "EventEnt" ) ] )
+		draw.NoTexture()
 
 		surface.DrawPoly( {
 			{ x = ScrW() / 2 - 86, y = 37 }, --upper left
@@ -107,17 +98,19 @@ hook.Add( "HUDPaint", "STShowTimer", function()
 
 		surface.SetFont( "UPGSmall" )
 		surface.SetTextColor( color_black )
-		surface.SetTextPos( ScrW() / 2 - ( surface.GetTextSize( locLUT[ game.GetWorld():GetNWString( "EventLoc" ) ] ) / 2 ), 52 )
-		surface.DrawText( locLUT[ game.GetWorld():GetNWString( "EventLoc" ) ] )
+		surface.SetTextPos( ScrW() / 2 - ( surface.GetTextSize( game.GetWorld():GetNWString( "EventLoc" ) == "eggs" and LocalPlayer():GetNWInt( "NumEggs", 0 ) .. " Eggs" or locLUT[ game.GetWorld():GetNWString( "EventLoc" ) ] ) / 2 ), 52 )
+		surface.DrawText( game.GetWorld():GetNWString( "EventLoc" ) == "eggs" and LocalPlayer():GetNWInt( "NumEggs", 0 ) .. " Eggs" or locLUT[ game.GetWorld():GetNWString( "EventLoc" ) ] )
 
-		surface.SetFont( "STChevronText" )
-		surface.SetTextColor( Color( 255, TimedSin( 1, 127, 255, 0 ), TimedSin( 1, 127, 255, 0 ), 64 ) )
-		surface.SetTextPos( locPos[ game.GetWorld():GetNWString( "EventLoc" ) ]:ToScreen().x - surface.GetTextSize( "!" )/2, locPos[ game.GetWorld():GetNWString( "EventLoc" ) ]:ToScreen().y )
-		surface.DrawText( "!" )
-		surface.SetFont( "UPGMini" )
-		surface.SetTextColor( Color( 255, TimedSin( 1, 127, 255, 0 ), TimedSin( 1, 127, 255, 0 ), 64 ) )
-		surface.SetTextPos( locPos[ game.GetWorld():GetNWString( "EventLoc" ) ]:ToScreen().x - surface.GetTextSize( lootLUT[ game.GetWorld():GetNWString( "EventEnt" ) ] )/2, locPos[ game.GetWorld():GetNWString( "EventLoc" ) ]:ToScreen().y - 20 )
-		surface.DrawText( lootLUT[ game.GetWorld():GetNWString( "EventEnt" ) ] )
+		if game.GetWorld():GetNWString( "EventLoc" ) != "eggs" then
+			surface.SetFont( "STChevronText" )
+			surface.SetTextColor( Color( 255, TimedSin( 1, 127, 255, 0 ), TimedSin( 1, 127, 255, 0 ), 64 ) )
+			surface.SetTextPos( locPos[ game.GetWorld():GetNWString( "EventLoc" ) ]:ToScreen().x - surface.GetTextSize( "!" )/2, locPos[ game.GetWorld():GetNWString( "EventLoc" ) ]:ToScreen().y )
+			surface.DrawText( "!" )
+			surface.SetFont( "UPGMini" )
+			surface.SetTextColor( Color( 255, TimedSin( 1, 127, 255, 0 ), TimedSin( 1, 127, 255, 0 ), 64 ) )
+			surface.SetTextPos( locPos[ game.GetWorld():GetNWString( "EventLoc" ) ]:ToScreen().x - surface.GetTextSize( lootLUT[ game.GetWorld():GetNWString( "EventEnt" ) ] )/2, locPos[ game.GetWorld():GetNWString( "EventLoc" ) ]:ToScreen().y - 20 )
+			surface.DrawText( lootLUT[ game.GetWorld():GetNWString( "EventEnt" ) ] )
+		end
 	end
 	
 	if LocalPlayer():GetNWBool( "HasGold" ) or LocalPlayer():GetNWBool( "HasSmallGems" ) or LocalPlayer():GetNWBool( "HasLargeGems" ) then

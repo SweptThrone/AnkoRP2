@@ -8,6 +8,20 @@
 
 hook.Add( "PlayerDeath", "GiveMoneyForKills", function( vic, inf, atk )
 
+	if game.GetWorld():GetNWString( "EventLoc", "" ) == "eggs" and vic:IsCombatant() then
+		local egg = ents.Create( "st_golden_egg" )
+		egg:SetPos( vic:GetPos() + Vector( 0, 0, 32 ) )
+		egg:Spawn()
+		egg:GetPhysicsObject():SetVelocity( VectorRand( -100, 100 ) )
+		for i = 1, vic:GetNWInt( "NumEggs", 0 ) do
+			local egg = ents.Create( "st_golden_egg" )
+			egg:SetPos( vic:GetPos() + Vector( 0, 0, 32 ) )
+			egg:Spawn()
+			egg:GetPhysicsObject():SetVelocity( VectorRand( -100, 100 ) )
+		end
+		vic:SetNWInt( "NumEggs", 0 )
+	end
+
     if vic:GetNWBool( "HasGold", false ) then
         local gold = ents.Create( "st_ankorp_gold" )
         gold:SetPos( vic:GetPos() + Vector( 0, 0, 64 ) )

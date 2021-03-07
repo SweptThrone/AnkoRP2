@@ -68,5 +68,35 @@ if SERVER then
 
     function ENT:OnUseCancel( ply )
     end
+	
+	function ENT:Think()
+
+		if IsValid( self:GetUser() ) then
+            if !IsValid( self:GetUser():GetUseEntity() ) and self:GetUser():GetUseEntity() != self then
+                self:SetUser( nil )
+                self:SetProgress( -1 )
+            end
+        end
+
+		if self:GetProgress() == self.LastProg and self:GetProgress() != -1 then
+			self:OnUseCancel( self:GetUser() )
+            self:SetUser( nil )
+            self:SetProgress( -1 )
+		end
+
+		self.LastProg = self:GetProgress()
+
+		--[[
+			usually you'd just use CurTime() here,
+			but on 66-tick servers, it's extremely unreliable.
+			sometimes it will cancel using even if you're holding it.
+			this is a bit of a fix, but it runs this entity
+			at 16-tick i think...
+		]]--
+		self:NextThink( CurTime() + 0.06 )
+
+		return true
+
+	end
 
 end

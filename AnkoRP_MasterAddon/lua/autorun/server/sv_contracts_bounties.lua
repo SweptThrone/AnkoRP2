@@ -75,7 +75,7 @@ function plyMeta:OfferBounty( target )
         tgtRate = tgtSucc / ( tgtSucc + tgtFail ) * 100
     end
 
-    local bounty = math.max( 1000, tgtRate - myRate * 1000 )
+    local bounty = math.max( 1000, tgtRate - myRate * 1000 ) * myRate / 10
 
     self:SetNWEntity( "Bounty_Target", target )
     self:SetNWInt( "Bounty_Payout", bounty )
@@ -121,9 +121,13 @@ hook.Add( "PlayerLoadout", "OfferPlayerContract", function( ply )
     chance = math.Clamp( rate, 20, 80 )
 
     local randChance = math.random( 1, 100 )
-    if randChance < chance and ply:GetNWInt( "Contract_IsActive", 0 ) == 0 and #GetCombatants() > 1 and #GetActiveTeams() >= 2 then
-        ply:OfferContract()
-    end
+	if #GetCombatants() > 1 and #GetActiveTeams() >= 2 then
+		if randChance < chance and ply:GetNWInt( "Contract_IsActive", 0 ) == 0 and ply:IsCombatant() then
+			ply:OfferContract()
+		end
+	else
+		PrintMessage( HUD_PRINTCONSOLE, "Need 2 combatants and 2 teams for a contract, have " .. #GetCombatants() .. " combatants and " .. #GetActiveTeams() .. " teams." )
+	end
 
 end )
 

@@ -97,6 +97,10 @@ hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
 
 end )
 
+hook.Add( "playerGetSalary", "OverrideSalMsg", function( ply, amt )
+	return false, "Thanks for playing! +" .. DarkRP.formatMoney( amt )
+end )
+
 local plyMeta = FindMetaTable( "Player" )
 
 function plyMeta:GetWeaponTable()

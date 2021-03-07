@@ -97,7 +97,7 @@ if CLIENT then
 
         local InventoryScroller = vgui.Create( "DScrollPanel", UpgradeWindow )
         InventoryScroller:SetPos( 5, 60 )
-        InventoryScroller:SetSize( 580, 300 )
+        InventoryScroller:SetSize( 580, 290 )
 
         local ItemStore = vgui.Create( "DButton", UpgradeWindow )
         ItemStore:SetText( "STORE CURRENT WEAPON" )
@@ -136,7 +136,7 @@ if CLIENT then
                 ItemEquip:SetFont( "UPGMini" )
                 ItemEquip:SetTextColor( color_white )
                 ItemEquip:SetSize( 75, 20 )
-                ItemEquip:SetPos( 405, ( i * 20 ) )
+                ItemEquip:SetPos( 390, ( i * 20 ) )
                 ItemEquip.class = v
                 function ItemEquip:Paint( w, h )
                     if self:IsHovered() then
@@ -160,7 +160,7 @@ if CLIENT then
                 ItemScrap:SetFont( "UPGMini" )
                 ItemScrap:SetTextColor( color_white )
                 ItemScrap:SetSize( 75, 20 )
-                ItemScrap:SetPos( 500, ( i * 20 ) )
+                ItemScrap:SetPos( 485, ( i * 20 ) )
                 ItemScrap.class = v
                 function ItemScrap:Paint( w, h )
                     if self:IsHovered() then
