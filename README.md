@@ -15,10 +15,10 @@ cso_weapons_with_prices.json goes into the data folder.
 cso_weapons_with_prices.json is a JSON table with the following structure:  
 * \[root table]  
      * tableKey= weapon_class:  
-          * price: the price of this weapon (or upgrade)  
-          * slot: the 1-based slot of this weapon  
-          * parent: the weapon_class this weapon is derived of, or the string "nil" if there is none  
-          * deep: what "tier" this weapon is, starts at 1  
-          * model: the worldmodel of this weapon  
-          * basic: is this weapon a "normal" weapon?  
-          * name: print name of this weapon
+          * price: \[int] the price of this weapon (or upgrade)  
+          * slot: \[int] the 1-based slot of this weapon  
+          * parent: \[string] the weapon_class this weapon is derived of, or the string "nil" if there is none  
+          * deep: \[int] what "tier" this weapon is, starts at 1  
+          * model: \[string] the worldmodel of this weapon  
+          * basic: \[boolean] is this weapon a "normal" weapon?  
+          * name: \[string] print name of this weapon
