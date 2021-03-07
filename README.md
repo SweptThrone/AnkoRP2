@@ -10,3 +10,15 @@ Other than that, there aren't very many comments.
 AnkoRP_MasterAddon goes into the addons folder.  
 darkrpmodification-master goes into the addons folder.  
 cso_weapons_with_prices.json goes into the data folder.  
+
+### Data File Structure
+cso_weapons_with_prices.json is a JSON table with the following structure:  
+\[root table]  
+     tableKey= weapon_class:  
+          price: the price of this weapon (or upgrade)  
+          slot: the 1-based slot of this weapon  
+          parent: the weapon_class this weapon is derived of, or the string "nil" if there is none  
+          deep: what "tier" this weapon is, starts at 1  
+          model: the worldmodel of this weapon  
+          basic: is this weapon a "normal" weapon?  
+          name: print name of this weapon
