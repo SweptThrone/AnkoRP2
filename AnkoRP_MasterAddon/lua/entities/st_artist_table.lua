@@ -111,7 +111,7 @@ if CLIENT then
         local wepUpgrades = LocalPlayer():GetActiveWeapon().Attachments
         
         if wepUpgrades == {} or wepUpgrades == nil or table.IsEmpty( wepUpgrades ) then
-            WeaponLabel:SetText( "You cannot apply any skins to your " .. ( LocalPlayer():GetActiveWeapon():GetPrintName()[1] == "#" and language.GetPhrase( LocalPlayer():GetActiveWeapon():GetPrintName() ) or LocalPlayer():GetActiveWeapon():GetPrintName() ) .. "." )
+            WeaponLabel:SetText( "You cannot apply any skins to your " .. language.GetPhrase( LocalPlayer():GetActiveWeapon():GetPrintName() ) .. "." )
             WeaponLabel:SizeToContents()
             WeaponLabel:CenterHorizontal()
         else
@@ -164,7 +164,6 @@ if CLIENT then
                             local SkinnedWeapon = vgui.Create( "DButton", UpgradeWindow )
                             SkinnedWeapon:SetPos( 100, 50 + (m+k)*35 )
                             SkinnedWeapon:SetSize( 600, 30 )
-                            --SkinnedWeapon:SetText( LocalPlayer():GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ x ].Name .. " - " .. "$97" )
                             SkinnedWeapon:SetText( LocalPlayer():GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ x ].Name .. " - " .. "$" .. string.Comma( math.floor( skinPrice ) ) .. " | " .. FormatTime( paintTime ) )
                             SkinnedWeapon:SetFont( "UPGSmall" )
                             SkinnedWeapon:SetTextColor( LocalPlayer().attInvTable[ x ] and Color( 128, 128, 128 ) or Color( 255, 255, 255 ) )
@@ -291,43 +290,7 @@ if SERVER then
         else
             DarkRP.notify( ply, 1, 4, "This workbench is busy." )
         end
-            
-            --[[local mdl = ply:GetActiveWeapon().WorldModel
-            self.weapon:SetModel( mdl )
 
-            print( self.weapon:OBBMins() )
-            print( self.weapon:OBBMaxs() )
-            local diffs = {
-                ["x"] = Vector( Vector( self.weapon:OBBMaxs().x, self.weapon:OBBMins().y, self.weapon:OBBMins().z ) - self.weapon:OBBMins() ).x,
-                ["y"] = Vector( Vector( self.weapon:OBBMins().x, self.weapon:OBBMaxs().y, self.weapon:OBBMins().z ) - self.weapon:OBBMins() ).y,
-                ["z"] = Vector( Vector( self.weapon:OBBMins().x, self.weapon:OBBMins().y, self.weapon:OBBMaxs().z ) - self.weapon:OBBMins() ).z,
-            }
-            local func = {
-                ["x"] = self.weapon:GetForward() * 64,
-                ["y"] = self.weapon:GetRight() * 64,
-                ["z"] = self.weapon:GetUp() * 64,
-            }
-            local angs = {
-                ["x"] = Angle( 90, 0, 0 ),
-                ["y"] = Angle( 0, 0, 0 ),
-                ["z"] = Angle( 0, 225, 90 )
-            }
-            PrintTable( diffs )
-            print( table.GetLosingKey( diffs ) )
-            self.weapon:SetAngles( self:GetAngles() - Angle( 0, 115, 270 ) - angs[ table.GetLosingKey( diffs ) ] )
-            self.weapon:SetMaterial( "" )
-            ]]
-        
-       -- debugoverlay.Line( self.weapon:GetPos(), self.weapon:GetPos() + func[ table.GetLosingKey( diffs ) ], 5, Color( 255, 0, 0 ) )
-       -- debugoverlay.BoxAngles( self.weapon:GetPos(), self.weapon:OBBMins(), self.weapon:OBBMaxs(), self.weapon:GetAngles(), 5, Color( 0, 255, 0 ) )
-        --[[
-        print( "y diff:" )
-        print( Vector( Vector( self.weapon:OBBMins().x, self.weapon:OBBMaxs().y, self.weapon:OBBMins().z ) - self.weapon:OBBMins() ).y )
-        print( "z diff:" )
-        print( Vector( Vector( self.weapon:OBBMins().x, self.weapon:OBBMins().y, self.weapon:OBBMaxs().z ) - self.weapon:OBBMins() ).z )
-        print( "x diff:" )
-        print( Vector( Vector( self.weapon:OBBMaxs().x, self.weapon:OBBMins().y, self.weapon:OBBMins().z ) - self.weapon:OBBMins() ).x )
-        ]]
     end
 
     net.Receive( "ST_SkinWeapon", function( _, ply )
@@ -367,31 +330,8 @@ if SERVER then
         }
         this.weapon:SetAngles( this:GetAngles() - Angle( 0, 115, 270 ) - angs[ table.GetLosingKey( diffs ) ] )
         this.weapon:SetMaterial( "" )
-
-        --[[
-        if ply:GetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" ) == ply:GetActiveWeapon():GetClass() then
-            if ply:GetActiveWeapon().Slot == weapons.Get( wep ).Slot then
-                ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, wep )
-            else
-                ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" )
-                timer.Simple( 4, function()
-                    DarkRP.notify( ply, 0, 8, "Your new weapon has a different slot than your previous weapon. Your new weapon has not been added to your loadout." )
-                end )
-            end
-        end
-        ]]
+        
         ply:StripWeapon( ply:GetActiveWeapon():GetClass() )
-        --[[
-        ply:Give( wep )
-        ply:SelectWeapon( wep )
-        local finalParent = wep
-        for _ = CSO_WEAPONS_TREE[ wep ].deep, 2, -1 do
-            finalParent = CSO_WEAPONS_TREE[ finalParent ].parent
-        end
-        ply.wepInvTable[ finalParent ] = wep
-        file.Write( "ankorp/" .. ply:SteamID64() .. ".txt", util.TableToJSON( ply.wepInvTable ) )
-        ply:addMoney( -CSO_WEAPONS_TREE[wep].price )
-        ]]
 
     end )
 
