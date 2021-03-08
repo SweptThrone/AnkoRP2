@@ -82,7 +82,7 @@ if CLIENT then
         end
         
         if wepUpgrades == {} or wepUpgrades == nil or wepUpgrades[1] == nil then
-            WeaponLabel:SetText( "Your " .. ( LocalPlayer():GetActiveWeapon():GetPrintName()[1] == "#" and language.GetPhrase( LocalPlayer():GetActiveWeapon():GetPrintName() ) or LocalPlayer():GetActiveWeapon():GetPrintName() ) .. " cannot be upgraded." )
+            WeaponLabel:SetText( "Your " .. language.GetPhrase( LocalPlayer():GetActiveWeapon():GetPrintName() ) .. " cannot be upgraded." )
             WeaponLabel:SizeToContents()
             WeaponLabel:CenterHorizontal()
         else
