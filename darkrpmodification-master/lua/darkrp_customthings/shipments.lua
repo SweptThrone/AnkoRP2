@@ -316,13 +316,13 @@ DarkRP.createShipment( "Serpent Blade", {
 	category = "Slot 1 - Melee"
 })
 
-DarkRP.createShipment( "Lightning Dao-1 (A Mode)", {
+DarkRP.createShipment( "Lightning Dao-1", {
 	model = "models/weapons/tfa_cso/w_cartblue.mdl",
 	entity = "tfa_cso_cartblue_a",
 	price = 40700,
 	amount = 10,
 	separate = true,
-	pricesep = 3700,
+	pricesep = 4200,
 	noship = true,
 	allowed = {TEAM_SPECGUN},
 	category = "Slot 3 - Light Weapons"
@@ -514,7 +514,7 @@ DarkRP.createShipment( "XM8", {
 	price = 38500,
 	amount = 10,
 	separate = true,
-	pricesep = 3500,
+	pricesep = 4000,
 	noship = true,
 	allowed = {TEAM_GUN},
 	category = "Slot 3 - Light Weapons"
@@ -580,13 +580,13 @@ DarkRP.createShipment( "Colt Python", {
 	category = "Slot 2 - Sidearms"
 })
 
-DarkRP.createShipment( "Lightning Bazzi-1 (A Mode)", {
+DarkRP.createShipment( "Lightning Bazzi-1", {
 	model = "models/weapons/tfa_cso/w_cartred.mdl",
 	entity = "tfa_cso_cartred_a",
 	price = 40700,
 	amount = 10,
 	separate = true,
-	pricesep = 3700,
+	pricesep = 4200,
 	noship = true,
 	allowed = {TEAM_SPECGUN},
 	category = "Slot 3 - Light Weapons"
@@ -1696,18 +1696,6 @@ DarkRP.createShipment( "Tempest", {
 	category = "Slot 3 - Light Weapons"
 })
 
-DarkRP.createShipment( "SCAR-L", {
-	model = "models/weapons/tfa_cso/w_scarl.mdl",
-	entity = "tfa_cso_scar_l",
-	price = 44000,
-	amount = 10,
-	separate = true,
-	pricesep = 4000,
-	noship = true,
-	allowed = {TEAM_GUN},
-	category = "Slot 3 - Light Weapons"
-})
-
 DarkRP.createShipment( "M4A1", {
 	model = "models/weapons/tfa_cso/w_m4a1.mdl",
 	entity = "tfa_cso_m4a1",
@@ -2068,13 +2056,13 @@ DarkRP.createShipment( "Needler", {
 	category = "Slot 3 - Light Weapons"
 })
 
-DarkRP.createShipment( "SCAR-H", {
+DarkRP.createShipment( "SCAR", {
 	model = "models/weapons/tfa_cso/w_scarh.mdl",
 	entity = "tfa_cso_scarh",
 	price = 47300,
 	amount = 10,
 	separate = true,
-	pricesep = 4300,
+	pricesep = 4800,
 	noship = true,
 	allowed = {TEAM_GUN},
 	category = "Slot 3 - Light Weapons"
@@ -2122,7 +2110,7 @@ DarkRP.createShipment( "MP7A1", {
 	price = 18700,
 	amount = 10,
 	separate = true,
-	pricesep = 1700,
+	pricesep = 2100,
 	noship = true,
 	allowed = {TEAM_GUN},
 	category = "Slot 3 - Light Weapons"
@@ -2306,4 +2294,40 @@ DarkRP.createShipment( "Plasma Rifle MK-1", {
 	noship = true,
 	allowed = {TEAM_SPECGUN},
 	category = "Slot 3 - Light Weapons"
+} )
+
+DarkRP.createShipment( "Divine Blaster", {
+	model = "models/weapons/tfa_cso/w_divine_blaster.mdl",
+	entity = "tfa_cso_divine_blaster",
+	price = 9000000,
+	amount = 10,
+	separate = true,
+	pricesep = 9000000,
+	noship = true,
+	allowed = {TEAM_SPECGUN},
+	category = "Slot 3 - Light Weapons"
+} )
+
+DarkRP.createShipment( "VULCANUS-9", {
+	model = "models/weapons/tfa_cso/w_vulcanus9.mdl",
+	entity = "tfa_cso_vulcanus9",
+	price = 81000,
+	amount = 10,
+	separate = true,
+	pricesep = 81000,
+	noship = true,
+	allowed = {TEAM_SPECGUN},
+	category = "Slot 1 - Melee"
+} )
+
+DarkRP.createShipment( "Demonic Scarlet Rose", {
+	model = "models/weapons/tfa_cso/w_scarlet_rose.mdl",
+	entity = "tfa_cso_scarlet_rose",
+	price = 101000,
+	amount = 10,
+	separate = true,
+	pricesep = 101000,
+	noship = true,
+	allowed = {TEAM_SPECGUN},
+	category = "Slot 1 - Melee"
 } )
