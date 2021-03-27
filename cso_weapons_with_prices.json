@@ -171,7 +171,7 @@
     "name": "M1 Garand"
   },
   "tfa_cso_m249phoenix": {
-    "price": 310000,
+    "price": 420000,
     "slot": 4,
     "parent": "tfa_cso_m249ep",
     "deep": 5,
@@ -241,15 +241,6 @@
     "model": "models/weapons/tfa_cso/w_p228.mdl",
     "basic": true,
     "name": "P228"
-  },
-  "tfa_cso_cartred_b": {
-    "price": 6800,
-    "slot": 3,
-    "parent": "tfa_cso_cartred_a",
-    "deep": 2,
-    "model": "models/weapons/tfa_cso/w_cartred.mdl",
-    "basic": false,
-    "name": "Lightning Bazzi-1 (B Mode)"
   },
   "tfa_cso_ksg12_gold": {
     "price": 320000,
@@ -457,15 +448,6 @@
     "model": "models/weapons/tfa_cso/w_k1a_maverick.mdl",
     "basic": false,
     "name": "K1A Maverick"
-  },
-  "tfa_cso_skull3_b": {
-    "price": 61000,
-    "slot": 3,
-    "parent": "tfa_cso_skull3_a",
-    "deep": 3,
-    "model": "models/weapons/tfa_cso/w_skull_3.mdl",
-    "basic": false,
-    "name": "SKULL-3 (B Mode)"
   },
   "tfa_cso_dualkriss": {
     "price": 72000,
@@ -720,13 +702,13 @@
     "name": "Dual Wakizashi"
   },
   "tfa_cso_cartblue_a": {
-    "price": 3700,
+    "price": 4200,
     "slot": 3,
     "parent": "nil",
     "deep": 1,
     "model": "models/weapons/tfa_cso/w_cartblue.mdl",
     "basic": false,
-    "name": "Lightning Dao-1 (A Mode)"
+    "name": "Lightning Dao-1"
   },
   "tfa_cso_norinco_86s": {
     "price": 2500,
@@ -828,7 +810,7 @@
     "name": "M136 AT4"
   },
   "tfa_cso_darkknight": {
-    "price": 24000,
+    "price": 30000,
     "slot": 3,
     "parent": "tfa_cso_m4a1",
     "deep": 2,
@@ -946,7 +928,7 @@
   },
   "tfa_cso_m950_attack": {
     "price": 69000,
-    "slot": 3,
+    "slot": 2,
     "parent": "tfa_cso_m950",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_m950_attack.mdl",
@@ -1197,7 +1179,7 @@
     "name": "FN MK48 - Master"
   },
   "tfa_cso_xm8": {
-    "price": 3500,
+    "price": 4000,
     "slot": 3,
     "parent": "nil",
     "deep": 1,
@@ -1395,13 +1377,13 @@
     "name": "Blaser R93 Tactical"
   },
   "tfa_cso_cartred_a": {
-    "price": 3700,
+    "price": 4200,
     "slot": 3,
     "parent": "nil",
     "deep": 1,
     "model": "models/weapons/tfa_cso/w_cartred.mdl",
     "basic": false,
-    "name": "Lightning Bazzi-1 (A Mode)"
+    "name": "Lightning Bazzi-1"
   },
   "tfa_cso_m950": {
     "price": 2500,
@@ -1422,13 +1404,13 @@
     "name": "MG3"
   },
   "tfa_cso_scarh": {
-    "price": 4300,
+    "price": 4800,
     "slot": 3,
     "parent": "nil",
     "deep": 1,
     "model": "models/weapons/tfa_cso/w_scarh.mdl",
     "basic": true,
-    "name": "SCAR-H"
+    "name": "SCAR"
   },
   "tfa_cso_m3dragon": {
     "price": 1300000,
@@ -1980,7 +1962,7 @@
     "name": "MG36 XMAS"
   },
   "tfa_cso_darkknight_v8": {
-    "price": 680000,
+    "price": 685000,
     "slot": 3,
     "parent": "tfa_cso_darkknight_v6",
     "deep": 4,
@@ -2457,7 +2439,7 @@
     "name": "JANUS-11 (A Mode)"
   },
   "tfa_cso_balrog1": {
-    "price": 43000,
+    "price": 123000,
     "slot": 2,
     "parent": "tfa_cso_automagv",
     "deep": 2,
@@ -2535,7 +2517,7 @@
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_skull_3.mdl",
     "basic": false,
-    "name": "SKULL-3 (A Mode)"
+    "name": "SKULL-3"
   },
   "tfa_cso_m134_vulcan": {
     "price": 710000,
@@ -2826,7 +2808,7 @@
     "name": "UTS-15 Expert"
   },
   "tfa_cso_darkknight_v6": {
-    "price": 867000,
+    "price": 870000,
     "slot": 3,
     "parent": "tfa_cso_darkknight",
     "deep": 3,
@@ -3221,24 +3203,6 @@
     "basic": false,
     "name": "M60E4 Maverick"
   },
-  "tfa_cso_xm8_sharpshooter": {
-    "price": 18000,
-    "slot": 3,
-    "parent": "tfa_cso_xm8",
-    "deep": 2,
-    "model": "models/weapons/tfa_cso/w_xm8sharpshooter.mdl",
-    "basic": false,
-    "name": "XM8 Sharpshooter"
-  },
-  "tfa_cso_scar_l": {
-    "price": 4000,
-    "slot": 3,
-    "parent": "nil",
-    "deep": 1,
-    "model": "models/weapons/tfa_cso/w_scarl.mdl",
-    "basic": true,
-    "name": "SCAR-L"
-  },
   "tfa_cso_blaster": {
     "price": 41000,
     "slot": 3,
@@ -3289,7 +3253,7 @@
     "slot": 2,
     "parent": "tfa_cso_skull1",
     "deep": 3,
-    "model": "models/weapons/tfa_cso/w_skull_2.mdl",
+    "model": "models/weapons/tfa_cso/w_skull2_b.mdl",
     "basic": false,
     "name": "SKULL-2"
   },
@@ -3454,15 +3418,6 @@
     "model": "models/weapons/tfa_cso/w_black_dragon_cannon.mdl",
     "basic": false,
     "name": "Black Dragon Cannon"
-  },
-  "tfa_cso_cartblue_b": {
-    "price": 6800,
-    "slot": 3,
-    "parent": "tfa_cso_cartblue_a",
-    "deep": 2,
-    "model": "models/weapons/tfa_cso/w_cartblue_b.mdl",
-    "basic": false,
-    "name": "Lightning Dao-1 (B Mode)"
   },
   "tfa_cso_m24grenade": {
     "price": 6000,
@@ -4005,7 +3960,7 @@
     "name": "Jay's Dagger"
   },
   "tfa_cso_mp7a1": {
-    "price": 1700,
+    "price": 2100,
     "slot": 3,
     "parent": "nil",
     "deep": 1,
@@ -4250,7 +4205,7 @@
   "tfa_cso_scar_oza": {
 	"price": 64000,
 	"slot": 3,
-	"parent": "tfa_cso_scar_l",
+	"parent": "tfa_cso_scarh",
 	"deep": 2,
 	"model": "models/weapons/tfa_cso/w_scar_oza.mdl",
 	"basic": false,
@@ -4354,5 +4309,41 @@
     "model": "models/weapons/tfa_cso/w_plasmagunexd.mdl",
     "basic": false,
     "name": "Taimat Mk4"
+  },
+  "tfa_cso_divine_blaster": {
+    "price": 9000000,
+    "slot": 3,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_divine_blaster.mdl",
+    "basic": false,
+    "name": "Divine Blaster"
+  },
+  "tfa_cso_thunder_force": {
+    "price": 2140000,
+    "slot": 4,
+    "parent": "tfa_cso_crossbowex",
+    "deep": 4,
+    "model": "models/weapons/tfa_cso/w_thunder_force.mdl",
+    "basic": false,
+    "name": "Thunder Force"
+  },
+  "tfa_cso_vulcanus9": {
+    "price": 81000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_vulcanus9.mdl",
+    "basic": false,
+    "name": "VULCANUS-9"
+  },
+  "tfa_cso_scarlet_rose": {
+    "price": 101000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_scarlet_rose.mdl",
+    "basic": false,
+    "name": "Demonic Scarlet Rose"
   }
 }
