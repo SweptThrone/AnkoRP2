@@ -13,6 +13,17 @@ ENT.AdminSpawnable = false
 ENT.Category = "AnkoRP Pickups"
 ENT.TimeToUse = 10
 
+--[[
+ENT.PartialUses = {
+	{ prog = 1, func = function( ent ) ent:EmitSound( "buttons/blip1.wav", 75, 38 ) end },
+	{ prog = 20, func = function( ent ) ent:EmitSound( "buttons/blip1.wav", 75, 50 ) end },
+	{ prog = 40, func = function( ent ) ent:EmitSound( "buttons/blip1.wav", 75, 63 ) end },
+	{ prog = 60, func = function( ent ) ent:EmitSound( "buttons/blip1.wav", 75, 75 ) end },
+	{ prog = 80, func = function( ent ) ent:EmitSound( "buttons/blip1.wav", 75, 88 ) end },
+	{ prog = 99, func = function( ent ) ent:EmitSound( "buttons/blip1.wav", 75, 100 ) end }
+}
+]]
+
 if CLIENT then
     function ENT:Draw()
         self:DrawModel()
@@ -40,20 +51,17 @@ if SERVER then
     function ENT:OnUseStart( ply )
         if ply:GetNWBool( "HasGold", false ) or ply:GetNWBool( "HasSmallGems", false ) or ply:GetNWBool( "HasLargeGems", false ) then
             DarkRP.notify( ply, 1, 4, "You are already carrying something!" )
-            self:SetUser( nil )
-			self:SetProgress( -1 )
+            self:CancelUse()
             return
         end
         if ply:getJobTable().category == "Citizens" then
             DarkRP.notify( ply, 1, 4, "You cannot participate in Money Events as a Citizen!" )
-            self:SetUser( nil )
-			self:SetProgress( -1 )
+            self:CancelUse()
             return
         end
         if ply:getJobTable().category == "Counter-Terrorists" then
             DarkRP.notify( ply, 1, 4, "Defend this gold from anyone trying to steal it!" )
-            self:SetUser( nil )
-			self:SetProgress( -1 )
+            self:CancelUse()
             return
         end
         self:EmitSound( "items/ammopickup.wav" )
@@ -67,35 +75,5 @@ if SERVER then
 
     function ENT:OnUseCancel( ply )
     end
-	
-	function ENT:Think()
-
-		if IsValid( self:GetUser() ) then
-            if !IsValid( self:GetUser():GetUseEntity() ) and self:GetUser():GetUseEntity() != self then
-                self:SetUser( nil )
-                self:SetProgress( -1 )
-            end
-        end
-
-		if self:GetProgress() == self.LastProg and self:GetProgress() != -1 then
-			self:OnUseCancel( self:GetUser() )
-            self:SetUser( nil )
-            self:SetProgress( -1 )
-		end
-
-		self.LastProg = self:GetProgress()
-
-		--[[
-			usually you'd just use CurTime() here,
-			but on 66-tick servers, it's extremely unreliable.
-			sometimes it will cancel using even if you're holding it.
-			this is a bit of a fix, but it runs this entity
-			at 16-tick i think...
-		]]--
-		self:NextThink( CurTime() + 0.06 )
-
-		return true
-
-	end
 
 end

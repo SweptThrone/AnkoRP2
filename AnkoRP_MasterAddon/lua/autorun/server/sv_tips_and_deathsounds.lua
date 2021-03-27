@@ -15,7 +15,8 @@ local ANKORP_TIPS = {
     "These tips only show up 25% of the time!",
 	"Visit the Crime Boss at the Club to pick up a Bounty!",
 	"Hold shift to run up stairs without flying off!",
-	"Check the Utilities menu in the spawnmenu for extra options!"
+	"Check the Utilities menu in the spawnmenu for extra options!",
+	"Hit F1 to view the map!"
 }
 
 hook.Add( "PlayerDeath", "DifferentKillSounds", function( vic, inf, atk )

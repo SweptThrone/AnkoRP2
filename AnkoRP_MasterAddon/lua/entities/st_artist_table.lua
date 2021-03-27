@@ -164,6 +164,7 @@ if CLIENT then
                             local SkinnedWeapon = vgui.Create( "DButton", UpgradeWindow )
                             SkinnedWeapon:SetPos( 100, 50 + (m+k)*35 )
                             SkinnedWeapon:SetSize( 600, 30 )
+                            --SkinnedWeapon:SetText( LocalPlayer():GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ x ].Name .. " - " .. "$97" )
                             SkinnedWeapon:SetText( LocalPlayer():GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ x ].Name .. " - " .. "$" .. string.Comma( math.floor( skinPrice ) ) .. " | " .. FormatTime( paintTime ) )
                             SkinnedWeapon:SetFont( "UPGSmall" )
                             SkinnedWeapon:SetTextColor( LocalPlayer().attInvTable[ x ] and Color( 128, 128, 128 ) or Color( 255, 255, 255 ) )
@@ -290,7 +291,7 @@ if SERVER then
         else
             DarkRP.notify( ply, 1, 4, "This workbench is busy." )
         end
-
+            
     end
 
     net.Receive( "ST_SkinWeapon", function( _, ply )
@@ -330,7 +331,7 @@ if SERVER then
         }
         this.weapon:SetAngles( this:GetAngles() - Angle( 0, 115, 270 ) - angs[ table.GetLosingKey( diffs ) ] )
         this.weapon:SetMaterial( "" )
-        
+		
         ply:StripWeapon( ply:GetActiveWeapon():GetClass() )
 
     end )

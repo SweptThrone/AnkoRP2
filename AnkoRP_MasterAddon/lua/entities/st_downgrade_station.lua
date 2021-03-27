@@ -141,6 +141,10 @@ if SERVER then
         this:EmitSound( "ambient/energy/weld1.wav" )
         DarkRP.notify( ply, 0, 4, "Downgrade succeeded! Your " .. ply:GetActiveWeapon():GetPrintName() .. " was downgraded to " .. weapons.Get( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent ).PrintName .. " and placed in your inventory." )
         ply:Give( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent )
+        --local finalParent = CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent
+        --for _ = CSO_WEAPONS_TREE[ CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent ].deep, 2, -1 do
+        --    finalParent = CSO_WEAPONS_TREE[ finalParent ].parent
+        --end
         if ply:GetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" ) == ply:GetActiveWeapon():GetClass() then
             if ply:GetActiveWeapon().Slot == weapons.Get( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent ).Slot then
                 ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent )
@@ -152,6 +156,8 @@ if SERVER then
             end
         end
         ply:AddWeaponToTable( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent )
+        --ply.wepInvTable[ finalParent ] = CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent
+        --file.Write( "ankorp/" .. ply:SteamID64() .. ".txt", util.TableToJSON( ply.wepInvTable ) )
         ply:addMoney( -CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].price * 0.2 )
         ply:StripWeapon( ply:GetActiveWeapon():GetClass() )
 
