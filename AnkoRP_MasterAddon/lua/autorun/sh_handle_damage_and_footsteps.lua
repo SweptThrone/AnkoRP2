@@ -4,21 +4,24 @@
 	and play custom footstep sound effects.
 ]]--
 
-hook.Add( "ScalePlayerDamage", "FriendlyFire/CitizenFie", function( vic, _, dmg )
+hook.Add( "EntityTakeDamage", "FriendlyFire/CitizenFie", function( vic, dmg )
+
+	if !vic:IsPlayer() then return end
+	if vic == dmg:GetAttacker() then
+		dmg:ScaleDamage( 1 )
+	end
 
 	-- friendly fire and civilian shots deal zero damage
     if vic:getJobTable() and dmg:GetAttacker():IsPlayer() then
 
 		if vic:Team() == TEAM_SKELETON then
 			dmg:ScaleDamage( 0.75 )
-			if SERVER then vic:EmitSound( "weapons/fx/rics/ric" .. math.random( 1, 5 ) .. ".wav" ) end
+			vic:EmitSound( "weapons/fx/rics/ric" .. math.random( 1, 5 ) .. ".wav" )
 		end
 		
 		if vic:Team() == TEAM_CORPSE and dmg:GetDamage() >= vic:Health() then
 			vic:SetHealth( 75 )
-			if SERVER then
-				DarkRP.notify( vic, 0, 4, "Your UNDYING trait saved you from death...this time..." )
-			end
+			DarkRP.notify( vic, 0, 4, "Your UNDYING trait saved you from death...this time..." )
 		end
 
 		if dmg:GetAttacker():Team() == TEAM_CHARPLE and vic:getJobTable().category != "Monsters" and vic:getJobTable().category != "Citizens" and dmg:GetInflictor():IsWeapon() and dmg:GetInflictor().Slot == 0 then
@@ -26,34 +29,29 @@ hook.Add( "ScalePlayerDamage", "FriendlyFire/CitizenFie", function( vic, _, dmg 
 		end
 
 		if dmg:GetAttacker():Team() == TEAM_ZOMBIE and vic:getJobTable().category != "Monsters" and vic:getJobTable().category != "Citizens" and dmg:GetInflictor():IsWeapon() and dmg:GetInflictor().Slot == 0 then
-			if SERVER then
-				timer.Create( "Bleeding" .. vic:EntIndex(), 0.5, math.random( 12, 18 ), function()
-					local cdmg = DamageInfo()
-					cdmg:SetDamage( math.random( 2, 4 ) )
-					cdmg:SetAttacker( dmg:GetAttacker() )
-					cdmg:SetDamageType( DMG_SLASH )
-					cdmg:SetInflictor( dmg:GetInflictor() )
-					vic:TakeDamageInfo( cdmg )
-				end )
-			end
+			timer.Create( "Bleeding" .. vic:EntIndex(), 0.5, math.random( 12, 18 ), function()
+				local cdmg = DamageInfo()
+				cdmg:SetDamage( math.random( 2, 4 ) )
+				cdmg:SetAttacker( dmg:GetAttacker() )
+				cdmg:SetDamageType( DMG_SLASH )
+				cdmg:SetInflictor( dmg:GetInflictor() )
+				vic:TakeDamageInfo( cdmg )
+			end )
 		end
 
         if dmg:GetAttacker():getJobTable() and vic:getJobTable().category == dmg:GetAttacker():getJobTable().category then
             dmg:ScaleDamage( 0 )
             dmg:GetAttacker():PrintMessage( HUD_PRINTCENTER, "Watch your fire!  You hit a teammate!" )
-			if SERVER then return true end
         end
 
         if vic:getJobTable().category == "Citizens" then
             dmg:ScaleDamage( 0 )
             dmg:GetAttacker():PrintMessage( HUD_PRINTCENTER, "Watch your fire!  Civilians are not combatants!" )
-			if SERVER then return true end
         end
 		
 		if dmg:GetAttacker():getJobTable().category == "Citizens" then
 			dmg:ScaleDamage( 0 )
             dmg:GetAttacker():PrintMessage( HUD_PRINTCENTER, "Do not attack people as a civilian!" )
-			if SERVER then return true end
 		end
 		
 		if dmg:GetAttacker().Babygod then
@@ -65,7 +63,6 @@ hook.Add( "ScalePlayerDamage", "FriendlyFire/CitizenFie", function( vic, _, dmg 
 		if vic.Babygod then
 			dmg:ScaleDamage( 0 )
             dmg:GetAttacker():PrintMessage( HUD_PRINTCENTER, "Slow down!  They are still spawning!" )
-			if SERVER then return true end
 		end
 
 		-- this never actually worked
@@ -73,7 +70,6 @@ hook.Add( "ScalePlayerDamage", "FriendlyFire/CitizenFie", function( vic, _, dmg 
 		if dmg:GetAttacker().Babygod then
 			dmg:ScaleDamage( 0.5 )
 			dmg:GetAttacker():PrintMessage( HUD_PRINTCENTER, "Baby-god pop!  50% damage!" )
-			if SERVER then return true end
 		end
 		
 		-- monster health siphon
@@ -82,7 +78,7 @@ hook.Add( "ScalePlayerDamage", "FriendlyFire/CitizenFie", function( vic, _, dmg 
 			dmg:GetAttacker():SetHealth( math.Clamp( dmg:GetAttacker():Health() + dmg:GetDamage(), 0, 150 ) )
 		end
 		
-    end
+	end
 
 end )
 

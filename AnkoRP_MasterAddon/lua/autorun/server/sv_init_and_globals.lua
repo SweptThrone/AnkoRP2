@@ -77,23 +77,6 @@ hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
 	end
 	local creds = sql.Query( "SELECT Credits FROM AnkoRP_Credits WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ].Credits
 	ply:SetNWInt( "STCredits", creds )
-    -- make absolutely sure that the player is loaded and has what they need
-    -- i'm sure this is REALLY bad
-    -- but who cares
-    timer.Simple( 10, function()
-        -- see darkrp_customthings/shipments.lua
-        local CSO_WEAPONS_TREE = file.Read( "cso_weapons_with_prices.json" )
-        net.Start( "AllowTreeToBeSeen" )
-            net.WriteData( util.Compress( CSO_WEAPONS_TREE ), #util.Compress( CSO_WEAPONS_TREE ) )
-        net.Send( ply )
-        net.Start( "SendAnkoScores" )
-            net.WriteData( util.Compress( util.TableToJSON( FINAL_SCORES ) ), #util.Compress( util.TableToJSON( FINAL_SCORES ) ) )
-        net.Broadcast()
-        net.Start( "SendPlyTheirAttTable" )
-            net.WriteData( util.Compress( util.TableToJSON( ply:GetAttachmentTable() ) ), #util.Compress( util.TableToJSON( ply:GetAttachmentTable() ) ) )
-        net.Send( ply )
-    end )
-
 
 end )
 
@@ -176,3 +159,16 @@ end
 function plyMeta:GetWorth( str )
 	return str and "$" .. string.Comma( self:GetInventoryValue() + self:getDarkRPVar( "money" ) ) or self:GetInventoryValue() + self:getDarkRPVar( "money" )
 end
+
+net.Receive( "AskForCSOTree", function( len, ply )
+    local CSO_WEAPONS_TREE = file.Read( "cso_weapons_with_prices.json" )
+    net.Start( "AllowTreeToBeSeen" )
+        net.WriteData( util.Compress( CSO_WEAPONS_TREE ), #util.Compress( CSO_WEAPONS_TREE ) )
+    net.Send( ply )
+    net.Start( "SendAnkoScores" )
+        net.WriteData( util.Compress( util.TableToJSON( FINAL_SCORES ) ), #util.Compress( util.TableToJSON( FINAL_SCORES ) ) )
+    net.Broadcast()
+    net.Start( "SendPlyTheirAttTable" )
+        net.WriteData( util.Compress( util.TableToJSON( ply:GetAttachmentTable() ) ), #util.Compress( util.TableToJSON( ply:GetAttachmentTable() ) ) )
+    net.Send( ply )
+end )
