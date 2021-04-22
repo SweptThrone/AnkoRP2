@@ -1415,7 +1415,7 @@ STATS:
 150 HP
 0 AP
 NO COMBAT]],
-    weapons = { "urp_pickaxe" },
+    weapons = {},
     command = "miner",
     max = 8, -- at most 70% of the players can have this job. Set to a whole number to set an absolute limit.
     salary = 50,

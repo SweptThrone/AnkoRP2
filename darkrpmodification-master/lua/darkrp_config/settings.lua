@@ -422,6 +422,8 @@ GM.Config.PocketBlacklist = {
     ["gmod_lamp"] = true,
     ["gmod_emitter"] = true,
 	["slot_machine"] = true,
+    ["prop_physics_multiplayer"] = true,
+    ["st_downgrade_station"] = true
 }
 
 -- These weapons are classed as 'legal' in the weapon checker and are not stripped when confiscating weapons.
