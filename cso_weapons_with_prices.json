@@ -1,4 +1,4 @@
-﻿{
+{
   "tfa_cso_m82_v8": {
     "price": 395000,
     "slot": 4,
@@ -468,13 +468,13 @@
     "name": "AK-47 Red"
   },
   "tfa_cso_ak47wg": {
-	"price": 27000,
-	"slot": 3,
-	"parent": "tfa_cso_ak47red",
-	"deep": 4,
-	"model": "models/weapons/tfa_cso/w_ak47wg.mdl",
-	"basic": false,
-	"name": "AK-47 White Gold"
+    "price": 27000,
+    "slot": 3,
+    "parent": "tfa_cso_ak47red",
+    "deep": 4,
+    "model": "models/weapons/tfa_cso/w_ak47wg.mdl",
+    "basic": false,
+    "name": "AK-47 White Gold"
   },
   "tfa_cso_wa2000_master": {
     "price": 76000,
@@ -2493,13 +2493,13 @@
     "name": "Desert Eagle Red"
   },
   "tfa_cso_deaglewg": {
-	"price": 41000,
-	"slot": 2,
-	"parent": "tfa_cso_deaglered",
-	"deep": 3,
-	"model": "models/weapons/tfa_cso/w_deaglewg.mdl",
-	"basic": false,
-	"name": "Desert Eagle White Gold"
+    "price": 41000,
+    "slot": 2,
+    "parent": "tfa_cso_deaglered",
+    "deep": 3,
+    "model": "models/weapons/tfa_cso/w_deaglewg.mdl",
+    "basic": false,
+    "name": "Desert Eagle White Gold"
   },
   "tfa_cso_pkm_gold": {
     "price": 398000,
@@ -4113,85 +4113,85 @@
     "name": "Dao Grenade"
   },
   "tfa_cso_ballista": {
-	"price": 2500000,
-	"slot": 4,
-	"parent": "nil",
-	"deep": 1,
-	"model": "models/weapons/tfa_cso/w_ballista.mdl",
-	"basic": false,
-	"name": "Ballista"
+    "price": 2500000,
+    "slot": 4,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_ballista.mdl",
+    "basic": false,
+    "name": "Ballista"
   },
   "tfa_cso_crowbar": {
-	"price": 3000,
-	"slot": 1,
-	"parent": "nil",
-	"deep": 1,
-	"model": "models/weapons/tfa_cso/w_crowbar.mdl",
-	"basic": true,
-	"name": "Crowbar"
+    "price": 3000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_crowbar.mdl",
+    "basic": true,
+    "name": "Crowbar"
   },
   "tfa_cso_crowbarcraft": {
-	"price": 21000,
-	"slot": 1,
-	"parent": "tfa_cso_crowbar",
-	"deep": 2,
-	"model": "models/weapons/tfa_cso/w_crowbarcraft.mdl",
-	"basic": false,
-	"name": "Crowbar Maverick"
+    "price": 21000,
+    "slot": 1,
+    "parent": "tfa_cso_crowbar",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_crowbarcraft.mdl",
+    "basic": false,
+    "name": "Crowbar Maverick"
   },
   "tfa_cso_dartpistol": {
-	"price": 71000,
-	"slot": 2,
-	"parent": "nil",
-	"deep": 1,
-	"model": "models/weapons/tfa_cso/w_dartpistol.mdl",
-	"basic": false,
-	"name": "Dart Pistol"
+    "price": 71000,
+    "slot": 2,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_dartpistol.mdl",
+    "basic": false,
+    "name": "Dart Pistol"
   },
   "tfa_cso_dualuzi_v6": {
-	"price": 298000,
-	"slot": 3,
-	"parent": "tfa_cso_dualuzi",
-	"deep": 3,
-	"model": "models/weapons/tfa_cso/w_dualuzi_v6.mdl",
-	"basic": false,
-	"name": "Dual Uzi Expert (A Mode)"
+    "price": 298000,
+    "slot": 3,
+    "parent": "tfa_cso_dualuzi",
+    "deep": 3,
+    "model": "models/weapons/tfa_cso/w_dualuzi_v6.mdl",
+    "basic": false,
+    "name": "Dual Uzi Expert (A Mode)"
   },
   "tfa_cso_dualuzi_v6_stock": {
-	"price": 298000,
-	"slot": 3,
-	"parent": "tfa_cso_dualuzi_stock",
-	"deep": 3,
-	"model": "models/weapons/tfa_cso/w_dualuzi_v6_stock.mdl",
-	"basic": false,
-	"name": "Dual Uzi Expert (B Mode)"
+    "price": 298000,
+    "slot": 3,
+    "parent": "tfa_cso_dualuzi_stock",
+    "deep": 3,
+    "model": "models/weapons/tfa_cso/w_dualuzi_v6_stock.mdl",
+    "basic": false,
+    "name": "Dual Uzi Expert (B Mode)"
   },
   "tfa_cso_heartbomb": {
-	"price": 6200,
-	"slot": 5,
-	"parent": "tfa_cso_fragnade",
-	"deep": 2,
-	"model": "models/weapons/tfa_cso/w_heartbomb.mdl",
-	"basic": false,
-	"name": "Heart Bomb"
+    "price": 6200,
+    "slot": 5,
+    "parent": "tfa_cso_fragnade",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_heartbomb.mdl",
+    "basic": false,
+    "name": "Heart Bomb"
   },
   "tfa_cso_heavenscorcher": {
-	"price": 7500000,
-	"slot": 4,
-	"parent": "nil",
-	"deep": 1,
-	"model": "models/weapons/tfa_cso/w_heaven_scorcher.mdl",
-	"basic": false,
-	"name": "Heaven Scorcher"
+    "price": 7500000,
+    "slot": 4,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_heaven_scorcher.mdl",
+    "basic": false,
+    "name": "Heaven Scorcher"
   },
   "tfa_cso_hwando": {
-	"price": 28000,
-	"slot": 1,
-	"parent": "nil",
-	"deep": 1,
-	"model": "models/weapons/tfa_cso/w_hwando.mdl",
-	"basic": true,
-	"name": "Hwando"
+    "price": 28000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_hwando.mdl",
+    "basic": true,
+    "name": "Hwando"
   },
   "tfa_cso_thunderstorm": {
     "price": 6500,
@@ -4203,40 +4203,40 @@
     "name": "Thunderstorm"
   },
   "tfa_cso_scar_oza": {
-	"price": 64000,
-	"slot": 3,
-	"parent": "tfa_cso_scarh",
-	"deep": 2,
-	"model": "models/weapons/tfa_cso/w_scar_oza.mdl",
-	"basic": false,
-	"name": "SCAR OZ-A"
+    "price": 64000,
+    "slot": 3,
+    "parent": "tfa_cso_scarh",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_scar_oza.mdl",
+    "basic": false,
+    "name": "SCAR OZ-A"
   },
   "tfa_cso_scar_ozb": {
-	"price": 74000,
-	"slot": 3,
-	"parent": "tfa_cso_scar_oza",
-	"deep": 3,
-	"model": "models/weapons/tfa_cso/w_scar_ozb.mdl",
-	"basic": false,
-	"name": "SCAR OZ-B"
+    "price": 74000,
+    "slot": 3,
+    "parent": "tfa_cso_scar_oza",
+    "deep": 3,
+    "model": "models/weapons/tfa_cso/w_scar_ozb.mdl",
+    "basic": false,
+    "name": "SCAR OZ-B"
   },
   "tfa_cso_scar_ozc": {
-	"price": 243000,
-	"slot": 3,
-	"parent": "tfa_cso_scar_ozb",
-	"deep": 4,
-	"model": "models/weapons/tfa_cso/w_scar_ozc.mdl",
-	"basic": false,
-	"name": "SCAR OZ-C"
+    "price": 243000,
+    "slot": 3,
+    "parent": "tfa_cso_scar_ozb",
+    "deep": 4,
+    "model": "models/weapons/tfa_cso/w_scar_ozc.mdl",
+    "basic": false,
+    "name": "SCAR OZ-C"
   },
   "tfa_cso_scar_ozd": {
-	"price": 726000,
-	"slot": 3,
-	"parent": "tfa_cso_scar_ozc",
-	"deep": 5,
-	"model": "models/weapons/tfa_cso/w_scar_ozd.mdl",
-	"basic": false,
-	"name": "SCAR OZ-D"
+    "price": 726000,
+    "slot": 3,
+    "parent": "tfa_cso_scar_ozc",
+    "deep": 5,
+    "model": "models/weapons/tfa_cso/w_scar_ozd.mdl",
+    "basic": false,
+    "name": "SCAR OZ-D"
   },
   "tfa_cso_magic_rod": {
     "price": 2100000,
