@@ -2,6 +2,13 @@
 The second coming of AnkoRP.  Even better this time.  
 Custom files optimized and organized for the second installment of AnkoRP.  
 
+### What Is It?
+AnkoRP is a TDMRP gamemode built for the TFA CS:O weapons.  
+Players buy weapons and can upgrade them to kill others players easier.  
+There's also a soft roleplay element via gun dealer jobs and other jobs, but the main point is killing.  
+This specific version is intended to be played on RP_SouthSide.  
+It's based on the regular DarkRP gamemode and relies on it for most functionality.  
+
 ### Comments
 All files have a summary of what they are at the top of the file.  
 Other than that, there aren't very many comments.  
