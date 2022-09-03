@@ -278,14 +278,14 @@
     "basic": true,
     "name": "UTS-15"
   },
-  "tfa_cso_janus5a": {
-    "price": 23000,
+  "tfa_cso_janus5": {
+    "price": 230000,
     "slot": 3,
     "parent": "tfa_cso_hk416",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_janus5.mdl",
     "basic": false,
-    "name": "JANUS-5 (A Mode)"
+    "name": "JANUS-5"
   },
   "tfa_cso_qbz95b": {
     "price": 3600,
@@ -935,14 +935,14 @@
     "basic": false,
     "name": "M950 Attack"
   },
-  "tfa_cso_janus3a": {
-    "price": 57000,
+  "tfa_cso_janus3": {
+    "price": 285000,
     "slot": 3,
     "parent": "tfa_cso_thompson_chicago",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_janus3.mdl",
     "basic": false,
-    "name": "JANUS-3 (A Mode)"
+    "name": "JANUS-3"
   },
   "tfa_cso_galil": {
     "price": 2500,
@@ -1142,9 +1142,9 @@
     "basic": true,
     "name": "M1918 BAR"
   },
-  "tfa_cso_gungnir_nrm": {
-    "price": 10000000,
-    "slot": 3,
+  "tfa_cso_gungnir": {
+    "price": 30000000,
+    "slot": 5,
     "parent": "nil",
     "deep": 1,
     "model": "models/weapons/tfa_cso/w_gungnira.mdl",
@@ -1501,15 +1501,6 @@
     "model": "models/weapons/w_mach_m249para.mdl",
     "basic": true,
     "name": "QBB-95"
-  },
-  "tfa_cso_vulcanus1_b": {
-    "price": 62000,
-    "slot": 2,
-    "parent": "tfa_cso_vulcanus1_a",
-    "deep": 3,
-    "model": "models/weapons/tfa_cso/w_vulcanus_1.mdl",
-    "basic": false,
-    "name": "VULCANUS-1 (B-Mode)"
   },
   "tfa_cso_g11_v6": {
     "price": 89000,
@@ -1916,15 +1907,6 @@
     "basic": true,
     "name": "AI AW50F"
   },
-  "tfa_cso_janus3b": {
-    "price": 6500000,
-    "slot": 3,
-    "parent": "tfa_cso_janus3a",
-    "deep": 3,
-    "model": "models/weapons/tfa_cso/w_janus3.mdl",
-    "basic": false,
-    "name": "JANUS-3 (B Mode)"
-  },
   "tfa_cso_usp": {
     "price": 300,
     "slot": 2,
@@ -2186,15 +2168,6 @@
     "basic": false,
     "name": "FG-Launcher"
   },
-  "tfa_cso_janus5b": {
-    "price": 7400000,
-    "slot": 3,
-    "parent": "tfa_cso_janus5a",
-    "deep": 3,
-    "model": "models/weapons/tfa_cso/w_janus5.mdl",
-    "basic": false,
-    "name": "JANUS-5 (B Mode)"
-  },
   "tfa_cso_xm2010_v6": {
     "price": 230000,
     "slot": 4,
@@ -2212,15 +2185,6 @@
     "model": "models/weapons/tfa_cso/w_violingun.mdl",
     "basic": false,
     "name": "Lightning AR-2"
-  },
-  "tfa_cso_gungnir": {
-    "price": 20000000,
-    "slot": 4,
-    "parent": "tfa_cso_gungnir_nrm",
-    "deep": 2,
-    "model": "models/weapons/tfa_cso/w_gungnirb.mdl",
-    "basic": false,
-    "name": "Gungnir (True Form)"
   },
   "tfa_cso_magnumdrill_expert": {
     "price": 995000,
@@ -2402,15 +2366,6 @@
     "basic": false,
     "name": "Dual Sword Hellfire"
   },
-  "tfa_cso_janus11b": {
-    "price": 9700000,
-    "slot": 4,
-    "parent": "tfa_cso_janus11a",
-    "deep": 3,
-    "model": "models/weapons/tfa_cso/w_janus11.mdl",
-    "basic": false,
-    "name": "JANUS-11 (B Mode)"
-  },
   "tfa_cso_sten_mk2": {
     "price": 2000,
     "slot": 3,
@@ -2429,14 +2384,14 @@
     "basic": true,
     "name": "SAKO TRG-42"
   },
-  "tfa_cso_janus11a": {
-    "price": 187000,
+  "tfa_cso_janus11": {
+    "price": 467500,
     "slot": 4,
     "parent": "tfa_cso_uts15",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_janus11.mdl",
     "basic": false,
-    "name": "JANUS-11 (A Mode)"
+    "name": "JANUS-11"
   },
   "tfa_cso_balrog1": {
     "price": 123000,
@@ -3212,8 +3167,8 @@
     "basic": false,
     "name": "Blaster"
   },
-  "tfa_cso_vulcanus1_a": {
-    "price": 26000,
+  "tfa_cso_vulcanus1": {
+    "price": 52000,
     "slot": 2,
     "parent": "tfa_cso_m1911a1",
     "deep": 2,
@@ -3483,13 +3438,13 @@
     "name": "Stun Rifle (Charging)"
   },
   "tfa_cso_xtracker": {
-    "price": 250000,
+    "price": 400000,
     "slot": 4,
     "parent": "tfa_cso_xtracker_nrm",
-    "deep": 2,
+    "deep": 1,
     "model": "models/weapons/tfa_cso/w_xtracker_nrm.mdl",
     "basic": false,
-    "name": "X-TRACKER (Scoped)"
+    "name": "X-TRACKER"
   },
   "tfa_cso_mg3_v6": {
     "price": 125000,
@@ -3571,15 +3526,6 @@
     "model": "models/weapons/tfa_cso/w_destroyer.mdl",
     "basic": false,
     "name": "Destroyer"
-  },
-  "tfa_cso_janus1b": {
-    "price": 2900000,
-    "slot": 2,
-    "parent": "tfa_cso_janus1a",
-    "deep": 3,
-    "model": "models/weapons/tfa_cso/w_janus1.mdl",
-    "basic": false,
-    "name": "JANUS-1 (B Mode)"
   },
   "tfa_cso_m82_v6": {
     "price": 169000,
@@ -3905,8 +3851,8 @@
     "basic": false,
     "name": "Green Dragon Blade - Expert"
   },
-  "tfa_cso_janus1a": {
-    "price": 587000,
+  "tfa_cso_janus1": {
+    "price": 1174000,
     "slot": 2,
     "parent": "tfa_cso_m79",
     "deep": 2,
@@ -4021,15 +3967,6 @@
     "model": "models/weapons/tfa_cso/w_xm1014red.mdl",
     "basic": false,
     "name": "Benelli XM1014 Red Edition"
-  },
-  "tfa_cso_xtracker_nrm": {
-    "price": 250000,
-    "slot": 4,
-    "parent": "nil",
-    "deep": 1,
-    "model": "models/weapons/tfa_cso/w_xtracker_nrm.mdl",
-    "basic": false,
-    "name": "X-TRACKER"
   },
   "tfa_cso_paladin_v8": {
     "price": 1500000,
@@ -4345,5 +4282,293 @@
     "model": "models/weapons/tfa_cso/w_scarlet_rose.mdl",
     "basic": false,
     "name": "Demonic Scarlet Rose"
+  },
+  "tfa_cso_death_eater": {
+    "price": 6460000,
+    "slot": 4,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_death_eater.mdl",
+    "basic": false,
+    "name": "Death Eater"
+  },
+  "tfa_cso_m32_venom": {
+    "price": 1270000,
+    "slot": 5,
+    "parent": "tfa_cso_milkorm32",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_m32_venom.mdl",
+    "basic": false,
+    "name": "M32 MGL Venom"
+  },
+  "tfa_cso_blazenova": {
+    "price": 815000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_blazenova.mdl",
+    "basic": false,
+    "name": "Blaze Nova"
+  },
+  "tfa_cso_chainsawm": {
+    "price": 212000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_chainsawm.mdl",
+    "basic": true,
+    "name": "Slasher"
+  },
+  "tfa_cso_chainsaw": {
+    "price": 286000,
+    "slot": 1,
+    "parent": "tfa_cso_chainsawm",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_chainsaw.mdl",
+    "basic": false,
+    "name": "Ripper"
+  },
+  "tfa_cso_chainsaw_v6": {
+    "price": 338000,
+    "slot": 1,
+    "parent": "tfa_cso_chainsaw",
+    "deep": 3,
+    "model": "models/weapons/tfa_cso/w_chainsaw_v6.mdl",
+    "basic": false,
+    "name": "Ripper Expert"
+  },
+  "tfa_cso_laserchainsaw": {
+    "price": 454000,
+    "slot": 1,
+    "parent": "tfa_cso_chainsaw_v6",
+    "deep": 4,
+    "model": "models/weapons/tfa_cso/w_laserchainsaw.mdl",
+    "basic": false,
+    "name": "Laser Ripper"
+  },
+  "tfa_cso_star_taylor": {
+    "price": 1748000,
+    "slot": 2,
+    "parent": "tfa_cso_cyclone",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_star_taylor.mdl",
+    "basic": false,
+    "name": "Star Taylor"
+  },
+  "tfa_cso_janus7": {
+    "price": 746000,
+    "slot": 4,
+    "parent": "tfa_cso_mg3",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_janus7.mdl",
+    "basic": false,
+    "name": "JANUS-7"
+  },
+  "tfa_cso_janus7xmas": {
+    "price": 801000,
+    "slot": 4,
+    "parent": "tfa_cso_janus7",
+    "deep": 3,
+    "model": "models/weapons/tfa_cso/w_janus7xmas.mdl",
+    "basic": false,
+    "name": "JANUS-7 Xmas"
+  },
+  "tfa_cso_lightzg": {
+    "price": 37000,
+    "slot": 3,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_lightzg.mdl",
+    "basic": false,
+    "name": "Lightning LZ-1"
+  },
+  "tfa_cso_heavyzg": {
+    "price": 48000,
+    "slot": 3,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_heavyzg.mdl",
+    "basic": false,
+    "name": "Lightning HZ-1"
+  },
+  "tfa_cso_waterpistol": {
+    "price": 17000,
+    "slot": 2,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_waterpistol.mdl",
+    "basic": false,
+    "name": "Lightning BIG-EYE"
+  },
+  "tfa_cso_harmonium": {
+    "price": 4741000,
+    "slot": 5,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_harmonium_right.mdl",
+    "basic": false,
+    "name": "Psychic Harmonium"
+  },
+  "tfa_cso_pianogunex": {
+    "price": 4741000,
+    "slot": 5,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_pianogunex_right.mdl",
+    "basic": false,
+    "name": "Psychic Sizer"
+  },
+  "tfa_cso_voidpistol": {
+    "price": 2433000,
+    "slot": 2,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_voidpistol.mdl",
+    "basic": false,
+    "name": "Void Avenger"
+  },
+  "tfa_cso_quantum_horizon": {
+    "price": 7000000,
+    "slot": 4,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_quantum_horizon.mdl",
+    "basic": false,
+    "name": "Quantum Horizon"
+  },
+  "tfa_cso_flamethrower": {
+    "price": 348000,
+    "slot": 4,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_flamethrower.mdl",
+    "basic": true,
+    "name": "Salamander"
+  },
+  "tfa_cso_poisongun": {
+    "price": 618000,
+    "slot": 4,
+    "parent": "tfa_cso_flamethrower",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_poisongun.mdl",
+    "basic": false,
+    "name": "Poison Launcher"
+  },
+  "tfa_cso_cerberus": {
+    "price": 1243000,
+    "slot": 3,
+    "parent": "tfa_cso_sg552",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_sg552_cerberus.mdl",
+    "basic": false,
+    "name": "SG552 Cerberus"
+  },
+  "tfa_cso_laevatein": {
+    "price": 401000,
+    "slot": 2,
+    "parent": "tfa_cso_fiveseven",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_laevatein.mdl",
+    "basic": false,
+    "name": "Laevatein"
+  },
+  "tfa_cso_magnum_shooter": {
+    "price": 4000000,
+    "slot": 4,
+    "parent": "tfa_cso_magnumlauncher_gs18",
+    "deep": 4,
+    "model": "models/weapons/tfa_cso/w_magnum_shooter.mdl",
+    "basic": false,
+    "name": "Magnum Shooter"
+  },
+  "tfa_cso_mechasaurus_mk1": {
+    "price": 67000,
+    "slot": 3,
+    "parent": "tfa_cso_hk416",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_mechasaurus_mk1.mdl",
+    "basic": false,
+    "name": "Mechasaurus MK-1"
+  },
+  "tfa_cso_mechasaurus_mk2": {
+    "price": 92000,
+    "slot": 3,
+    "parent": "tfa_cso_mechasaurus_mk1",
+    "deep": 3,
+    "model": "models/weapons/tfa_cso/w_mechasaurus_mk2.mdl",
+    "basic": false,
+    "name": "Mechasaurus MK-2"
+  },
+  "tfa_cso_mechasaurus_mk3": {
+    "price": 218000,
+    "slot": 3,
+    "parent": "tfa_cso_mechasaurus_mk2",
+    "deep": 4,
+    "model": "models/weapons/tfa_cso/w_mechasaurus_mk3.mdl",
+    "basic": false,
+    "name": "Mechasaurus MK-3"
+  },
+  "tfa_cso_mechasaurus_mk4": {
+    "price": 561000,
+    "slot": 3,
+    "parent": "tfa_cso_mechasaurus_mk3",
+    "deep": 5,
+    "model": "models/weapons/tfa_cso/w_mechasaurus_mk4.mdl",
+    "basic": false,
+    "name": "Mechasaurus MK-4"
+  },
+  "tfa_cso_whipsword": {
+    "price": 159000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_whipsword.mdl",
+    "basic": false,
+    "name": "Whip Sword"
+  },
+  "tfa_cso_dark_spirit": {
+    "price": 202000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_dark_spirit.mdl",
+    "basic": false,
+    "name": "Twin Shadow Axes"
+  },
+  "tfa_cso_m2_devastator": {
+    "price": 2841000,
+    "slot": 4,
+    "parent": "tfa_cso_m2",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_m2_devastator.mdl",
+    "basic": false,
+    "name": "M2 Devastator"
+  },
+  "tfa_cso_lunarcannon": {
+    "price": 573000,
+    "slot": 4,
+    "parent": "tfa_cso_fire_vulcan",
+    "deep": 2,
+    "model": "models/weapons/tfa_cso/w_lunarcannon.mdl",
+    "basic": false,
+    "name": "Lunar Cannon"
+  },
+  "tfa_cso_magnumdrillex": {
+    "price": 2750000,
+    "slot": 4,
+    "parent": "tfa_cso_magnumdrillg",
+    "deep": 4,
+    "model": "models/weapons/tfa_cso/w_magnumdrillex.mdl",
+    "basic": false,
+    "name": "Gigantic Drill"
+  },
+  "tfa_cso_starlight_sword": {
+    "price": 600000,
+    "slot": 1,
+    "parent": "nil",
+    "deep": 1,
+    "model": "models/weapons/tfa_cso/w_starlightsword.mdl",
+    "basic": false,
+    "name": "Starlight Sword"
   }
 }
