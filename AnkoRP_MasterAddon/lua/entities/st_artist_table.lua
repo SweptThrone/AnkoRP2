@@ -21,12 +21,35 @@ local function FormatTime( num )
 end
 
 if CLIENT then
+    function ENT:Initialize()
+        self.spraycan = ClientsideModel( "models/props_junk/propane_tank001a.mdl" )
+        self.spraycan:SetPos( self:GetPos() + self:GetUp() * 22 - self:GetForward() * 10 + self:GetRight() * 45 )
+        self.spraycan:SetModelScale( 0.3333 )
+        self.spraycan:Spawn()
+
+        self.wrench = ClientsideModel( "models/props_c17/tools_wrench01a.mdl" )
+        self.wrench:SetPos( self:GetPos() + self:GetUp() * 17 + self:GetForward() * 15 - self:GetRight() * 45 )
+        self.wrench:Spawn()
+    end
+
+    function ENT:OnRemove()
+        self.spraycan:Remove()
+        self.wrench:Remove()
+    end
+
     function ENT:Draw()
         self:DrawModel()
 
         local Pos = self:GetPos()
         local Ang = self:GetAngles()
-        
+
+        local propAng = self:GetAngles()
+        propAng:RotateAroundAxis( propAng:Up(), -225 )
+        self.spraycan:SetPos( self:GetPos() + self:GetUp() * 22 - self:GetForward() * 10 + self:GetRight() * 45 )
+        self.spraycan:SetAngles( propAng )
+        self.wrench:SetPos( self:GetPos() + self:GetUp() * 17 + self:GetForward() * 15 - self:GetRight() * 45 )
+        self.wrench:SetAngles( propAng )
+
         Ang:RotateAroundAxis(Ang:Forward(), 90)
         Ang:RotateAroundAxis(Ang:Right(),-90)
         
@@ -72,6 +95,7 @@ if CLIENT then
     net.Receive( "ST_OpenArtistMenu", function()
     
         local this = net.ReadEntity()
+        local wep = net.ReadEntity()
 
         local UpgradeWindow = vgui.Create( "DFrame" )
         UpgradeWindow:SetPos( 5, 5 )
@@ -108,14 +132,14 @@ if CLIENT then
         local WeaponLabel = vgui.Create( "DLabel", UpgradeWindow )
         WeaponLabel:SetPos( 0, 80 )
         WeaponLabel:SetFont( "UPGSmall" )
-        local wepUpgrades = LocalPlayer():GetActiveWeapon().Attachments
+        local wepUpgrades = wep.Attachments
         
         if wepUpgrades == {} or wepUpgrades == nil or table.IsEmpty( wepUpgrades ) then
-            WeaponLabel:SetText( "You cannot apply any skins to your " .. language.GetPhrase( LocalPlayer():GetActiveWeapon():GetPrintName() ) .. "." )
+            WeaponLabel:SetText( "You cannot apply any skins to your " .. language.GetPhrase( wep:GetPrintName() ) .. "." )
             WeaponLabel:SizeToContents()
             WeaponLabel:CenterHorizontal()
         else
-            WeaponLabel:SetText( "Select a skin for your " .. LocalPlayer():GetActiveWeapon():GetPrintName() .. ":" )
+            WeaponLabel:SetText( "Select a skin for your " .. wep:GetPrintName() .. ":" )
             WeaponLabel:SizeToContents()
             WeaponLabel:CenterHorizontal()
 
@@ -179,13 +203,13 @@ if CLIENT then
                                 surface.DrawOutlinedRect( 0, 0, w, h)
                             end
                             function SkinnedWeapon:DoClick()
-				-- this is evil
                                 net.Start( "ST_SkinWeapon" )
                                     net.WriteString( self.class )
                                     net.WriteEntity( this )
-                                    net.WriteInt( math.floor( skinPrice ), 32 )
-                                    net.WriteInt( paintTime, 32 )
-                                    net.WriteString( LocalPlayer():GetActiveWeapon():GetClass() )
+                                    net.WriteEntity( wep )
+                                    --net.WriteInt( math.floor( skinPrice ), 32 )
+                                    --net.WriteInt( paintTime, 32 )
+                                    --net.WriteString( LocalPlayer():GetActiveWeapon():GetClass() )
                                 net.SendToServer()
                                 UpgradeWindow:Close()
                             end
@@ -212,23 +236,6 @@ if SERVER then
         local phys = self:GetPhysicsObject()
         if (phys:IsValid()) then phys:Wake() end
         self:SetUseType(SIMPLE_USE)
-
-        self.spraycan = ents.Create( "prop_dynamic" )
-        self.spraycan:SetModel( "models/props_junk/propane_tank001a.mdl" )
-        self.spraycan:SetPos( self:GetPos() + self:GetUp() * 22 - self:GetForward() * 10 + self:GetRight() * 45 )
-        self.spraycan:SetAngles( self:GetAngles() - Angle( 0, 225, 0 ) )
-        self.spraycan:SetParent(self)
-        self:DeleteOnRemove( self.spraycan )
-        self.spraycan:SetModelScale( 0.3333 )
-        self.spraycan:Spawn()
-
-        self.wrench = ents.Create( "prop_dynamic" )
-        self.wrench:SetModel( "models/props_c17/tools_wrench01a.mdl" )
-        self.wrench:SetPos( self:GetPos() + self:GetUp() * 17 + self:GetForward() * 15 - self:GetRight() * 45 )
-        self.wrench:SetAngles( self:GetAngles() - Angle( 0, 225, 0 ) )
-        self.wrench:SetParent(self)
-        self:DeleteOnRemove( self.wrench )
-        self.wrench:Spawn()
 
         -- ############## up is not up for all weapons ##################
         -- use the OBB's second smallest edge and orient it based on that
@@ -287,6 +294,7 @@ if SERVER then
             else
                 net.Start( "ST_OpenArtistMenu" )
                     net.WriteEntity( self )
+                    net.WriteEntity( ply:GetActiveWeapon() )
                 net.Send( ply )
             end
         else
@@ -296,24 +304,66 @@ if SERVER then
     end
 
     net.Receive( "ST_SkinWeapon", function( _, ply )
-        local wep = net.ReadString()
+        local att = net.ReadString()
         local this = net.ReadEntity()
-        local price = net.ReadInt( 32 )
-        local time = net.ReadInt( 32 )
-        local actWep = net.ReadString()
+        local wep = net.ReadEntity()
+        --local price = net.ReadInt( 32 )
+        --local time = net.ReadInt( 32 )
+        --local actWep = net.ReadString()
+        local skinPrice, paintTime = 0, 0
 
-        if !table.HasValue( ply:GetActiveWeapon().Attachments[ 1 ].atts, wep ) and !table.HasValue( ply:GetActiveWeapon().Attachments[ 2 ].atts, wep ) then
+        if wep ~= ply:GetActiveWeapon() then
             DarkRP.notify( ply, 1, 4, "Paint failed, you are not holding the right weapon." )
         return end
-        if !ply:canAfford( price ) then
+
+        local wepUpgrades = ply:GetActiveWeapon().Attachments
+
+        for k,v in pairs( wepUpgrades ) do
+            for l,w in pairs( v ) do
+                if l != "sel" then
+                    for m,x in pairs( w ) do
+
+                        skinPrice, paintTime = 0, 0
+
+                        if TFA.Attachments.Atts[ x ].WeaponTable.MaterialTable != {} or TFA.Attachments.Atts[ x ].WeaponTable.MaterialTable_W != {} then
+                            skinPrice = skinPrice + 500
+                            paintTime = paintTime + 30
+                        end
+                        if TFA.Attachments.Atts[ x ].WeaponTable.Primary then
+                            if TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage then
+                                skinPrice = skinPrice + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Damage ) / LocalPlayer():GetActiveWeapon().Primary.Damage ) ) * CSO_WEAPONS_TREE[ GetFinalParent( LocalPlayer():GetActiveWeapon():GetClass() ) ].price * 5 )
+                                paintTime = paintTime + 30 + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Damage ) / LocalPlayer():GetActiveWeapon().Primary.Damage ) - 1 ) * 90 )
+                            end
+                            if TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize then
+                                skinPrice = skinPrice + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.ClipSize ) - LocalPlayer():GetActiveWeapon().Primary.ClipSize ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 1 ) )
+                                paintTime = paintTime + 30 + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.ClipSize ) - LocalPlayer():GetActiveWeapon().Primary.ClipSize ) * 9 )
+                            end
+                            if TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread then
+                                skinPrice = skinPrice + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Spread ) / LocalPlayer():GetActiveWeapon().Primary.Spread ) ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 2.5 ) )
+                                paintTime = paintTime + 30 + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Spread ) / LocalPlayer():GetActiveWeapon().Primary.Spread ) - 1 ) * 45 )
+                            end
+                            if TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM then
+                                skinPrice = skinPrice + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.RPM ) - LocalPlayer():GetActiveWeapon().Primary.RPM ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 0.1 ) )
+                                paintTime = paintTime + 30 + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.RPM ) - LocalPlayer():GetActiveWeapon().Primary.RPM ) * 6 )
+                            end
+                        end
+
+                        paintTime = paintTime / SKIN_SPEED_MULTIPLIER
+                    end
+                end
+            end
+        end
+
+
+        if !ply:canAfford( skinPrice ) then
             DarkRP.notify( ply, 1, 4, "Paint failed, you don't have enough money." )
         return end
         this:EmitSound( "npc/dog/dog_servo12.wav" )
-        DarkRP.notify( ply, 0, 4, "Paint started! Come back in " .. FormatTime( time ) .. " to get your " .. ply:GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ wep ].Name .. "." )
-        ply:addMoney( -price )
-        this:SetNWString( "WorkWeapon", actWep )
-        this:SetNWString( "WorkSkin", wep )
-        this:SetNWInt( "WorkTime", CurTime() + time )
+        DarkRP.notify( ply, 0, 4, "Paint started! Come back in " .. FormatTime( paintTime ) .. " to get your " .. ply:GetActiveWeapon():GetPrintName() .. " | " .. TFA.Attachments.Atts[ att ].Name .. "." )
+        ply:addMoney( -skinPrice )
+        this:SetNWString( "WorkWeapon", wep:GetClass() )
+        this:SetNWString( "WorkSkin", att )
+        this:SetNWInt( "WorkTime", CurTime() + paintTime )
         this.weapon:SetModel( ply:GetActiveWeapon().WorldModel )
         local diffs = {
             ["x"] = Vector( Vector( this.weapon:OBBMaxs().x, this.weapon:OBBMins().y, this.weapon:OBBMins().z ) - this.weapon:OBBMins() ).x,
