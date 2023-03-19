@@ -72,12 +72,6 @@ hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )
     ply:SetNWInt( "BountySuccess", tonumber( ankoRepTable[ "BountySuccess" ] ) )
     ply:SetNWInt( "BountyFail", tonumber( ankoRepTable[ "BountyFail" ] ) )
 
-	if sql.Query( "SELECT Credits FROM AnkoRP_Credits WHERE SteamID = '" .. ply:SteamID64() .. "'" ) == nil then
-		sql.Query( "INSERT INTO AnkoRP_Credits( SteamID, Credits ) VALUES( '" .. ply:SteamID64() .. "', 0 )" )
-	end
-	local creds = sql.Query( "SELECT Credits FROM AnkoRP_Credits WHERE SteamID = '" .. ply:SteamID64() .. "'" )[ 1 ].Credits
-	ply:SetNWInt( "STCredits", creds )
-
 end )
 
 hook.Add( "playerGetSalary", "OverrideSalMsg", function( ply, amt )
@@ -118,19 +112,6 @@ function plyMeta:AddAttachmentToTable( att )
     net.Start( "SendPlyTheirAttTable" )
         net.WriteData( util.Compress( util.TableToJSON( self:GetAttachmentTable() ) ), #util.Compress( util.TableToJSON( self:GetAttachmentTable() ) ) )
     net.Send( self )
-end
-
-function plyMeta:SetCredits( cr )
-	sql.Query( "UPDATE AnkoRP_Credits SET Credits = " .. cr .. " WHERE SteamID = '" .. self:SteamID64() .. "'" )
-	self:SetNWInt( "STCredits", cr )
-end
-
-function plyMeta:AddCredits( cr )
-	local creds = sql.Query( "SELECT Credits FROM AnkoRP_Credits WHERE SteamID = '" .. self:SteamID64() .. "'" )[ 1 ].Credits
-	creds = creds + cr
-
-	sql.Query( "UPDATE AnkoRP_Credits SET Credits = " .. creds .. " WHERE SteamID = '" .. self:SteamID64() .. "'" )
-	self:SetNWInt( "STCredits", creds )
 end
 
 function plyMeta:STNPCMessage( ent, msg )
