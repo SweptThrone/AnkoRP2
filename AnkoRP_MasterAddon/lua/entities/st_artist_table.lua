@@ -179,6 +179,7 @@ if CLIENT then
                                 surface.DrawOutlinedRect( 0, 0, w, h)
                             end
                             function SkinnedWeapon:DoClick()
+				-- this is evil
                                 net.Start( "ST_SkinWeapon" )
                                     net.WriteString( self.class )
                                     net.WriteEntity( this )
