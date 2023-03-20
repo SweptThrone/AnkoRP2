@@ -2,6 +2,10 @@
 The second coming of AnkoRP.  Even better this time.  
 Custom files optimized and organized for the second installment of AnkoRP.  
 
+### Outdated
+The data file has not been updated for the March 2023 CS:O changes!  
+A lot has changed and I need to restructure some of the trees.  
+
 ### What Is It?
 AnkoRP is a TDMRP gamemode built for the TFA CS:O weapons.  
 Players buy weapons and can upgrade them to kill others players easier.  
