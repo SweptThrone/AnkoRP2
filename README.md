@@ -32,4 +32,7 @@ cso_weapons_with_prices.json is a JSON table with the following structure:
           * deep: \[int] what "tier" this weapon is, starts at 1  
           * model: \[string] the worldmodel of this weapon  
           * basic: \[boolean] is this weapon a "normal" weapon?  
-          * name: \[string] print name of this weapon
+          * name: \[string] print name of this weapon  
+
+### Documentation
+Some documentation for developers is available at https://docs.sweptthr.one/ankorp2
