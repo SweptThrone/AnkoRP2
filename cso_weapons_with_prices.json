@@ -443,7 +443,7 @@
   "tfa_cso_k1a_maverick": {
     "price": 54000,
     "slot": 3,
-    "parent": "tfa_cso_k1ase",
+    "parent": "tfa_cso_k1ase_nochands",
     "deep": 3,
     "model": "models/weapons/tfa_cso/w_k1a_maverick.mdl",
     "basic": false,
@@ -740,7 +740,7 @@
   "tfa_cso_gunkata": {
     "price": 475000,
     "slot": 2,
-    "parent": "tfa_cso_elite",
+    "parent": "tfa_cso_elite_nochands",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_gunkata.mdl",
     "basic": false,
@@ -773,10 +773,10 @@
     "basic": false,
     "name": "AWP-Z"
   },
-  "tfa_cso_k1ase": {
+  "tfa_cso_k1ase_nochands": {
     "price": 38000,
     "slot": 4,
-    "parent": "tfa_cso_k1a",
+    "parent": "tfa_cso_k1a_nochands",
     "deep": 2,
     "model": "models/weapons/w_rif_ak47.mdl",
     "basic": false,
@@ -944,7 +944,7 @@
     "basic": false,
     "name": "JANUS-3"
   },
-  "tfa_cso_galil": {
+  "tfa_cso_galil_nochands": {
     "price": 2500,
     "slot": 3,
     "parent": "nil",
@@ -1187,7 +1187,7 @@
     "basic": true,
     "name": "XM8"
   },
-  "tfa_cso_sg550": {
+  "tfa_cso_sg550_nochands": {
     "price": 5000,
     "slot": 3,
     "parent": "nil",
@@ -1487,13 +1487,13 @@
   "tfa_cso_duckgun": {
     "price": 389000,
     "slot": 2,
-    "parent": "tfa_cso_divinelock",
+    "parent": "tfa_cso_musket",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_duck_musket.mdl",
     "basic": false,
     "name": "Special Duck Foot Gun"
   },
-  "tfa_cso_qbb95": {
+  "tfa_cso_qbb95_nochands": {
     "price": 2900,
     "slot": 4,
     "parent": "nil",
@@ -1511,7 +1511,7 @@
     "basic": false,
     "name": "HK G11 Expert"
   },
-  "tfa_cso_divinelock": {
+  "tfa_cso_musket": {
     "price": 99000,
     "slot": 2,
     "parent": "nil",
@@ -1745,19 +1745,19 @@
     "basic": false,
     "name": "Winchester M1887 Christmas Edition"
   },
-  "tfa_cso_qbb95ex": {
+  "tfa_cso_qbb95ex_nochands": {
     "price": 5300,
     "slot": 4,
-    "parent": "tfa_cso_qbb95",
+    "parent": "tfa_cso_qbb95_nochands",
     "deep": 2,
     "model": "models/weapons/w_mach_m249para.mdl",
     "basic": false,
     "name": "QBB-95EX"
   },
-  "tfa_cso_bqbb95": {
+  "tfa_cso_bqbb95_nochands": {
     "price": 28000,
     "slot": 4,
-    "parent": "tfa_cso_qbb95ex",
+    "parent": "tfa_cso_qbb95ex_nochands",
     "deep": 3,
     "model": "models/weapons/w_mach_m249para.mdl",
     "basic": false,
@@ -1790,7 +1790,7 @@
     "basic": true,
     "name": "USAS-12"
   },
-  "tfa_cso_svd": {
+  "tfa_cso_svd_nochands": {
     "price": 7200,
     "slot": 5,
     "parent": "nil",
@@ -2006,7 +2006,7 @@
     "basic": false,
     "name": "Laser Minigun"
   },
-  "tfa_cso_elite": {
+  "tfa_cso_elite_nochands": {
     "price": 500,
     "slot": 3,
     "parent": "nil",
@@ -2414,7 +2414,7 @@
   "tfa_cso_galilcraft": {
     "price": 16500,
     "slot": 3,
-    "parent": "tfa_cso_galil",
+    "parent": "tfa_cso_galil_nochands",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_galilcraft.mdl",
     "basic": false,
@@ -2726,7 +2726,7 @@
     "basic": true,
     "name": "MP5"
   },
-  "tfa_cso_vsk94": {
+  "tfa_cso_vsk94_nochands": {
     "price": 7200,
     "slot": 4,
     "parent": "nil",
@@ -3266,7 +3266,7 @@
     "basic": true,
     "name": "Steyr Scout"
   },
-  "tfa_cso_ddeagle": {
+  "tfa_cso_ddeagle_nochands": {
     "price": 2100,
     "slot": 3,
     "parent": "tfa_cso_deagle",
@@ -3500,7 +3500,7 @@
     "basic": false,
     "name": "THANATOS-1"
   },
-  "tfa_cso_k1a": {
+  "tfa_cso_k1a_nochands": {
     "price": 2900,
     "slot": 4,
     "parent": "nil",
@@ -3557,7 +3557,7 @@
   "tfa_cso_starchasersr": {
     "price": 687000,
     "slot": 4,
-    "parent": "tfa_cso_vsk94",
+    "parent": "tfa_cso_vsk94_nochands",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_starchasersr.mdl",
     "basic": false,
@@ -3953,7 +3953,7 @@
   "tfa_cso_svdex": {
     "price": 89000,
     "slot": 4,
-    "parent": "tfa_cso_svd",
+    "parent": "tfa_cso_svd_nochands",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_svdex.mdl",
     "basic": false,
@@ -3998,7 +3998,7 @@
   "tfa_cso_windrider": {
     "price": 72000,
     "slot": 2,
-    "parent": "tfa_cso_elite",
+    "parent": "tfa_cso_elite_nochands",
     "deep": 2,
     "model": "models/weapons/tfa_cso/w_windrider.mdl",
     "basic": false,
