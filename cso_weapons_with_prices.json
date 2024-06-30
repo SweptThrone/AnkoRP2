@@ -144,7 +144,7 @@
 		"name": "Beretta ARX-160"
 	},
 	"tfa_cso_arx160_expert": {
-		"price": 39000,
+		"price": 8100,
 		"slot": 3,
 		"parent": "tfa_cso_arx160",
 		"deep": 2,
@@ -153,7 +153,7 @@
 		"name": "Beretta ARX-160 Expert"
 	},
 	"tfa_cso_arx160_master": {
-		"price": 693000,
+		"price": 12900,
 		"slot": 3,
 		"parent": "tfa_cso_arx160_expert",
 		"deep": 3,
@@ -166,34 +166,34 @@
 		"slot": 4,
 		"parent": "nil",
 		"deep": 1,
-		"model": "models/weapons/w_snip_awp.mdl",
+		"model": "models/weapons/tfa_cso/w_as50.mdl",
 		"basic": true,
 		"name": "AI AS50"
 	},
 	"tfa_cso_as50_expert": {
-		"price": 112000,
+		"price": 41000,
 		"slot": 4,
 		"parent": "tfa_cso_as50",
 		"deep": 2,
-		"model": "models/weapons/w_snip_awp.mdl",
+		"model": "models/weapons/tfa_cso/w_as50_v6.mdl",
 		"basic": false,
 		"name": "AI AS50 Expert"
 	},
 	"tfa_cso_as50_master": {
-		"price": 392000,
+		"price": 58000,
 		"slot": 4,
 		"parent": "tfa_cso_as50_expert",
 		"deep": 3,
-		"model": "models/weapons/w_snip_awp.mdl",
+		"model": "models/weapons/tfa_cso/w_as50_v8.mdl",
 		"basic": false,
 		"name": "AI AS50 Master"
 	},
 	"tfa_cso_as50g": {
-		"price": 786000,
+		"price": 70000,
 		"slot": 4,
 		"parent": "tfa_cso_as50_master",
 		"deep": 4,
-		"model": "models/weapons/w_snip_awp.mdl",
+		"model": "models/weapons/tfa_cso/w_as50g.mdl",
 		"basic": false,
 		"name": "AI AS50 Pink Gold"
 	},
@@ -1152,7 +1152,7 @@
 		"name": "Dual Uzi (B Mode)"
 	},
 	"tfa_cso_dualuzi_v6": {
-		"price": 298000,
+		"price": 29800,
 		"slot": 3,
 		"parent": "tfa_cso_dualuzi",
 		"deep": 3,
@@ -1161,7 +1161,7 @@
 		"name": "Dual Uzi Expert (A Mode)"
 	},
 	"tfa_cso_dualuzi_v6_stock": {
-		"price": 298000,
+		"price": 29800,
 		"slot": 3,
 		"parent": "tfa_cso_dualuzi_stock",
 		"deep": 3,
@@ -1323,7 +1323,7 @@
 		"name": "M67 Frag Grenade"
 	},
 	"tfa_cso_g11_v6": {
-		"price": 89000,
+		"price": 5700,
 		"slot": 3,
 		"parent": "tfa_cso_hk_g11",
 		"deep": 2,
@@ -1332,7 +1332,7 @@
 		"name": "HK G11 Expert"
 	},
 	"tfa_cso_g11_v8": {
-		"price": 264000,
+		"price": 9200,
 		"slot": 3,
 		"parent": "tfa_cso_g11_v6",
 		"deep": 3,
@@ -1341,7 +1341,7 @@
 		"name": "HK G11 Master"
 	},
 	"tfa_cso_g11g": {
-		"price": 595000,
+		"price": 13400,
 		"slot": 3,
 		"parent": "tfa_cso_g11_v8",
 		"deep": 4,
@@ -1467,7 +1467,7 @@
 		"name": "OTs-14 Groza"
 	},
 	"tfa_cso_groza_expert": {
-		"price": 65000,
+		"price": 5750,
 		"slot": 3,
 		"parent": "tfa_cso_groza",
 		"deep": 2,
@@ -1476,7 +1476,7 @@
 		"name": "OTs-14 Groza Expert"
 	},
 	"tfa_cso_groza_master": {
-		"price": 6000,
+		"price": 7140,
 		"slot": 3,
 		"parent": "tfa_cso_groza_expert",
 		"deep": 3,
@@ -1603,7 +1603,7 @@
 		"name": "HK23E"
 	},
 	"tfa_cso_hk23_expert": {
-		"price": 49000,
+		"price": 9300,
 		"slot": 4,
 		"parent": "tfa_cso_hk23",
 		"deep": 2,
@@ -1612,7 +1612,7 @@
 		"name": "HK23E Expert"
 	},
 	"tfa_cso_hk23_master": {
-		"price": 483000,
+		"price": 12600,
 		"slot": 4,
 		"parent": "tfa_cso_hk23_expert",
 		"deep": 3,
@@ -1621,7 +1621,7 @@
 		"name": "HK23E Master"
 	},
 	"tfa_cso_hk23g": {
-		"price": 973000,
+		"price": 15700,
 		"slot": 4,
 		"parent": "tfa_cso_hk23_master",
 		"deep": 4,
@@ -1882,7 +1882,7 @@
 		"name": "King Cobra"
 	},
 	"tfa_cso_kingcobra_v6": {
-		"price": 110000,
+		"price": 17500,
 		"slot": 2,
 		"parent": "tfa_cso_kingcobra",
 		"deep": 3,
@@ -1891,7 +1891,7 @@
 		"name": "King Cobra Expert"
 	},
 	"tfa_cso_kingcobra_v8": {
-		"price": 348000,
+		"price": 24800,
 		"slot": 2,
 		"parent": "tfa_cso_kingcobra_v6",
 		"deep": 4,
@@ -1900,7 +1900,7 @@
 		"name": "King Cobra Master"
 	},
 	"tfa_cso_kingcobragold": {
-		"price": 490000,
+		"price": 31500,
 		"slot": 2,
 		"parent": "tfa_cso_kingcobra_v8",
 		"deep": 5,
@@ -1927,7 +1927,7 @@
 		"name": "KSG-12"
 	},
 	"tfa_cso_ksg12_expert": {
-		"price": 56500,
+		"price": 5800,
 		"slot": 4,
 		"parent": "tfa_cso_ksg12",
 		"deep": 2,
@@ -1936,7 +1936,7 @@
 		"name": "KSG-12 Expert"
 	},
 	"tfa_cso_ksg12_gold": {
-		"price": 320000,
+		"price": 10200,
 		"slot": 4,
 		"parent": "tfa_cso_ksg12_master",
 		"deep": 4,
@@ -1945,7 +1945,7 @@
 		"name": "KSG-12 Gold"
 	},
 	"tfa_cso_ksg12_master": {
-		"price": 396000,
+		"price": 8100,
 		"slot": 4,
 		"parent": "tfa_cso_ksg12_expert",
 		"deep": 3,
@@ -2053,7 +2053,7 @@
 		"name": "Luger P08"
 	},
 	"tfa_cso_luger_expert": {
-		"price": 59000,
+		"price": 900,
 		"slot": 2,
 		"parent": "tfa_cso_luger",
 		"deep": 2,
@@ -2062,7 +2062,7 @@
 		"name": "Luger P08 - Expert"
 	},
 	"tfa_cso_luger_gold": {
-		"price": 78000,
+		"price": 3200,
 		"slot": 2,
 		"parent": "tfa_cso_luger_master",
 		"deep": 4,
@@ -2071,7 +2071,7 @@
 		"name": "Luger P08 - Gold"
 	},
 	"tfa_cso_luger_legacy": {
-		"price": 110000,
+		"price": 11000,
 		"slot": 2,
 		"parent": "tfa_cso_luger_silver",
 		"deep": 6,
@@ -2080,7 +2080,7 @@
 		"name": "Dark Legacy Luger"
 	},
 	"tfa_cso_luger_master": {
-		"price": 52000,
+		"price": 1800,
 		"slot": 2,
 		"parent": "tfa_cso_luger_expert",
 		"deep": 3,
@@ -2089,7 +2089,7 @@
 		"name": "Luger P08 - Master"
 	},
 	"tfa_cso_luger_silver": {
-		"price": 397000,
+		"price": 5600,
 		"slot": 2,
 		"parent": "tfa_cso_luger_gold",
 		"deep": 5,
@@ -2197,7 +2197,7 @@
 		"name": "M14 EBR"
 	},
 	"tfa_cso_m14ebr_expert": {
-		"price": 132000,
+		"price": 9600,
 		"slot": 3,
 		"parent": "tfa_cso_m14ebr",
 		"deep": 2,
@@ -2206,7 +2206,7 @@
 		"name": "M14 EBR Expert"
 	},
 	"tfa_cso_m14ebr_master": {
-		"price": 342000,
+		"price": 14700,
 		"slot": 3,
 		"parent": "tfa_cso_m14ebr_expert",
 		"deep": 3,
@@ -2215,7 +2215,7 @@
 		"name": "M14 EBR Master"
 	},
 	"tfa_cso_m14ebrg": {
-		"price": 320000,
+		"price": 23500,
 		"slot": 3,
 		"parent": "tfa_cso_m14ebr_master",
 		"deep": 4,
@@ -2233,7 +2233,7 @@
 		"name": "M16A1"
 	},
 	"tfa_cso_m16a1ep": {
-		"price": 26000,
+		"price": 6400,
 		"slot": 3,
 		"parent": "tfa_cso_m16a1",
 		"deep": 2,
@@ -2260,7 +2260,7 @@
 		"name": "Winchester M1887"
 	},
 	"tfa_cso_m1887_expert": {
-		"price": 238000,
+		"price": 4100,
 		"slot": 4,
 		"parent": "tfa_cso_m1887",
 		"deep": 2,
@@ -2269,7 +2269,7 @@
 		"name": "Winchester M1887 - Expert"
 	},
 	"tfa_cso_m1887_gold": {
-		"price": 684000,
+		"price": 8700,
 		"slot": 4,
 		"parent": "tfa_cso_m1887_master",
 		"deep": 4,
@@ -2278,7 +2278,7 @@
 		"name": "Winchester M1887 - Gold"
 	},
 	"tfa_cso_m1887_master": {
-		"price": 753000,
+		"price": 6800,
 		"slot": 4,
 		"parent": "tfa_cso_m1887_expert",
 		"deep": 3,
@@ -2287,7 +2287,7 @@
 		"name": "Winchester M1887 - Master"
 	},
 	"tfa_cso_m1887_maverick": {
-		"price": 432000,
+		"price": 31200,
 		"slot": 2,
 		"parent": "tfa_cso_m1887",
 		"deep": 2,
@@ -2296,7 +2296,7 @@
 		"name": "M1887 Maverick"
 	},
 	"tfa_cso_m1887xmas": {
-		"price": 100000,
+		"price": 5100,
 		"slot": 4,
 		"parent": "tfa_cso_m1887",
 		"deep": 2,
@@ -2386,7 +2386,7 @@
 		"name": "M249 Camouflage"
 	},
 	"tfa_cso_m249ep": {
-		"price": 205000,
+		"price": 31000,
 		"slot": 4,
 		"parent": "tfa_cso_m249_xmas",
 		"deep": 4,
@@ -2593,7 +2593,7 @@
 		"name": "M60E4 Desert"
 	},
 	"tfa_cso_m60_v6": {
-		"price": 128000,
+		"price": 12800,
 		"slot": 4,
 		"parent": "tfa_cso_m60",
 		"deep": 2,
@@ -2602,7 +2602,7 @@
 		"name": "M60E4 Expert"
 	},
 	"tfa_cso_m60_v8": {
-		"price": 872000,
+		"price": 27200,
 		"slot": 4,
 		"parent": "tfa_cso_m60_v6",
 		"deep": 3,
@@ -2611,7 +2611,7 @@
 		"name": "M60E4 Master"
 	},
 	"tfa_cso_m60craft": {
-		"price": 364000,
+		"price": 36400,
 		"slot": 4,
 		"parent": "tfa_cso_m60",
 		"deep": 2,
@@ -2620,7 +2620,7 @@
 		"name": "M60E4 Maverick"
 	},
 	"tfa_cso_m60g": {
-		"price": 820000,
+		"price": 62000,
 		"slot": 4,
 		"parent": "tfa_cso_m60_v8",
 		"deep": 4,
@@ -2665,7 +2665,7 @@
 		"name": "Parker Hale M82"
 	},
 	"tfa_cso_m82_v6": {
-		"price": 169000,
+		"price": 7800,
 		"slot": 4,
 		"parent": "tfa_cso_m82",
 		"deep": 2,
@@ -2674,7 +2674,7 @@
 		"name": "Parker Hale M82 Expert"
 	},
 	"tfa_cso_m82_v8": {
-		"price": 395000,
+		"price": 10100,
 		"slot": 4,
 		"parent": "tfa_cso_m82_v6",
 		"deep": 3,
@@ -2710,7 +2710,7 @@
 		"name": "Calico M950"
 	},
 	"tfa_cso_m950_attack": {
-		"price": 69000,
+		"price": 6900,
 		"slot": 2,
 		"parent": "tfa_cso_m950",
 		"deep": 2,
@@ -2719,7 +2719,7 @@
 		"name": "M950 Attack"
 	},
 	"tfa_cso_m950_v6": {
-		"price": 34000,
+		"price": 9100,
 		"slot": 2,
 		"parent": "tfa_cso_m950",
 		"deep": 2,
@@ -2728,7 +2728,7 @@
 		"name": "Calico M950 Expert"
 	},
 	"tfa_cso_m950_v8": {
-		"price": 98000,
+		"price": 10500,
 		"slot": 2,
 		"parent": "tfa_cso_m950_v6",
 		"deep": 3,
@@ -2980,7 +2980,7 @@
 		"name": "MG36 Gold Edition"
 	},
 	"tfa_cso_mg3_v6": {
-		"price": 125000,
+		"price": 12500,
 		"slot": 4,
 		"parent": "tfa_cso_mg3",
 		"deep": 2,
@@ -2989,7 +2989,7 @@
 		"name": "MG3 Expert"
 	},
 	"tfa_cso_mg3_v8": {
-		"price": 415000,
+		"price": 41500,
 		"slot": 4,
 		"parent": "tfa_cso_mg3_v6",
 		"deep": 3,
@@ -2998,7 +2998,7 @@
 		"name": "MG3 Master"
 	},
 	"tfa_cso_mg3g": {
-		"price": 671000,
+		"price": 67100,
 		"slot": 4,
 		"parent": "tfa_cso_mg3_v8",
 		"deep": 4,
@@ -3007,7 +3007,7 @@
 		"name": "MG3 Gold"
 	},
 	"tfa_cso_mg3xmas": {
-		"price": 250000,
+		"price": 25000,
 		"slot": 4,
 		"parent": "tfa_cso_mg3",
 		"deep": 2,
@@ -3070,7 +3070,7 @@
 		"name": "FN MK48"
 	},
 	"tfa_cso_mk48_expert": {
-		"price": 293000,
+		"price": 19300,
 		"slot": 4,
 		"parent": "tfa_cso_mk48",
 		"deep": 2,
@@ -3079,7 +3079,7 @@
 		"name": "FN MK48 - Expert"
 	},
 	"tfa_cso_mk48_master": {
-		"price": 896000,
+		"price": 29600,
 		"slot": 4,
 		"parent": "tfa_cso_mk48_expert",
 		"deep": 3,
@@ -3376,7 +3376,7 @@
 		"name": "PKM"
 	},
 	"tfa_cso_pkm_expert": {
-		"price": 72000,
+		"price": 7200,
 		"slot": 4,
 		"parent": "tfa_cso_pkm",
 		"deep": 2,
@@ -3385,7 +3385,7 @@
 		"name": "PKM Expert"
 	},
 	"tfa_cso_pkm_gold": {
-		"price": 398000,
+		"price": 39800,
 		"slot": 4,
 		"parent": "tfa_cso_pkm_master",
 		"deep": 4,
@@ -3394,7 +3394,7 @@
 		"name": "PKM Gold"
 	},
 	"tfa_cso_pkm_master": {
-		"price": 186000,
+		"price": 18600,
 		"slot": 4,
 		"parent": "tfa_cso_pkm_expert",
 		"deep": 3,
@@ -4069,7 +4069,7 @@
 		"name": "STG44"
 	},
 	"tfa_cso_stg44_expert": {
-		"price": 183000,
+		"price": 5010,
 		"slot": 3,
 		"parent": "tfa_cso_stg44",
 		"deep": 2,
@@ -4078,7 +4078,7 @@
 		"name": "STG44 Expert"
 	},
 	"tfa_cso_stg44_master": {
-		"price": 267000,
+		"price": 7290,
 		"slot": 3,
 		"parent": "tfa_cso_stg44_expert",
 		"deep": 3,
@@ -4087,7 +4087,7 @@
 		"name": "STG44 Master"
 	},
 	"tfa_cso_stg44g": {
-		"price": 497000,
+		"price": 10500,
 		"slot": 3,
 		"parent": "tfa_cso_stg44_master",
 		"deep": 4,
@@ -4303,7 +4303,7 @@
 		"name": "Thompson - Expert"
 	},
 	"tfa_cso_thompson_gold": {
-		"price": 96000,
+		"price": 10600,
 		"slot": 3,
 		"parent": "tfa_cso_thompson_master",
 		"deep": 4,
@@ -4312,7 +4312,7 @@
 		"name": "Thompson - Gold"
 	},
 	"tfa_cso_thompson_master": {
-		"price": 24000,
+		"price": 9700,
 		"slot": 3,
 		"parent": "tfa_cso_thompson_expert",
 		"deep": 3,
@@ -4636,7 +4636,7 @@
 		"name": "UTS-15"
 	},
 	"tfa_cso_uts15_v6": {
-		"price": 39000,
+		"price": 5900,
 		"slot": 4,
 		"parent": "tfa_cso_uts15",
 		"deep": 2,
@@ -4645,7 +4645,7 @@
 		"name": "UTS-15 Expert"
 	},
 	"tfa_cso_uts15_v8": {
-		"price": 395000,
+		"price": 7600,
 		"slot": 4,
 		"parent": "tfa_cso_uts15_v6",
 		"deep": 3,
@@ -4654,7 +4654,7 @@
 		"name": "UTS-15 Master"
 	},
 	"tfa_cso_uts15g": {
-		"price": 658000,
+		"price": 9900,
 		"slot": 4,
 		"parent": "tfa_cso_uts15_v8",
 		"deep": 4,
@@ -4961,7 +4961,7 @@
 		"name": "Remington XM2010 ESR"
 	},
 	"tfa_cso_xm2010_v6": {
-		"price": 230000,
+		"price": 21300,
 		"slot": 4,
 		"parent": "tfa_cso_xm2010",
 		"deep": 2,
@@ -4970,7 +4970,7 @@
 		"name": "Remington XM2010 ESR Expert"
 	},
 	"tfa_cso_xm2010_v8": {
-		"price": 729000,
+		"price": 33700,
 		"slot": 4,
 		"parent": "tfa_cso_xm2010_v6",
 		"deep": 3,
