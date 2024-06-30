@@ -14,11 +14,14 @@ ENT.Instructions= ""
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 ENT.Category = "AnkoRP Entities"
+ENT.RenderGroup = RENDERGROUP_BOTH
 
 if CLIENT then
     function ENT:Draw()
         self:DrawModel()
+    end
 
+    function ENT:DrawTranslucent()
         local Pos = self:GetPos()
         local Ang = self:GetAngles()
         
@@ -39,6 +42,7 @@ if CLIENT then
     
         local data = net.ReadData( len )
         local inv = util.JSONToTable( util.Decompress( data ) )
+        PrintTable( inv )
 
         local UpgradeWindow = vgui.Create( "DFrame" )
         UpgradeWindow:SetPos( 5, 5 )
@@ -85,10 +89,11 @@ if CLIENT then
         Slot1Box:AddChoice( "[Job default]", "nil" )
         Slot1Box:SetValue( LocalPlayer():GetNWString( "WepLoadoutSlot1", "nil" ) == "nil" and "[Job default]" or weapons.Get( LocalPlayer():GetNWString( "WepLoadoutSlot1" ) ).PrintName )
         for k,v in pairs( inv ) do
+            print( v )
             if v != "nil" and v != "NULL" then
-            if weapons.Get( v ).Slot + 1 == 1 then
-                Slot1Box:AddChoice( weapons.Get( v ).PrintName, v )
-            end
+                if ( weapons.Get( v ).Slot and weapons.Get( v ).Slot + 1 or 1 ) == 1 then
+                    Slot1Box:AddChoice( weapons.Get( v ).PrintName, v )
+                end
             end
         end
         function Slot1Box:OnSelect( index, value, dat )

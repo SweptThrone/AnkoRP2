@@ -96,7 +96,7 @@ hook.Add( "PlayerDeath", "GiveMoneyForKills", function( vic, inf, atk )
 			local wep = atk:GetActiveWeapon()
 			local slot
             local randMon
-            if IsValid( wep ) then slot = wep.Slot + 1 end
+            if IsValid( wep ) then slot = ( wep.Slot and wep.Slot + 1 or 1 ) end
             if slot == 1 then
                 randMon = math.random( 1500, 2500 )
                 atk:addMoney( ( ( randMon + math.max( 0, vic:Frags() ) * 500 ) * ( 1 + atk:GetNWInt( "CurrKillStreak", 0 ) / 10 ) ) * ( GLOBAL_MONEY_MULTIPLIER * KILL_MONEY_MULTIPLIER ) )

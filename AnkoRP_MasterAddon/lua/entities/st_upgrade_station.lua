@@ -14,11 +14,14 @@ ENT.Instructions= ""
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 ENT.Category = "AnkoRP Entities"
+ENT.RenderGroup = RENDERGROUP_BOTH
 
 if CLIENT then
     function ENT:Draw()
         self:DrawModel()
+    end
 
+    function ENT:DrawTranslucent()
         local Pos = self:GetPos()
         local Ang = self:GetAngles()
         
@@ -41,7 +44,7 @@ if CLIENT then
 
         local UpgradeWindow = vgui.Create( "DFrame" )
         UpgradeWindow:SetPos( 5, 5 )
-        UpgradeWindow:SetSize( 800, 600 )
+        UpgradeWindow:SetSize( 800, 640 )
         UpgradeWindow:SetTitle( "" )
         UpgradeWindow:SetVisible( true )
         UpgradeWindow:SetDraggable( false )
@@ -151,19 +154,23 @@ if SERVER then
         return end
         this:EmitSound( "ambient/energy/whiteflash.wav" )
         DarkRP.notify( ply, 0, 4, "Upgrade succeeded! Your " .. ply:GetActiveWeapon():GetPrintName() .. " was upgraded to " .. weapons.Get( wep ).PrintName .. " and placed in your inventory." )
-        if ply:GetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" ) == ply:GetActiveWeapon():GetClass() then
+        local slot = ply:GetActiveWeapon().Slot and ply:GetActiveWeapon().Slot + 1 or 1
+        if ply:GetNWString( "WepLoadoutSlot" .. slot, "nil" ) == ply:GetActiveWeapon():GetClass() then
             if ply:GetActiveWeapon().Slot == weapons.Get( wep ).Slot then
-                ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, wep )
+                ply:SetNWString( "WepLoadoutSlot" .. slot, wep )
             else
-                ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" )
+                ply:SetNWString( "WepLoadoutSlot" .. slot, "nil" )
                 timer.Simple( 4, function()
                     DarkRP.notify( ply, 0, 8, "Your new weapon has a different slot than your previous weapon. Your new weapon has not been added to your loadout." )
                 end )
             end
         end
         ply:StripWeapon( ply:GetActiveWeapon():GetClass() )
-        ply:Give( wep )
-        ply:SelectWeapon( wep )
+        
+        if ply:getJobTable().category ~= "Monsters" then
+            ply:Give( wep )
+            ply:SelectWeapon( wep )
+        end
         --local finalParent = wep
         --for _ = CSO_WEAPONS_TREE[ wep ].deep, 2, -1 do
         --    finalParent = CSO_WEAPONS_TREE[ finalParent ].parent

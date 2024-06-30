@@ -10,7 +10,9 @@ local ignoreWeapons = {
     [ "tfa_cso_g3sg1_nochands" ] = true,
     [ "tfa_cso_sg552_nochands" ] = true,
     [ "tfa_cso_ump45_nochands" ] = true,
-    [ "tfa_cso_aug_nochands" ] = true
+    [ "tfa_cso_aug_nochands" ] = true,
+    [ "tfa_cso_m3_nochands" ] = true,
+    [ "tfa_cso_galil_nochands" ] = true
 }
 
 http.Fetch( "https://raw.githubusercontent.com/SweptThrone/AnkoRP2/main/cso_weapons_with_prices.json", function( body, size, headers, code )
@@ -26,7 +28,7 @@ http.Fetch( "https://raw.githubusercontent.com/SweptThrone/AnkoRP2/main/cso_weap
         print( "=====[ NEW WEAPONS ]=====" )
         for k,v in pairs( EXISTING_CSO_WEPS ) do
             if !CSO_WEAPONS_TREE[ k ] and !ignoreWeapons[ k ] then
-                print( k .. ":\t\t" .. weapons.Get( k ).PrintName )
+                print( ( weapons.Get( k ).Spawnable and "" or "NOSPAWN: " ) .. k .. ":\t\t" .. weapons.Get( k ).PrintName )
             end
         end
         

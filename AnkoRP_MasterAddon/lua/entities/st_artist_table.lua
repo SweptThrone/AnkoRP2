@@ -14,6 +14,7 @@ ENT.Instructions= ""
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 ENT.Category = "AnkoRP Entities"
+ENT.RenderGroup = RENDERGROUP_BOTH
 
 local function FormatTime( num )
     return string.FormattedTime( math.ceil( num ) ).m .. ":" .. 
@@ -22,13 +23,13 @@ end
 
 if CLIENT then
     function ENT:Initialize()
-        self.spraycan = ClientsideModel( "models/props_junk/propane_tank001a.mdl" )
-        self.spraycan:SetPos( self:GetPos() + self:GetUp() * 22 - self:GetForward() * 10 + self:GetRight() * 45 )
-        self.spraycan:SetModelScale( 0.3333 )
+        self.spraycan = ClientsideModel( "models/sweptthrone/spray_can.mdl" )
+        self.spraycan:SetPos( self:GetPos() + self:GetUp() * 34 - self:GetForward() * 10 + self:GetRight() * 30 )
+        --self.spraycan:SetModelScale( 0.3333 )
         self.spraycan:Spawn()
 
         self.wrench = ClientsideModel( "models/props_c17/tools_wrench01a.mdl" )
-        self.wrench:SetPos( self:GetPos() + self:GetUp() * 17 + self:GetForward() * 15 - self:GetRight() * 45 )
+        self.wrench:SetPos( self:GetPos() + self:GetUp() * 35 + self:GetForward() * 15 - self:GetRight() * 30 )
         self.wrench:Spawn()
     end
 
@@ -39,15 +40,26 @@ if CLIENT then
 
     function ENT:Draw()
         self:DrawModel()
+    end
+
+    function ENT:DrawTranslucent()
 
         local Pos = self:GetPos()
         local Ang = self:GetAngles()
 
+        if not IsValid( self.spraycan ) then
+            self.spraycan = ClientsideModel( "models/sweptthrone/spray_can.mdl" )
+        end
+
+        if not IsValid( self.wrench ) then
+            self.wrench = ClientsideModel( "models/props_c17/tools_wrench01a.mdl" )
+        end
+
         local propAng = self:GetAngles()
         propAng:RotateAroundAxis( propAng:Up(), -225 )
-        self.spraycan:SetPos( self:GetPos() + self:GetUp() * 22 - self:GetForward() * 10 + self:GetRight() * 45 )
+        self.spraycan:SetPos( self:GetPos() + self:GetUp() * 34 - self:GetForward() * 10 + self:GetRight() * 30 )
         self.spraycan:SetAngles( propAng )
-        self.wrench:SetPos( self:GetPos() + self:GetUp() * 17 + self:GetForward() * 15 - self:GetRight() * 45 )
+        self.wrench:SetPos( self:GetPos() + self:GetUp() * 35 + self:GetForward() * 15 - self:GetRight() * 30 )
         self.wrench:SetAngles( propAng )
 
         Ang:RotateAroundAxis(Ang:Forward(), 90)
@@ -84,7 +96,7 @@ if CLIENT then
         local TextWidth3 = surface.GetTextSize(txt3)
         local TextWidth4 = surface.GetTextSize(txt4)
         
-        cam.Start3D2D(Pos + Ang:Up() * -20 - Ang:Right() * -15, Ang, 0.16)
+        cam.Start3D2D(Pos + Ang:Up() * -20 - Ang:Right() * 5, Ang, 0.16)
             draw.WordBox(4, -TextWidth*0.5, -380, txt, "UPGMed", Color(50, 22, 49, 255), Color(255,255,255,255))
             draw.WordBox(4, -TextWidth2*0.5, -340, txt2, "UPGMed", Color(50, 22, 49, 255), Color(255,255,255,255))
             draw.WordBox(4, -TextWidth3*0.5, -300, txt3, "UPGMed", Color(50, 22, 49, 255), Color(255,255,255,255))
@@ -226,7 +238,7 @@ end
 if SERVER then
     function ENT:Initialize()
     
-        self:SetModel( "models/props_wasteland/controlroom_desk001b.mdl" )
+        self:SetModel( "models/props/CS_militia/table_kitchen.mdl" )
         self:PhysicsInit( SOLID_VPHYSICS )
         self:SetMoveType( MOVETYPE_VPHYSICS )
         self:SetSolid( SOLID_VPHYSICS )
@@ -242,7 +254,7 @@ if SERVER then
         -- but how
         self.weapon = ents.Create( "prop_dynamic" )
         self.weapon:SetModel( "models/weapons/w_rif_m4a1.mdl" )
-        self.weapon:SetPos( self:GetPos() + self:GetUp() * 20 + self:GetForward() * 4 + self:GetRight() * 7 )
+        self.weapon:SetPos( self:GetPos() + self:GetUp() * 36 + self:GetForward() * 4 + self:GetRight() * 7 )
         self.weapon:SetAngles( self:GetAngles() - Angle( 0, 115, 270 ) )
         self.weapon:SetParent(self)
         self.weapon:SetMaterial( "models/wireframe" )
@@ -281,8 +293,10 @@ if SERVER then
     function ENT:Use( act, ply )
         if self:GetNWInt( "WorkTime", math.huge ) == math.huge then
             if self.Ready then
-                ply:Give( self:GetNWString( "WorkWeapon" ) )
-                DarkRP.notify( ply, 0, 4, "You got the " .. weapons.Get( self:GetNWString( "WorkWeapon" ) ).PrintName .. " | " .. TFA.Attachments.Atts[ self:GetNWString( "WorkSkin" ) ].Name .. ".  Hit C to equip it!" )
+                if ply:getJobTable().category ~= "Monsters" then
+                    ply:Give( self:GetNWString( "WorkWeapon" ) )
+                end
+                DarkRP.notify( ply, 0, 4, "You got the " .. weapons.Get( self:GetNWString( "WorkWeapon" ) ).PrintName .. " | " .. TFA.Attachments.Atts[ self:GetNWString( "WorkSkin" ) ].Name .. "." )
                 ply:AddAttachmentToTable( self:GetNWString( "WorkSkin" ) )
                 self.weapon:SetModel( "models/weapons/w_rif_m4a1.mdl" )
                 self.weapon:SetAngles( self:GetAngles() - Angle( 0, 115, 270 ) )
@@ -331,20 +345,20 @@ if SERVER then
                         end
                         if TFA.Attachments.Atts[ x ].WeaponTable.Primary then
                             if TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage then
-                                skinPrice = skinPrice + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Damage ) / LocalPlayer():GetActiveWeapon().Primary.Damage ) ) * CSO_WEAPONS_TREE[ GetFinalParent( LocalPlayer():GetActiveWeapon():GetClass() ) ].price * 5 )
-                                paintTime = paintTime + 30 + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Damage ) / LocalPlayer():GetActiveWeapon().Primary.Damage ) - 1 ) * 90 )
+                                skinPrice = skinPrice + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage( wep, wep.Primary.Damage ) / wep.Primary.Damage ) ) * CSO_WEAPONS_TREE[ GetFinalParent( wep:GetClass() ) ].price * 5 )
+                                paintTime = paintTime + 30 + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Damage( wep, wep.Primary.Damage ) / wep.Primary.Damage ) - 1 ) * 90 )
                             end
                             if TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize then
-                                skinPrice = skinPrice + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.ClipSize ) - LocalPlayer():GetActiveWeapon().Primary.ClipSize ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 1 ) )
-                                paintTime = paintTime + 30 + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.ClipSize ) - LocalPlayer():GetActiveWeapon().Primary.ClipSize ) * 9 )
+                                skinPrice = skinPrice + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize( wep, wep.Primary.ClipSize ) - wep.Primary.ClipSize ) * ( CSO_WEAPONS_TREE[ wep:GetClass() ].price * 1 ) )
+                                paintTime = paintTime + 30 + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.ClipSize( wep, wep.Primary.ClipSize ) - wep.Primary.ClipSize ) * 9 )
                             end
                             if TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread then
-                                skinPrice = skinPrice + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Spread ) / LocalPlayer():GetActiveWeapon().Primary.Spread ) ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 2.5 ) )
-                                paintTime = paintTime + 30 + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.Spread ) / LocalPlayer():GetActiveWeapon().Primary.Spread ) - 1 ) * 45 )
+                                skinPrice = skinPrice + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread( wep, wep.Primary.Spread ) / wep.Primary.Spread ) ) * ( CSO_WEAPONS_TREE[ wep:GetClass() ].price * 2.5 ) )
+                                paintTime = paintTime + 30 + ( ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.Spread( wep, wep.Primary.Spread ) / wep.Primary.Spread ) - 1 ) * 45 )
                             end
                             if TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM then
-                                skinPrice = skinPrice + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.RPM ) - LocalPlayer():GetActiveWeapon().Primary.RPM ) * ( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 0.1 ) )
-                                paintTime = paintTime + 30 + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM( LocalPlayer():GetActiveWeapon(), LocalPlayer():GetActiveWeapon().Primary.RPM ) - LocalPlayer():GetActiveWeapon().Primary.RPM ) * 6 )
+                                skinPrice = skinPrice + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM( wep, wep.Primary.RPM ) - wep.Primary.RPM ) * ( CSO_WEAPONS_TREE[ wep:GetClass() ].price * 0.1 ) )
+                                paintTime = paintTime + 30 + ( ( TFA.Attachments.Atts[ x ].WeaponTable.Primary.RPM( wep, wep.Primary.RPM ) - wep.Primary.RPM ) * 6 )
                             end
                         end
 

@@ -39,7 +39,7 @@ hook.Add( "EntityTakeDamage", "FriendlyFire/CitizenFie", function( vic, dmg )
 			end )
 		end
 
-        if dmg:GetAttacker():getJobTable() and vic:getJobTable().category == dmg:GetAttacker():getJobTable().category then
+        if dmg:GetAttacker():getJobTable() and vic:getJobTable().category == dmg:GetAttacker():getJobTable().category and vic ~= dmg:GetAttacker() then
             dmg:ScaleDamage( 0 )
             dmg:GetAttacker():PrintMessage( HUD_PRINTCENTER, "Watch your fire!  You hit a teammate!" )
         end
@@ -106,9 +106,11 @@ hook.Add( "KeyPress", "KillBabygodWhenFire", function( ply, key )
 					local explode = ents.Create( "env_explosion" ) //creates the explosion
 					explode:SetPos( ply:GetPos() + Vector( 0, 0, 32 ) )
 					explode:Spawn()
-					explode:SetKeyValue( "iMagnitude", 200 )
-					explode:SetOwner( ply )
+					explode:SetKeyValue( "iMagnitude", 0 )
+					--explode:SetOwner( ply )
 					explode:Fire( "Explode", 0, 0 )
+
+					util.BlastDamage( explode, ply, ply:GetPos() + Vector( 0, 0, 32 ), 200, 200 )
 				end
 			end )
 		end

@@ -37,8 +37,6 @@ hook.Add( "Initialize", "SetupTDMRPDir", function()
             GAMEMODE.Config.DisallowDrop[ k ] = true
         end
     end
-
-    game.GetWorld():SetNWInt( "AnkoNextRound", CurTime() + ROUND_TIME )
 	
 end )
 
@@ -46,6 +44,8 @@ hook.Add( "InitPostEntity", "FreezeMultiplayerProps", function()
 	for k,v in pairs( ents.FindByClass( "prop_physics_multiplayer" ) ) do
 		v:GetPhysicsObject():EnableMotion( false )
 	end
+    
+    game.GetWorld():SetNWInt( "AnkoNextRound", CurTime() + ROUND_TIME )
 end )
 
 hook.Add( "PlayerInitialSpawn", "AssignOrSetupInventory", function( ply )

@@ -38,7 +38,7 @@ local locLUT = {
 	[ "barge" ] = "The Barge",
 	[ "remote" ] = "Remote",
 	[ "richman" ] = "Richman",
-	[ "eggs" ] = LocalPlayer():GetNWInt( "NumEggs", 0 ) .. " Eggs"
+	[ "eggs" ] = "Eggs"
 }
 local locPos = {
 	[ "worldcorp" ] = Vector( "-1216.555664 4793.572266 32.209515" ),

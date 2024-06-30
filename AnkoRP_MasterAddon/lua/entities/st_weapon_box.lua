@@ -51,7 +51,7 @@ if SERVER then
             local gun = ents.Create( randWep ) //creates the explosion
             gun:SetPos( self:GetPos() )
             gun:Spawn()
-            if #ents.FindByClass( "st_weapon_box" ) == 1 then
+            if #ents.FindByClass( "st_weapon_box" ) == 1 and CURRENT_ANKORP_EVENT then
                 CURRENT_ANKORP_EVENT = false
                 game.GetWorld():SetNWString( "EventLoc", "" )
                 game.GetWorld():SetNWString( "EventEnt", "" )

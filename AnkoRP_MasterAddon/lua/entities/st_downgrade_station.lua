@@ -14,11 +14,14 @@ ENT.Instructions= ""
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 ENT.Category = "AnkoRP Entities"
+ENT.RenderGroup = RENDERGROUP_BOTH
 
 if CLIENT then
     function ENT:Draw()
         self:DrawModel()
+    end
 
+    function ENT:DrawTranslucent()
         local Pos = self:GetPos()
         local Ang = self:GetAngles()
         
@@ -80,13 +83,13 @@ if CLIENT then
             WeaponLabel:SizeToContents()
             WeaponLabel:CenterHorizontal()
         else
-            WeaponLabel:SetText( "Would you like to downgrade your " .. LocalPlayer():GetActiveWeapon():GetPrintName() .. "?" )
+            WeaponLabel:SetText( "Pay to downgrade your " .. LocalPlayer():GetActiveWeapon():GetPrintName() .. ":" )
             WeaponLabel:SizeToContents()
             WeaponLabel:CenterHorizontal()
             local UpgradedWeapon = vgui.Create( "DButton", UpgradeWindow )
             UpgradedWeapon:SetPos( 150, 180 )
             UpgradedWeapon:SetSize( 500, 30 )
-            UpgradedWeapon:SetText( weapons.Get( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].parent ).PrintName .. " - -" .. DarkRP.formatMoney( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 0.2 ) )
+            UpgradedWeapon:SetText( weapons.Get( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].parent ).PrintName .. " - " .. DarkRP.formatMoney( CSO_WEAPONS_TREE[ LocalPlayer():GetActiveWeapon():GetClass() ].price * 0.2 ) )
             UpgradedWeapon:SetFont( "UPGSmall" )
             UpgradedWeapon:SetTextColor( Color( 255, 255, 255 ) )
             UpgradedWeapon.class = v
@@ -140,16 +143,20 @@ if SERVER then
         return end
         this:EmitSound( "ambient/energy/weld1.wav" )
         DarkRP.notify( ply, 0, 4, "Downgrade succeeded! Your " .. ply:GetActiveWeapon():GetPrintName() .. " was downgraded to " .. weapons.Get( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent ).PrintName .. " and placed in your inventory." )
-        ply:Give( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent )
+        
+        if ply:getJobTable().category ~= "Monsters" then
+            ply:Give( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent )
+        end
         --local finalParent = CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent
         --for _ = CSO_WEAPONS_TREE[ CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent ].deep, 2, -1 do
         --    finalParent = CSO_WEAPONS_TREE[ finalParent ].parent
         --end
-        if ply:GetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" ) == ply:GetActiveWeapon():GetClass() then
-            if ply:GetActiveWeapon().Slot == weapons.Get( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent ).Slot then
-                ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent )
+        local slot = ( ply:GetActiveWeapon().Slot and ply:GetActiveWeapon().Slot + 1 or 1 )
+        if ply:GetNWString( "WepLoadoutSlot" .. slot, "nil" ) == ply:GetActiveWeapon():GetClass() then
+            if slot == weapons.Get( CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent ).Slot then
+                ply:SetNWString( "WepLoadoutSlot" .. slot, CSO_WEAPONS_TREE[ply:GetActiveWeapon():GetClass()].parent )
             else
-                ply:SetNWString( "WepLoadoutSlot" .. ply:GetActiveWeapon().Slot + 1, "nil" )
+                ply:SetNWString( "WepLoadoutSlot" .. slot, "nil" )
                 timer.Simple( 4, function()
                     DarkRP.notify( ply, 0, 8, "Your new weapon has a different slot than your previous weapon. Your new weapon has not been added to your loadout." )
                 end )

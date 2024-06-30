@@ -14,11 +14,14 @@ ENT.Instructions= ""
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
 ENT.Category = "AnkoRP Entities"
+ENT.RenderGroup = RENDERGROUP_BOTH
 
 if CLIENT then
     function ENT:Draw()
         self:DrawModel()
+    end
 
+    function ENT:DrawTranslucent()
         local Pos = self:GetPos()
         local Ang = self:GetAngles()
         
@@ -228,7 +231,8 @@ if SERVER then
         elseif typ == "equip" then
             local wep = net.ReadString()
 			
-			if ply:getJobTable().category == "Monsters" and weapons.Get( wep ).Slot + 1 != 1 then
+            local slot = weapons.Get( wep ).Slot and weapons.Get( wep ).Slot + 1 or 1
+			if ply:getJobTable().category == "Monsters" and slot != 1 then
 				DarkRP.notify( ply, 1, 4, "You cannot use guns as a Monster!" )
 				return
 			end
@@ -241,22 +245,26 @@ if SERVER then
 			ply:SetAmmo( 0, weapons.Get( wep ).Primary.Ammo )
 			
             for k,v in pairs( ply:GetWeapons() ) do
-                if v.Slot == weapons.Get( wep ).Slot and string.sub( v:GetClass(), 1, 3 ) == "tfa" and GetFinalParent( v:GetClass() ) == GetFinalParent( wep ) then
+                if ( v.Slot and v.Slot + 1 or 1 ) == slot and string.sub( v:GetClass(), 1, 3 ) == "tfa" and GetFinalParent( v:GetClass() ) == GetFinalParent( wep ) then
                     DarkRP.notify( ply, 0, 4, "Your " .. v.PrintName .. " was replaced with your " .. weapons.Get( wep ).PrintName .. "." )
                     ply:StripWeapon( v:GetClass() )
                 end
-                ply:Give( wep )
+                
+                if ply:getJobTable().category ~= "Monsters" then
+                    ply:Give( wep )
+                end
                 timer.Simple( 0.1, function()
                     ply:SelectWeapon( ply:GetWeapon( wep ) )
                 end )
             end
         elseif typ == "scrap" then
             local wep = net.ReadString()
+            local slot = weapons.Get( wep ).Slot and weapons.Get( wep ).Slot + 1 or 1
             if ply:HasWeapon( wep ) then
                 ply:StripWeapon( wep )
             end
-            if ply:GetNWString( "WepLoadoutSlot" .. weapons.Get( wep ).Slot + 1 ) == wep then
-                ply:SetNWString( "WepLoadoutSlot" .. weapons.Get( wep ).Slot + 1, "nil" )
+            if ply:GetNWString( "WepLoadoutSlot" .. slot ) == wep then
+                ply:SetNWString( "WepLoadoutSlot" .. slot, "nil" )
             end
             ply:RemoveWeaponFromTable( wep )
             --file.Write( "ankorp/" .. ply:SteamID64() .. ".txt", util.TableToJSON( ply.wepInvTable ) )
