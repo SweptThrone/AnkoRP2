@@ -43,7 +43,7 @@
 		"m": "models/weapons/tfa_cso/w_ak47_hq.mdl",
 		"b": false,
 		"n": "AK-47 Camouflage"
-	},		
+	},
 	"tfa_cso_ak47wg": {
 		"c": 27000,
 		"s": 3,
@@ -124,7 +124,7 @@
 		"m": "models/weapons/tfa_cso/w_electronv.mdl",
 		"b": false,
 		"n": "Electron-V"
-	},		
+	},
 	"tfa_cso_anaconda": {
 		"c": 900,
 		"s": 2,
@@ -1024,7 +1024,7 @@
 		"m": "models/weapons/tfa_cso/w_doom_blaster.mdl",
 		"b": false,
 		"n": "Doom Blaster"
-		},		
+	},
 	"tfa_cso_dmp7a1": {
 		"c": 5800,
 		"s": 3,
@@ -1060,7 +1060,7 @@
 		"m": "models/weapons/tfa_cso/w_eruptor.mdl",
 		"b": false,
 		"n": "Eruptor"
-	},	
+	},
 	"tfa_cso_dragoncannon": {
 		"c": 482000,
 		"s": 5,
@@ -1402,7 +1402,7 @@
 		"m": "models/weapons/tfa_cso/w_bfamas.mdl",
 		"b": false,
 		"n": "Battle FAMAS F1"
-	},		
+	},
 	"tfa_cso_fglauncher": {
 		"c": 53000,
 		"s": 5,
@@ -1555,7 +1555,7 @@
 		"m": "models/weapons/tfa_cso/w_bgalil.mdl",
 		"b": false,
 		"n": "Battle Galil"
-	},		
+	},
 	"tfa_cso_galilcraft": {
 		"c": 16500,
 		"s": 3,
@@ -1600,7 +1600,7 @@
 		"m": "models/weapons/tfa_cso/w_bglock18.mdl",
 		"b": false,
 		"n": "Battle Glock 18"
-	},		
+	},
 	"tfa_cso_ozwpnset2": {
 		"c": 1500,
 		"s": 2,
@@ -1664,7 +1664,6 @@
 		"b": false,
 		"n": "AUG Guardians"
 	},
-	
 	"tfa_cso_guitar": {
 		"c": 43000,
 		"s": 3,
@@ -1952,7 +1951,7 @@
 		"m": "models/weapons/tfa_cso/w_ancient_keeper.mdl",
 		"b": false,
 		"n": "Ancient Keeper"
-	},		
+	},
 	"tfa_cso_janus7xmas": {
 		"c": 801000,
 		"s": 4,
@@ -2141,7 +2140,7 @@
 		"m": "models/weapons/tfa_cso/w_sheepsword.mdl",
 		"b": false,
 		"n": "Horn Kujang"
-	},		
+	},
 	"tfa_cso_l85a2": {
 		"c": 3600,
 		"s": 3,
@@ -2168,7 +2167,7 @@
 		"m": "models/weapons/tfa_cso/w_ancient_bringer.mdl",
 		"b": false,
 		"n": "Ancient Bringer"
-	},		
+	},
 	"tfa_cso_laserchainsaw": {
 		"c": 454000,
 		"s": 1,
@@ -2951,7 +2950,7 @@
 		"m": "models/weapons/tfa_cso/w_m95.mdl",
 		"b": true,
 		"n": "M95"
-	},	
+	},
 	"tfa_cso_m95desert": {
 		"c": 51000,
 		"s": 4,
@@ -3518,7 +3517,7 @@
 		"m": "models/weapons/tfa_cso/w_bnegev.mdl",
 		"b": false,
 		"n": "Battle Negev"
-	},		
+	},
 	"tfa_cso_negev_ajax": {
 		"c": 185000,
 		"s": 3,
@@ -3689,7 +3688,7 @@
 		"m": "models/weapons/tfa_cso/w_bpgm.mdl",
 		"b": false,
 		"n": "Battle PGM Hécate II"
-	},		
+	},
 	"tfa_cso_chainsr": {
 		"c": 756000,
 		"s": 4,
@@ -3950,7 +3949,7 @@
 		"m": "models/weapons/tfa_cso/w_bqbs09.mdl",
 		"b": false,
 		"n": "Battle QBS-09"
-	},		
+	},
 	"tfa_cso_qbz95b": {
 		"c": 3600,
 		"s": 3,
@@ -4355,7 +4354,7 @@
 		"m": "models/weapons/tfa_cso/w_spas12desert.mdl",
 		"b": false,
 		"n": "SPAS-12 Desert"
-	},		
+	},
 	"tfa_cso_spas12ex": {
 		"c": 48000,
 		"s": 4,
@@ -5012,7 +5011,7 @@
 		"m": "models/weapons/tfa_cso/w_busp45.mdl",
 		"b": false,
 		"n": "Battle USP45"
-	},		
+	},
 	"tfa_cso_uts15": {
 		"c": 4700,
 		"s": 4,
@@ -5103,7 +5102,6 @@
 		"b": false,
 		"n": "Supreme Sentinel"
 	},
-	
 	"tfa_cso_volcano": {
 		"c": 582000,
 		"s": 4,
@@ -5481,7 +5479,7 @@
 		"m": "models/weapons/tfa_cso/w_drakar1.mdl",
 		"b": false,
 		"n": "Drakar-I"
-	},	
+	},
 	"tfa_cso_drakar2": {
 		"c": 42000,
 		"s": 3,
