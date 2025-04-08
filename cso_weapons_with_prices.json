@@ -491,7 +491,7 @@
 		"p": "tfa_cso_kingdombow",
 		"d": 2,
 		"m": "models/weapons/tfa_cso/w_compound.mdl",
-		"b": true,
+		"b": false,
 		"n": "Compound Bow"
 	},
 	"tfa_cso_bow_v6": {
@@ -3569,7 +3569,7 @@
 		"p": "tfa_cso_oicw",
 		"d": 2,
 		"m": "models/weapons/tfa_cso/w_shiftexpar.mdl",
-		"b": true,
+		"b": false,
 		"n": "OICW Hellfire"
 	},
 	"tfa_cso_p228_v2": {
@@ -3875,7 +3875,7 @@
 		"p": "tfa_cso_python",
 		"d": 2,
 		"m": "models/weapons/tfa_cso/w_bpython.mdl",
-		"b": true,
+		"b": false,
 		"n": "Battle Colt Python"
 	},
 	"tfa_cso_qbarrel": {
@@ -5864,7 +5864,7 @@
 		"p": "tfa_cso_hammer",
 		"d": 2,
 		"m": "models/weapons/tfa_cso/w_hammerdesert.mdl",
-		"b": true,
+		"b": false,
 		"n": "Hammer Desert"
 	},
 	"tfa_cso_pulse_reactor": {
