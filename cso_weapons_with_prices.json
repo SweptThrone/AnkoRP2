@@ -4040,6 +4040,15 @@
 		"b": false,
 		"n": "Runebreaker - Expert"
 	},
+	"tfa_cso_frostbreaker": {
+		"c": 197600,
+		"s": 1,
+		"p": "tfa_cso_frostbreaker",
+		"d": 2,
+		"m": "models/weapons/tfa_cso/w_runebreaker.mdl",
+		"b": false,
+		"n": "Frostbreaker"
+	},
 	"tfa_cso_ruyi": {
 		"c": 7600,
 		"s": 1,
@@ -5931,13 +5940,22 @@
 		"n": "CROW-9"
 	},
 	"tfa_cso_leapstrikegun": {
-		"c": 173600,
+		"c": 1717600,
 		"s": 2,
 		"p": "nil",
 		"d": 1,
 		"m": "models/weapons/tfa_cso/w_leapstrikegun.mdl",
 		"b": false,
 		"n": "Gravity Repulsor"
+	},
+	"tfa_cso_leapstrikegunex": {
+		"c": 1736000,
+		"s": 2,
+		"p": "tfa_cso_leapstrikegun",
+		"d": 2,
+		"m": "models/weapons/tfa_cso/w_leapstrikegunex.mdl",
+		"b": false,
+		"n": "Abyss Repulsor"
 	},
 	"tfa_cso_turbulent9": {
 		"c": 3280,
@@ -6028,5 +6046,23 @@
 		"m": "models/weapons/tfa_cso/w_scythe.mdl",
 		"b": true,
 		"n": "Scythe"
+	},
+	"tfa_cso_rail_buster": {
+		"c": 200000,
+		"s": 4,
+		"p": "nil",
+		"d": 1,
+		"m": "models/weapons/tfa_cso/w_railgun.mdl",
+		"b": false,
+		"n": "Rail Buster"
+	},
+	"tfa_cso_joker": {
+		"c": 2960,
+		"s": 1,
+		"p": "nil",
+		"d": 1,
+		"m": "models/weapons/tfa_cso/w_dragonsword.mdl",
+		"b": true,
+		"n": "Joker's Staff"
 	}
 }
