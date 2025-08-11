@@ -3583,7 +3583,7 @@
 	},
 	"tfa_cso_p90": {
 		"c": 2000,
-		"s": 4,
+		"s": 3,
 		"p": "nil",
 		"d": 1,
 		"m": "models/weapons/w_smg_p90.mdl",
@@ -6066,3 +6066,4 @@
 		"n": "Joker's Staff"
 	}
 }
+
