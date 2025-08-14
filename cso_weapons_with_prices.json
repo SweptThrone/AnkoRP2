@@ -217,7 +217,7 @@
 	},
 	"tfa_cso_aug": {
 		"c": 2640,
-		"s": 4,
+		"s": 3,
 		"p": "nil",
 		"d": 1,
 		"m": "models/weapons/w_rif_aug.mdl",
@@ -1288,12 +1288,12 @@
 	},
 	"tfa_cso_elite": {
 		"c": 400,
-		"s": 3,
+		"s": 2,
 		"p": "nil",
 		"d": 1,
 		"m": "models/weapons/tfa_cso/w_elite_right.mdl",
 		"b": true,
-		"n": "Dual Elites"
+		"n": "Beretta 92G Elite II"
 	},
 	"tfa_cso_elvenranger": {
 		"c": 1680000,
@@ -1981,7 +1981,7 @@
 	},
 	"tfa_cso_k1a": {
 		"c": 2320,
-		"s": 4,
+		"s": 3,
 		"p": "nil",
 		"d": 1,
 		"m": "models/weapons/tfa_cso/w_k1a.mdl",
@@ -4195,7 +4195,7 @@
 	},
 	"tfa_cso_sg550": {
 		"c": 4000,
-		"s": 3,
+		"s": 4,
 		"p": "nil",
 		"d": 1,
 		"m": "models/weapons/tfa_cso/w_sg550.mdl",
@@ -4204,7 +4204,7 @@
 	},
 	"tfa_cso_sg552": {
 		"c": 2400,
-		"s": 4,
+		"s": 3,
 		"p": "nil",
 		"d": 1,
 		"m": "models/weapons/w_rif_sg552.mdl",
@@ -4546,7 +4546,7 @@
 	},
 	"tfa_cso_svd": {
 		"c": 5760,
-		"s": 5,
+		"s": 4,
 		"p": "nil",
 		"d": 1,
 		"m": "models/weapons/tfa_cso/w_svd.mdl",
@@ -6066,4 +6066,5 @@
 		"n": "Joker's Staff"
 	}
 }
+
 
