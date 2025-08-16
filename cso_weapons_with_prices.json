@@ -1181,7 +1181,7 @@
 	"tfa_cso_dualkriss_v4": {
 		"c": 11840,
 		"s": 3,
-		"p": "tfa_cso_kriss_v",
+		"p": "tfa_cso_dualkriss",
 		"d": 3,
 		"m": "models/weapons/tfa_cso/w_dualkriss_v4.mdl",
 		"b": false,
@@ -6066,5 +6066,6 @@
 		"n": "Joker's Staff"
 	}
 }
+
 
 
